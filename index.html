@@ -62,6 +62,15 @@
   --san-gold-soft: #F0F9FF;
   --san-gold-border: #BAE6FD;
 
+  /* Industrial Precision Rust Orange Palette (Warm Engineering Accent) */
+  --san-rust-deep: #B4380D;
+  --san-rust: #D9531E;
+  --san-rust-light: #EA580C;
+  --san-rust-bright: #FB923C;
+  --san-rust-soft: #FFF7ED;
+  --san-rust-border: #FED7AA;
+  --san-rust-glow: rgba(217, 83, 30, 0.28);
+
   /* Functional */
   --danger: #DC2626;
   --danger-soft: #FEF2F2;
@@ -153,6 +162,18 @@ img { display: block; max-width: 100%; height: auto; }
 .indux-pretitle--gold::before {
   background-color: var(--san-gold);
 }
+.indux-pretitle--rust {
+  color: var(--san-rust-deep);
+}
+.indux-pretitle--rust::before {
+  background-color: var(--san-rust);
+}
+.indux-pretitle--rust-bright {
+  color: var(--san-rust-bright);
+}
+.indux-pretitle--rust-bright::before {
+  background-color: var(--san-rust-light);
+}
 
 /* Section Header Structure */
 .section-header {
@@ -222,13 +243,48 @@ img { display: block; max-width: 100%; height: auto; }
   transform: translateY(-2px);
   box-shadow: 0 8px 20px var(--san-blue-glow);
 }
-.btn-gold {
-  background: var(--san-blue);
+.btn-rust, .btn-gold, .btn--gold {
+  background: var(--san-rust);
   color: #FFFFFF;
+  box-shadow: 0 4px 14px var(--san-rust-glow);
 }
-.btn-gold:hover {
-  background: var(--san-blue-deep);
+.btn-rust:hover, .btn-gold:hover, .btn--gold:hover {
+  background: var(--san-rust-deep);
+  color: #FFFFFF;
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--san-rust-glow);
+}
+.btn-outline-rust {
+  background: transparent;
+  color: var(--san-rust-deep);
+  border: 1.5px solid var(--san-rust);
+}
+.btn-outline-rust:hover {
+  background: var(--san-rust);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+.accent-rust, span.accent-rust {
+  color: var(--san-rust-bright) !important;
+}
+.badge-rust {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--san-rust-soft);
+  color: var(--san-rust-deep);
+  border: 1px solid var(--san-rust-border);
+  padding: 3px 9px;
+  border-radius: var(--r-xs);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-rust--dark {
+  background: rgba(217, 83, 30, 0.16);
+  color: var(--san-rust-bright);
+  border: 1px solid rgba(217, 83, 30, 0.35);
 }
 .btn-outline {
   background: transparent;
@@ -2035,6 +2091,31 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   box-shadow: 0 15px 30px -5px rgba(7, 76, 138, 0.65);
 }
 
+.hero-btn-rust {
+  background: var(--san-rust);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 16px 34px;
+  border-radius: var(--r-xs);
+  border: 1px solid var(--san-rust);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px var(--san-rust-glow);
+}
+.hero-btn-rust:hover {
+  background: var(--san-rust-deep);
+  border-color: var(--san-rust-deep);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(217, 83, 30, 0.55);
+}
+
 
 .hero-btn-secondary {
   background: transparent;
@@ -2250,7 +2331,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 .hero-progress-fill {
   height: 100%;
   width: 0%;
-  background: var(--san-gold);
+  background: linear-gradient(90deg, var(--san-blue) 0%, var(--san-gold-light) 50%, var(--san-rust) 100%);
   transition: width 0.05s linear;
 }
 
@@ -2744,9 +2825,9 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   }
   .dock-btn-quote {
     flex: 1.4 !important;
-    background: linear-gradient(135deg, #074C8A 0%, #0A66B7 100%) !important;
+    background: linear-gradient(135deg, var(--san-rust) 0%, var(--san-rust-deep) 100%) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(7, 76, 138, 0.4) !important;
+    box-shadow: 0 4px 14px var(--san-rust-glow) !important;
   }
 
   /* 4. Hero Section: Fluid, High-Contrast & Elimination of Fatigue */
@@ -2791,7 +2872,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     margin-bottom: 18px !important;
   }
   .hero-btn-primary,
-  .hero-btn-secondary {
+  .hero-btn-secondary,
+  .hero-btn-rust {
     width: 100% !important;
     justify-content: center !important;
     padding: 12px 6px !important;
@@ -3149,7 +3231,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </nav>
 <!-- Header Actions -->
 <div class="header-actions">
-<button class="btn btn-primary" data-page="contact">
+<button class="btn btn-rust" data-page="contact">
         Request a Quote →
       </button>
 <button aria-label="Toggle navigation menu" class="menu-btn" id="menu-toggle">
@@ -3171,7 +3253,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <a class="nav-link" data-page="projects">Projects</a>
 <a class="nav-link" data-page="contact">Contact</a>
 <div class="mobile-nav-footer">
-<button class="btn btn-primary btn-block mobile-quote-btn" data-page="contact" type="button">
+<button class="btn btn-rust btn-block mobile-quote-btn" data-page="contact" type="button">
         Request a Technical Quote →
       </button>
 <div class="mobile-nav-contact">
@@ -3221,8 +3303,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <!-- Left Editorial Column -->
 <div class="hero-editorial-col">
 <div class="hero-indux-pre">
-<span class="hero-pre-line"></span>
-<span>INDUSTRIAL &amp; MANUFACTURING</span>
+<span class="hero-pre-line" style="background:var(--san-rust)"></span>
+<span style="color:var(--san-rust-bright)">PEENYA INDUSTRIAL CLUSTER • HEAVY ENGINEERING</span>
 </div>
 <h1 class="hero-indux-title">
             Engineering solutions <span class="hero-accent">built for modern industry.</span>
@@ -3242,7 +3324,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <!-- Right Column: Floating Production Capability Card (Matches Indux reference 1:1) -->
 <div class="hero-card-col">
 <div class="hero-capability-card">
-<div class="cap-card-pre">PRODUCTION CAPABILITY</div>
+<div class="cap-card-pre" style="color:var(--san-rust-bright);display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:var(--san-rust-light);display:inline-block;box-shadow:0 0 8px var(--san-rust)"></span>PRODUCTION CAPABILITY</div>
 <div class="cap-card-stat">35,000+ <span style="font-size:24px;font-weight:600;color:#38BDF8">Sq.Ft</span></div>
 <div class="cap-card-stat-label">Components &amp; Automated Systems</div>
 <p class="cap-card-desc">
@@ -3255,7 +3337,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <span class="cap-row-lbl">Peenya 3rd Phase Covered Facility</span>
 </div>
 <div class="cap-card-row">
-<span class="cap-row-val">±0.005mm</span>
+<span class="cap-row-val" style="color:var(--san-rust-bright)">±0.005mm</span>
 <span class="cap-row-lbl">Sub-Micron Precision Tolerance</span>
 </div>
 <div class="cap-card-row">
@@ -3273,7 +3355,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="wrap">
 <div class="hero-slider-nav-inner">
 <div class="hero-slide-info-pill">
-<span class="hero-slide-pulse"></span>
+<span class="hero-slide-pulse" style="background:var(--san-rust-light);box-shadow:0 0 10px var(--san-rust)"></span>
 <span id="hero-bg-tag-text">PEENYA 3RD PHASE • 35,000 SQ.FT</span>
 </div>
 <div class="hero-slider-nav-btns">
@@ -3304,7 +3386,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="stat-label">Years of precision manufacturing &amp; automation expertise</div>
 </div>
 <div class="stat-item">
-<div class="stat-num">500<span class="accent">+</span></div>
+<div class="stat-num">500<span class="accent accent-rust">+</span></div>
 <div class="stat-label">Industrial machines built, reconditioned &amp; serviced</div>
 </div>
 <div class="stat-item">
@@ -3312,7 +3394,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="stat-label">CMM validated precision quality assurance standard</div>
 </div>
 <div class="stat-item">
-<div class="stat-num">99.4<span class="accent">%</span></div>
+<div class="stat-num">99.4<span class="accent accent-rust">%</span></div>
 <div class="stat-label">On-time project delivery &amp; guaranteed uptime target</div>
 </div>
 </div>
@@ -3334,7 +3416,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="about-feature-title">Production-minded technical team</div>
 </div>
 <div class="about-feature-box">
-<div class="about-feature-icon"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div>
+<div class="about-feature-icon" style="background:var(--san-rust-soft);color:var(--san-rust-deep)"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div>
 <div class="about-feature-title">Integrated manufacturing expertise</div>
 </div>
 <div class="about-feature-box">
@@ -3366,7 +3448,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <div class="mini-stat-text">Heavy Workshop &amp; Testing Lab</div>
 </div>
 <div>
-<div class="mini-stat-num">±0.005 mm</div>
+<div class="mini-stat-num" style="color:var(--san-rust-deep)">±0.005 mm</div>
 <div class="mini-stat-text">Machining Tolerance (Zeiss CMM)</div>
 </div>
 </div>
@@ -3477,16 +3559,16 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 <!-- Engineering Consultation Banner -->
 <div class="breakdown-banner-wrap">
-<div class="breakdown-box">
+<div class="breakdown-box" style="border-top:3px solid var(--san-rust)">
 <div>
-<div class="indux-pretitle indux-pretitle--gold">Industrial Engineering Solutions</div>
+<div class="indux-pretitle indux-pretitle--rust-bright">Industrial Engineering Solutions</div>
 <h3 class="breakdown-title">Have a Custom Machinery or Automation Requirement?</h3>
 <p class="breakdown-desc">
                 Our senior application engineering team is ready to evaluate your technical drawings, production cycle times, and plant layout to deliver a high-efficiency turnkey proposal.
               </p>
 </div>
 <div class="breakdown-cta-box">
-<button class="btn btn-primary" data-page="contact">Request Consultation</button>
+<button class="btn btn-rust" data-page="contact">Request Consultation →</button>
 <button class="btn btn-outline-white btn-sm" data-page="products">
                 Explore Products Catalog
               </button>
@@ -3971,7 +4053,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 </div>
 <div class="catalog-footer">
-<button class="btn btn-primary btn-sm" data-page="contact" data-product="ROBOTIC WELDING AND FABRICATION AUTOMATION">Request Welding Cell Quote</button>
+<button class="btn btn-rust btn-sm" data-page="contact" data-product="ROBOTIC WELDING AND FABRICATION AUTOMATION">Request Welding Cell Quote</button>
 <a class="btn btn-outline btn-sm" href="https://wa.me/919876543210?text=Hello%20SAN,%20I%20am%20interested%20in%20Robotic%20Welding" target="_blank">WhatsApp</a>
 </div>
 </div>
@@ -4008,7 +4090,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 <article class="catalog-card" data-category="emergency-repairs">
 <div class="catalog-img-wrap">
 <img alt="INDUSTRIAL MACHINE BREAKDOWN SERVICE - Rapid Factory Response" class="catalog-img" loading="lazy" src="assets/breakdown_service.jpg"/>
-<span class="catalog-img-badge" style="background:var(--danger)">24/7 Emergency</span>
+<span class="catalog-img-badge" style="background:var(--san-rust)">24/7 Rapid Emergency</span>
 <span class="catalog-img-sla">2-4 Hr Response</span>
 <button aria-label="Preview 1. MACHINE BREAKDOWN SERVICE" class="card-preview-btn" data-preview-badge="PRECISION ENGINEERING" data-preview-desc="Emergency rapid-response on-site mechanical and electrical troubleshooting for CNC machining centers, stamping presses, hydraulic systems, and automated production conveyors." data-preview-img="assets/breakdown_service.jpg" data-preview-title="1. MACHINE BREAKDOWN SERVICE" type="button"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg><span>Preview</span></button></div>
 <div class="catalog-body">
@@ -4022,7 +4104,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 </div>
 <div class="catalog-footer">
-<button class="btn btn-primary btn-sm" data-page="contact" data-product="INDUSTRIAL MACHINE BREAKDOWN SERVICE">Book Service Visit</button>
+<button class="btn btn-rust btn-sm" data-page="contact" data-product="INDUSTRIAL MACHINE BREAKDOWN SERVICE">Book Service Visit →</button>
 <a class="btn btn-outline btn-sm" href="https://wa.me/919876543210?text=Hello%20SAN,%20I%20need%20Machine%20Service" target="_blank">WhatsApp</a>
 </div>
 </div>
@@ -4409,7 +4491,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 <div id="form-feedback" style="display:none;padding:14px;border-radius:var(--r-xs);margin-bottom:20px;font-size:14px"></div>
 <div style="display:flex;gap:14px;flex-wrap:wrap">
-<button class="btn btn-primary" id="rfq-submit-btn" type="submit">Send Quotation Request</button>
+<button class="btn btn-rust" id="rfq-submit-btn" type="submit">Send Quotation Request →</button>
 <button class="btn btn-outline" id="rfq-whatsapp-btn" style="color:#059669;border-color:#059669" type="button">
                 💬 Transmit via WhatsApp
               </button>
@@ -4456,12 +4538,12 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 </div>
 <!-- Plant Assessment Card -->
-<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:var(--r-sm);padding:24px">
+<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-top:3px solid var(--san-rust);border-radius:var(--r-sm);padding:24px">
 <h4 style="color:var(--san-blue);font-family:var(--font-display);font-size:17px;margin-bottom:8px">📋 Need an On-Site Assessment?</h4>
 <p style="color:var(--ink-secondary);font-size:13.5px;line-height:1.5;margin-bottom:14px">
               Our technical specialists can visit your facility in Peenya, Bommasandra, or Bidadi to evaluate your shopfloor requirements and equipment setup.
             </p>
-<button class="btn btn-primary btn-sm" data-page="contact" style="width:100%">
+<button class="btn btn-rust btn-sm" data-page="contact" style="width:100%">
               Schedule Assessment
             </button>
 </div>
@@ -5138,12 +5220,12 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 </div>
 <div class="image-modal-info">
 <div class="image-modal-meta">
-<span class="image-modal-badge" id="modal-preview-badge">PRECISION ENGINEERING</span>
+<span class="image-modal-badge badge-rust--dark" id="modal-preview-badge">PRECISION ENGINEERING</span>
 </div>
 <h3 class="image-modal-title" id="modal-preview-title">System Title</h3>
 <p class="image-modal-desc" id="modal-preview-desc">Engineering specifications and technical manufacturing capabilities.</p>
 <div class="image-modal-actions">
-<button class="btn btn--gold" id="modal-inquire-btn" type="button">
+<button class="btn btn-rust" id="modal-inquire-btn" type="button">
           Request Technical Quote →
         </button>
 <button class="btn btn--outline" id="modal-dismiss-btn" type="button">
