@@ -2989,40 +2989,45 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     display: none !important;
   }
 
-  /* 6. Stats Band: Lifted Directly Below Buttons */
+  /* 6. Stats Band: 4 in a Row Metric Strip Directly Below Buttons */
   .stats-band {
-    padding: 10px 0 28px !important;
+    padding: 8px 0 22px !important;
     width: 100% !important;
   }
   .stats-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
   .stat-item {
-    padding: 16px 12px !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border-radius: 10px !important;
+    padding: 10px 4px !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    border-radius: 8px !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     box-sizing: border-box !important;
+    min-width: 0 !important;
   }
   .stat-num {
-    font-size: 26px !important;
+    font-size: clamp(17px, 4.8vw, 21px) !important;
     font-weight: 800 !important;
     color: #38BDF8 !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 3px !important;
     line-height: 1.1 !important;
+    white-space: nowrap !important;
   }
   .stat-label {
-    font-size: 11px !important;
-    line-height: 1.35 !important;
+    font-size: clamp(8.5px, 2.3vw, 10px) !important;
+    line-height: 1.25 !important;
     color: #94A3B8 !important;
+    text-align: center !important;
+    word-break: break-word !important;
   }
 
   /* 7. About Section on Mobile */
