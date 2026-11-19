@@ -460,6 +460,97 @@
 
 
   // ====================================================
+  // High-Performance Animated Number Counters (Stats Band)
+  // ====================================================
+  (function initAnimatedCounters(){
+    var statsBand = document.querySelector('.stats-band');
+    if (!statsBand) return;
+
+    var counters = statsBand.querySelectorAll('.counter-value');
+    if (!counters.length) return;
+
+    var hasAnimated = false;
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // High-precision cubic-bezier ease-out curve (fluid deceleration into final value)
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animateCounter(el, target, decimals, duration) {
+      if (prefersReduced) {
+        el.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toString();
+        return;
+      }
+
+      var start = 0;
+      var startTime = null;
+
+      function frame(now) {
+        if (!startTime) startTime = now;
+        var elapsed = now - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutCubic(progress);
+        var current = start + (target - start) * eased;
+
+        el.textContent = decimals > 0 ? current.toFixed(decimals) : Math.round(current).toString();
+
+        if (progress < 1) {
+          window.requestAnimationFrame(frame);
+        } else {
+          el.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target).toString();
+        }
+      }
+
+      window.requestAnimationFrame(frame);
+    }
+
+    function runCounters() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      counters.forEach(function(counter, idx){
+        var target = parseFloat(counter.getAttribute('data-target')) || 0;
+        var decimals = parseInt(counter.getAttribute('data-decimals'), 10) || 0;
+        counter.textContent = decimals > 0 ? (0).toFixed(decimals) : '0';
+        setTimeout(function(){
+          animateCounter(counter, target, decimals, 1800);
+        }, idx * 90);
+      });
+    }
+
+    // IntersectionObserver triggers animation when stats band enters viewport
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            runCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(statsBand);
+    } else {
+      runCounters();
+    }
+
+    // Re-trigger smoothly when user navigates back to 'home' via SPA router
+    window.addEventListener('hashchange', function(){
+      var page = location.hash.replace('#', '') || 'home';
+      if (page === 'home') {
+        hasAnimated = false;
+        var rect = statsBand.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          runCounters();
+        }
+      }
+    });
+  })();
+
+
+
+  // ====================================================
   // Intelligent Scroll-Driven Capabilities Switcher
   // ====================================================
   (function initScrollCapabilities(){

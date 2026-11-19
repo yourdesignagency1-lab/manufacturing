@@ -570,6 +570,12 @@ img { display: block; max-width: 100%; height: auto; }
   display: flex;
   align-items: baseline;
   gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.counter-value {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  min-width: 0.6em;
 }
 .stat-num span.accent {
   color: var(--san-gold-bright);
