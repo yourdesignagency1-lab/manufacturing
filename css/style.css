@@ -388,16 +388,6 @@ img { display: block; max-width: 100%; height: auto; }
   white-space: nowrap;
 }
 .brand-title span { color: var(--san-blue); }
-.brand-subtitle {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--san-gold-deep);
-  margin-top: 3px;
-  line-height: 1.2;
-  white-space: nowrap;
-}
 
 /* Nav Menu */
 .site-nav {
@@ -2764,13 +2754,6 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   }
   .brand-title span {
     color: var(--san-blue) !important;
-  }
-  .brand-subtitle {
-    font-size: 8.5px !important;
-    letter-spacing: 0.12em !important;
-    color: var(--ink-muted) !important;
-    line-height: 1 !important;
-    margin-top: 1px !important;
   }
   /* Remove cramped quote button from top header on all mobile viewports to prevent squishing */
   .header-actions .btn-primary {
