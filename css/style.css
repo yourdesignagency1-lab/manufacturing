@@ -1268,6 +1268,322 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 
 /* ================================================= */
+/* GLOBAL HIGH-TECH INDUSTRIAL CONTACT CARD DOCK     */
+/* ================================================= */
+.global-contact-wrapper {
+  padding: 50px 0 70px;
+  background: linear-gradient(180deg, var(--bg-subtle) 0%, #060B14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.distinct-contact-card {
+  position: relative;
+  border-radius: var(--r-md);
+  background: #080E1B;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 48px 44px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.distinct-contact-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ambient Radial Lighting & Precision Engineering Matrix Grid */
+.distinct-contact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(217, 83, 30, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  pointer-events: none;
+}
+
+/* Animated Top Scanning Laser / Light Beam Accent */
+.distinct-contact-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--san-rust-bright) 50%, var(--san-gold-bright) 100%);
+  animation: scanLight 4.5s ease-in-out infinite;
+}
+
+@keyframes scanLight {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+/* Header Telemetry Bar */
+.dcc-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 22px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+.dcc-status-beacon {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 14px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #E2E8F0;
+  text-transform: uppercase;
+}
+
+.dcc-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 10px #22C55E;
+  position: relative;
+}
+
+.dcc-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid #22C55E;
+  animation: beaconRing 1.8s infinite ease-out;
+}
+
+@keyframes beaconRing {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.dcc-sla-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--san-gold-bright);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Two-Column Industrial Layout */
+.dcc-body-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.dcc-heading {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  letter-spacing: -0.025em;
+}
+
+.dcc-heading .accent-rust-text {
+  color: var(--san-rust-bright);
+  text-shadow: 0 0 24px var(--san-rust-glow);
+}
+
+.dcc-desc {
+  font-size: 15px;
+  color: #94A3B8;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 580px;
+}
+
+.dcc-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dcc-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: var(--r-xs);
+  font-size: 12px;
+  font-weight: 600;
+  color: #CBD5E1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Interactive Action Cards Column */
+.dcc-actions-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dcc-action-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: var(--r-sm);
+  background: rgba(19, 28, 49, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dcc-action-card:hover {
+  background: rgba(19, 28, 49, 0.95);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.dcc-action-card--phone:hover {
+  border-color: var(--san-gold-light);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+}
+
+.dcc-action-card--wa:hover {
+  border-color: #22C55E;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
+}
+
+.dcc-action-card--rfq {
+  background: linear-gradient(135deg, var(--san-rust) 0%, var(--san-rust-deep) 100%);
+  border-color: var(--san-rust);
+  box-shadow: 0 6px 20px var(--san-rust-glow);
+}
+
+.dcc-action-card--rfq:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(217, 83, 30, 0.5);
+}
+
+.dcc-action-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dcc-action-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-xs);
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.dcc-action-card:hover .dcc-action-icon {
+  transform: scale(1.1);
+}
+
+.dcc-action-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.dcc-action-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  line-height: 1.3;
+}
+
+.dcc-action-card--rfq .dcc-action-sub {
+  color: #FED7AA;
+}
+
+.dcc-action-arrow {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.dcc-action-card:hover .dcc-action-arrow {
+  color: #FFFFFF;
+  transform: translateX(4px);
+}
+
+.dcc-email-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: var(--r-xs);
+  font-size: 12.5px;
+  color: #94A3B8;
+}
+
+.dcc-copy-btn {
+  background: transparent;
+  border: none;
+  color: var(--san-gold-light);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  transition: color 0.15s;
+}
+
+.dcc-copy-btn:hover {
+  color: #FFFFFF;
+}
+
+@media (max-width: 900px) {
+  .distinct-contact-card {
+    padding: 30px 20px;
+  }
+  .dcc-body-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ================================================= */
 /* FOOTER (INDUX STYLE DEEP CHARCOAL)                */
 /* ================================================= */
 .site-footer {

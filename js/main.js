@@ -661,6 +661,63 @@
 
 
 
+  // Distinct Global Contact Console Interactive Controller
+  // ====================================================
+  (function initDistinctContactCard(){
+    var card = document.getElementById('distinct-contact-card');
+    if (!card) return;
+
+    // Viewport intersection reveal animation
+    if ('IntersectionObserver' in window) {
+      var cardObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            card.classList.add('in-view');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cardObserver.observe(card);
+    } else {
+      card.classList.add('in-view');
+    }
+
+    // Interactive One-Click Email Copy
+    var copyBtn = document.getElementById('dcc-copy-btn');
+    var emailText = document.getElementById('dcc-email-text');
+    if (copyBtn && emailText) {
+      copyBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        var email = emailText.textContent.trim();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(function(){
+            copyBtn.textContent = 'Copied! ✓';
+            copyBtn.style.color = '#22C55E';
+            showToast('RFQ email copied to clipboard: ' + email);
+            setTimeout(function(){
+              copyBtn.textContent = 'Copy Email 📋';
+              copyBtn.style.color = '';
+            }, 2500);
+          });
+        } else {
+          showToast('Direct RFQ Email: ' + email);
+        }
+      });
+    }
+
+    // Re-check animation on page transitions
+    window.addEventListener('hashchange', function(){
+      setTimeout(function(){
+        var rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.95) {
+          card.classList.add('in-view');
+        }
+      }, 100);
+    });
+  })();
+
+
+
   // Senior Mobile Navigation Drawer Controller
   var menuBtn = document.getElementById('menu-toggle');
   var siteNav = document.getElementById('site-nav');
