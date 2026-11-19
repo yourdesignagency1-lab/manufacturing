@@ -1490,12 +1490,35 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   gap: 36px;
   margin-bottom: 48px;
 }
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.footer-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  background: #FFFFFF;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.footer-brand:hover .footer-logo-img {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
 .footer-brand-title {
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 800;
   color: #FFFFFF;
-  margin-bottom: 12px;
+  margin-bottom: 0;
+  line-height: 1.1;
 }
 .footer-brand-title span { color: var(--san-blue-vibrant); }
 .footer-desc {
