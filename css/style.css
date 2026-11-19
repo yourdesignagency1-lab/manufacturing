@@ -883,14 +883,14 @@ img { display: block; max-width: 100%; height: auto; }
 .ref-pretitle-line {
   width: 38px;
   height: 2.5px;
-  background: #F59E0B;
+  background: var(--san-rust);
   border-radius: 2px;
 }
 .ref-pretitle-text {
   font-family: var(--font-main);
   font-size: 12px;
   font-weight: 800;
-  color: #D97706;
+  color: var(--san-rust);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -904,7 +904,7 @@ img { display: block; max-width: 100%; height: auto; }
   margin: 0;
 }
 .ref-title-accent {
-  color: #F59E0B;
+  color: var(--san-blue);
 }
 
 /* 7-Card Horizontal Row on Desktop */
@@ -915,9 +915,10 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .ref-industry-card {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--surface-border);
+  border-top: 3px solid transparent;
   border-radius: 14px;
-  padding: 26px 10px 22px;
+  padding: 24px 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -930,8 +931,9 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .ref-industry-card:hover {
   transform: translateY(-6px);
-  border-color: #CBD5E1;
-  box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.08);
+  border-color: rgba(7, 76, 138, 0.35);
+  border-top-color: var(--san-blue);
+  box-shadow: 0 14px 28px -6px var(--san-blue-glow);
 }
 .ref-ind-icon {
   width: 48px;
@@ -946,13 +948,11 @@ img { display: block; max-width: 100%; height: auto; }
 .ref-industry-card:hover .ref-ind-icon {
   transform: scale(1.12);
 }
-.ref-ind-icon--blue { background: #EFF6FF; color: #2563EB; }
-.ref-ind-icon--orange { background: #FFF7ED; color: #EA580C; }
-.ref-ind-icon--teal { background: #ECFDF5; color: #059669; }
-.ref-ind-icon--slate { background: #F1F5F9; color: #475569; }
-.ref-ind-icon--cyan { background: #F0F9FF; color: #0284C7; }
-.ref-ind-icon--red { background: #FEF2F2; color: #DC2626; }
-.ref-ind-icon--green { background: #F0FDF4; color: #16A34A; }
+.ref-ind-icon--blue { background: var(--san-blue-soft); color: var(--san-blue); }
+.ref-ind-icon--rust { background: var(--san-rust-soft); color: var(--san-rust); }
+.ref-ind-icon--cyan { background: var(--san-gold-soft); color: #0284C7; }
+.ref-ind-icon--deep { background: #EFF6FF; color: var(--san-blue-deep); }
+.ref-ind-icon--orange { background: var(--san-rust-soft); color: var(--san-rust-deep); }
 
 .ref-ind-title {
   font-family: var(--font-display);
@@ -974,7 +974,8 @@ img { display: block; max-width: 100%; height: auto; }
 /* ================================================= */
 .ref-why-section {
   padding: 64px 0 88px;
-  background: #FFFFFF;
+  background: #F8FAFC;
+  border-top: 1px solid var(--surface-border);
 }
 .ref-why-grid {
   display: grid;
@@ -982,14 +983,16 @@ img { display: block; max-width: 100%; height: auto; }
   gap: 22px;
 }
 .ref-why-card {
-  background: #FEFDF5;
-  border: 1px solid #FDE68A;
+  background: #FFFFFF;
+  border: 1px solid var(--surface-border);
+  border-top: 3px solid transparent;
   border-radius: 16px;
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
               box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.25s ease, 
@@ -997,13 +1000,13 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .ref-why-card:hover {
   transform: translateY(-5px);
-  border-color: #F59E0B;
-  background: #FFFBEB;
-  box-shadow: 0 14px 28px -6px rgba(245, 158, 11, 0.14);
+  border-color: rgba(7, 76, 138, 0.35);
+  border-top-color: var(--san-blue);
+  box-shadow: 0 14px 28px -6px var(--san-blue-glow);
 }
 .ref-why-icon {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1014,15 +1017,12 @@ img { display: block; max-width: 100%; height: auto; }
 .ref-why-card:hover .ref-why-icon {
   transform: scale(1.12);
 }
-.ref-why-icon--purple { background: #F3E8FF; color: #9333EA; }
-.ref-why-icon--coral { background: #FFE4E6; color: #E11D48; }
-.ref-why-icon--teal { background: #CCFBF1; color: #0D9488; }
-.ref-why-icon--amber { background: #FEF3C7; color: #D97706; }
-.ref-why-icon--magenta { background: #FCE7F3; color: #DB2777; }
-.ref-why-icon--blue { background: #E0F2FE; color: #0284C7; }
-.ref-why-icon--emerald { background: #D1FAE5; color: #059669; }
-.ref-why-icon--violet { background: #EDE9FE; color: #7C3AED; }
-.ref-why-icon--cyan { background: #CFFAFE; color: #0891B2; }
+.ref-why-icon--blue { background: var(--san-blue-soft); color: var(--san-blue); }
+.ref-why-icon--rust { background: var(--san-rust-soft); color: var(--san-rust); }
+.ref-why-icon--cyan { background: var(--san-gold-soft); color: #0284C7; }
+.ref-why-icon--orange { background: var(--san-rust-soft); color: var(--san-rust-deep); }
+.ref-why-icon--teal { background: #F0FDFA; color: #0D9488; }
+.ref-why-icon--deep { background: #EFF6FF; color: var(--san-blue-deep); }
 
 .ref-why-title {
   font-family: var(--font-display);
