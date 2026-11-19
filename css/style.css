@@ -2230,26 +2230,6 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 
 /* Left Editorial Column */
-.hero-indux-pre {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--san-gold);
-  margin-bottom: 22px;
-}
-
-.hero-pre-line {
-  display: inline-block;
-  width: 36px;
-  height: 2px;
-  background: var(--san-gold);
-}
-
 .hero-indux-title {
   font-family: var(--font-display);
   font-size: clamp(40px, 5.2vw, 68px);
@@ -2507,12 +2487,6 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 
 
-.hero-indux-pre {
-  color: #38BDF8;
-}
-.hero-pre-line {
-  background: #38BDF8;
-}
 .hero-indux-title .hero-accent {
   color: #38BDF8;
   text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
@@ -2915,12 +2889,16 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     display: none !important;
   }
 
-  /* 4. Hero Section: Precision Mobile Alignment (Matching Reference Specification) */
+  /* 4. Hero Section: Mobile Layout (Matching Reference Specification) */
   .hero-section {
-    min-height: auto !important;
-    padding: 38px 0 34px !important;
+    min-height: calc(100vh - 64px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 24px 0 32px !important;
     width: 100% !important;
     overflow: hidden !important;
+    box-sizing: border-box !important;
   }
   .hero-bg-overlay {
     background: linear-gradient(
@@ -2930,7 +2908,14 @@ textarea.form-control { resize: vertical; min-height: 110px; }
       rgba(8, 14, 27, 0.98) 100%
     ) !important;
   }
+  .hero-content-wrap {
+    width: 100% !important;
+    position: relative !important;
+    z-index: 3 !important;
+  }
   .hero-grid-indux {
+    display: flex !important;
+    flex-direction: column !important;
     gap: 0 !important;
     width: 100% !important;
   }
@@ -2939,33 +2924,14 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
-  .hero-indux-pre {
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 12px !important;
-    margin-bottom: 20px !important;
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.12em !important;
-    line-height: 1.45 !important;
-    text-transform: uppercase !important;
-  }
-  .hero-pre-line {
-    display: inline-block !important;
-    width: 30px !important;
-    height: 2px !important;
-    background: var(--san-rust, #D9531E) !important;
-    flex-shrink: 0 !important;
-    margin-top: 7px !important;
-  }
   .hero-indux-title {
-    font-size: clamp(32px, 8.8vw, 38px) !important;
-    line-height: 1.14 !important;
+    font-size: clamp(34px, 9.2vw, 42px) !important;
+    line-height: 1.12 !important;
     font-weight: 800 !important;
-    letter-spacing: -0.03em !important;
-    margin-bottom: 20px !important;
+    letter-spacing: -0.035em !important;
+    margin-bottom: 18px !important;
     color: #FFFFFF !important;
-    max-width: 330px !important;
+    max-width: 320px !important;
     word-break: break-word !important;
   }
   .hero-indux-title .hero-accent {
@@ -2985,7 +2951,7 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     flex-direction: column !important;
     gap: 12px !important;
     width: 100% !important;
-    margin-bottom: 22px !important;
+    margin: 0 !important;
   }
   .hero-btn-primary {
     width: 100% !important;
@@ -3024,30 +2990,9 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     box-sizing: border-box !important;
   }
 
+  /* Hide desktop slideshow bottom nav controls on mobile */
   .hero-slider-nav-bar {
-    position: static !important;
-    margin-top: 14px !important;
-    padding-top: 6px !important;
-    width: 100% !important;
-  }
-  .hero-slider-nav-inner {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100% !important;
-  }
-  .hero-slide-info-pill {
-    font-size: 10px !important;
-    padding: 4px 10px !important;
-    max-width: 65% !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  .hero-slider-nav-btns {
-    justify-content: flex-end !important;
-    width: auto !important;
-    gap: 6px !important;
+    display: none !important;
   }
 
   /* 6. Stats Band: Compact 2x2 Metric Grid */
