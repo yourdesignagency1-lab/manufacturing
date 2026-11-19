@@ -1916,8 +1916,8 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 /* ================================================= */
 .hero-section {
   position: relative;
-  min-height: 88vh;
-  padding: 130px 0 100px;
+  min-height: calc(100vh - 84px);
+  padding: 50px 0 80px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1937,14 +1937,16 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   inset: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+  transition: opacity 1.0s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.0s;
   overflow: hidden;
+  z-index: 1;
+  will-change: opacity, transform;
 }
 
 .hero-bg-slide.active {
   opacity: 1;
   visibility: visible;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-bg-slide img {
@@ -1953,11 +1955,12 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   object-fit: cover;
   object-position: center;
   transform: scale(1.0);
-  transition: transform 7.5s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 .hero-bg-slide.active img {
-  transform: scale(1.07);
+  transform: scale(1.06);
 }
 
 /* Deep Indux Contrast Gradient Overlay */

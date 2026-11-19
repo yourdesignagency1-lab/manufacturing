@@ -331,9 +331,18 @@
 
     if (!slides.length) return;
 
+    // Preload all hero slide images into memory immediately for instant 5-second rendering
+    slides.forEach(function(s){
+      var img = s.querySelector('img');
+      if (img && img.src) {
+        var preloader = new Image();
+        preloader.src = img.src;
+      }
+    });
+
     var currentIndex = 0;
     var totalSlides = slides.length;
-    var duration = 5500; // ms
+    var duration = 5000; // Exact 5 seconds per slide
     var timer = null;
     var startTime = Date.now();
     var isPaused = false;
@@ -354,7 +363,7 @@
       startTime = Date.now();
       if (progressFill) progressFill.style.width = '0%';
       clearInterval(timer);
-      timer = setInterval(stepProgress, 35);
+      timer = setInterval(stepProgress, 30);
     }
 
     function goToSlide(targetIdx) {
@@ -396,16 +405,18 @@
       });
     }
 
-    // Pause on hover
-    section.addEventListener('mouseenter', function(){
-      isPaused = true;
-    });
-
-    section.addEventListener('mouseleave', function(){
-      isPaused = false;
-      var currentWidth = parseFloat(progressFill ? progressFill.style.width : 0) || 0;
-      startTime = Date.now() - (currentWidth / 100 * duration);
-    });
+    // Pause only when actively interacting with manual controls
+    var navControls = section.querySelector('.hero-slider-nav-btns');
+    if (navControls) {
+      navControls.addEventListener('mouseenter', function(){
+        isPaused = true;
+      });
+      navControls.addEventListener('mouseleave', function(){
+        isPaused = false;
+        var currentWidth = parseFloat(progressFill ? progressFill.style.width : 0) || 0;
+        startTime = Date.now() - (currentWidth / 100 * duration);
+      });
+    }
 
     // Page Visibility change pause
     document.addEventListener('visibilitychange', function(){
