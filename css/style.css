@@ -560,6 +560,12 @@ img { display: block; max-width: 100%; height: auto; }
   line-height: 1.5;
   font-weight: 500;
 }
+.stat-label-full {
+  display: block;
+}
+.stat-label-short {
+  display: none;
+}
 
 /* ================================================= */
 /* SECTION: ABOUT SAN (INDUX SPLIT WITH 4 ICONS)     */
@@ -2984,14 +2990,15 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     border: 1px solid rgba(255, 255, 255, 0.28) !important;
   }
 
-  /* Hide desktop slideshow bottom nav controls on mobile */
-  .hero-slider-nav-bar {
+  /* Hide desktop slideshow controls and blue dividing line on mobile */
+  .hero-slider-nav-bar,
+  .hero-progress-line {
     display: none !important;
   }
 
   /* 6. Stats Band: 4 in a Row Metric Strip Directly Below Buttons */
   .stats-band {
-    padding: 8px 0 22px !important;
+    padding: 12px 0 24px !important;
     width: 100% !important;
   }
   .stats-grid {
@@ -3002,32 +3009,43 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     box-sizing: border-box !important;
   }
   .stat-item {
-    padding: 10px 4px !important;
-    background: rgba(255, 255, 255, 0.035) !important;
+    padding: 10px 3px 8px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
     border-radius: 8px !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     box-sizing: border-box !important;
     min-width: 0 !important;
+    height: 74px !important;
+  }
+  .stat-item:not(:last-child)::after,
+  .stat-item::after {
+    display: none !important;
   }
   .stat-num {
-    font-size: clamp(17px, 4.8vw, 21px) !important;
+    font-size: clamp(17px, 4.8vw, 20px) !important;
     font-weight: 800 !important;
     color: #38BDF8 !important;
-    margin-bottom: 3px !important;
-    line-height: 1.1 !important;
+    margin-bottom: 2px !important;
+    line-height: 1 !important;
     white-space: nowrap !important;
   }
   .stat-label {
-    font-size: clamp(8.5px, 2.3vw, 10px) !important;
-    line-height: 1.25 !important;
+    font-size: clamp(9px, 2.4vw, 10px) !important;
+    line-height: 1.15 !important;
     color: #94A3B8 !important;
     text-align: center !important;
-    word-break: break-word !important;
+  }
+  .stat-label-full {
+    display: none !important;
+  }
+  .stat-label-short {
+    display: block !important;
+    line-height: 1.15 !important;
   }
 
   /* 7. About Section on Mobile */
