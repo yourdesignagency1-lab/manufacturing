@@ -2716,11 +2716,11 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     width: 100% !important;
   }
   body {
-    padding-bottom: 74px !important; /* Space for Mobile Bottom Dock */
+    padding-bottom: 0 !important;
   }
   .wrap {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   /* 1. Header Bar: Minimalist, Uncluttered, High-End Glass */
@@ -2761,15 +2761,33 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     align-items: center !important;
     gap: 8px !important;
   }
-  /* Remove cramped quote button from top header on mobile (already prominent in sticky bottom dock) */
+  /* Remove cramped quote button from top header on mobile */
   .header-actions .btn,
   .header-actions .btn-primary,
   .header-actions .btn-rust {
     display: none !important;
   }
-  /* Hide desktop floating WhatsApp button on mobile to avoid overlapping the bottom dock's Request Quote CTA */
+  /* Floating WhatsApp dial: Clean bottom-right positioning matching reference */
   .floating-dial {
-    display: none !important;
+    display: flex !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999 !important;
+  }
+  .floating-btn {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  }
+  .floating-btn--wa {
+    background: #25D366 !important;
+    color: #FFFFFF !important;
+    font-size: 24px !important;
   }
   /* High-Affordance Animated Hamburger Button */
   .menu-btn {
@@ -2892,77 +2910,23 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     text-decoration: none !important;
   }
 
-  /* 3. Sticky Mobile Bottom Dock (Thumb-Zone Conversions) */
+  /* 3. Mobile Bottom Dock (Hidden on mobile to match clean reference layout with floating WhatsApp) */
   .mobile-bottom-dock {
-    display: flex !important;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 64px !important;
-    background: rgba(11, 17, 32, 0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35) !important;
-    z-index: 998 !important;
-    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-  .dock-btn {
-    height: 48px !important;
-    border-radius: 8px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 7px !important;
-    font-family: var(--font-display) !important;
-    font-weight: 700 !important;
-    font-size: 13.5px !important;
-    text-decoration: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: transform 0.15s, opacity 0.15s !important;
-  }
-  .dock-btn:active {
-    transform: scale(0.96) !important;
-  }
-  .dock-btn-call {
-    flex: 1 !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    color: #F8FAFC !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  }
-  .dock-btn-call svg {
-    color: #38BDF8 !important;
-  }
-  .dock-btn-wa {
-    width: 48px !important;
-    flex-shrink: 0 !important;
-    background: #25D366 !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3) !important;
-  }
-  .dock-btn-quote {
-    flex: 1.4 !important;
-    background: linear-gradient(135deg, var(--san-rust) 0%, var(--san-rust-deep) 100%) !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 14px var(--san-rust-glow) !important;
+    display: none !important;
   }
 
-  /* 4. Hero Section: Fluid, High-Contrast & Elimination of Fatigue */
+  /* 4. Hero Section: Precision Mobile Alignment (Matching Reference Specification) */
   .hero-section {
     min-height: auto !important;
-    padding: 32px 0 24px !important;
+    padding: 38px 0 34px !important;
     width: 100% !important;
     overflow: hidden !important;
   }
   .hero-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(8, 14, 27, 0.95) 0%,
-      rgba(8, 14, 27, 0.90) 50%,
+      rgba(8, 14, 27, 0.94) 0%,
+      rgba(8, 14, 27, 0.88) 50%,
       rgba(8, 14, 27, 0.98) 100%
     ) !important;
   }
@@ -2976,44 +2940,87 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     box-sizing: border-box !important;
   }
   .hero-indux-pre {
-    margin-bottom: 12px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 20px !important;
     font-size: 11px !important;
+    font-weight: 800 !important;
     letter-spacing: 0.12em !important;
-    flex-wrap: wrap !important;
+    line-height: 1.45 !important;
+    text-transform: uppercase !important;
+  }
+  .hero-pre-line {
+    display: inline-block !important;
+    width: 30px !important;
+    height: 2px !important;
+    background: var(--san-rust, #D9531E) !important;
+    flex-shrink: 0 !important;
+    margin-top: 7px !important;
   }
   .hero-indux-title {
-    font-size: clamp(25px, 6.8vw, 32px) !important;
-    line-height: 1.18 !important;
-    margin-bottom: 14px !important;
-    letter-spacing: -0.02em !important;
+    font-size: clamp(32px, 8.8vw, 38px) !important;
+    line-height: 1.14 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 20px !important;
+    color: #FFFFFF !important;
+    max-width: 330px !important;
     word-break: break-word !important;
   }
+  .hero-indux-title .hero-accent {
+    color: #38BDF8 !important;
+    text-shadow: 0 0 25px rgba(56, 189, 248, 0.35) !important;
+    display: inline !important;
+  }
   .hero-indux-desc {
-    font-size: 13.5px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 20px !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    margin-bottom: 26px !important;
     color: #CBD5E1 !important;
+    max-width: 100% !important;
   }
   .hero-indux-actions {
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;
+    gap: 12px !important;
     width: 100% !important;
-    margin-bottom: 18px !important;
+    margin-bottom: 22px !important;
   }
-  .hero-btn-primary,
-  .hero-btn-secondary,
-  .hero-btn-rust {
+  .hero-btn-primary {
     width: 100% !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
-    padding: 13px 18px !important;
-    font-size: 14px !important;
+    background: #074C8A !important;
+    color: #FFFFFF !important;
+    font-family: var(--font-display) !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
-    min-height: 48px !important;
-    height: auto !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(7, 76, 138, 0.4) !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+  }
+  .hero-btn-secondary {
+    width: 100% !important;
+    min-height: 52px !important;
+    padding: 12px 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    font-family: var(--font-display) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
     border-radius: 8px !important;
     text-align: center !important;
-    white-space: normal !important;
+    line-height: 1.35 !important;
     box-sizing: border-box !important;
   }
 
