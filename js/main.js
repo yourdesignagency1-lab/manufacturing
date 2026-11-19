@@ -1,0 +1,594 @@
+/**
+ * SAN Automation & Precision Engineering
+ * Client Application Architecture (SPA Routing, Hero Slider, Filters, RFQ & Interactions)
+ */
+
+(function(){
+  'use strict';
+
+  // Toast Functionality
+  function showToast(msg) {
+    var toast = document.getElementById('site-toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 3400);
+  }
+
+  // SPA Route Switcher
+  function showPage(name, push) {
+    var validPages = ['home', 'about', 'products', 'services', 'projects', 'contact'];
+    if (validPages.indexOf(name) === -1) name = 'home';
+
+    document.querySelectorAll('.page').forEach(function(p){
+      p.classList.remove('active');
+    });
+
+    var targetPage = document.getElementById('page-' + name);
+    if (targetPage) {
+      targetPage.classList.add('active');
+    }
+
+    document.querySelectorAll('.site-nav .nav-link').forEach(function(link){
+      link.classList.toggle('active', link.getAttribute('data-page') === name);
+    });
+
+    if (push !== false) {
+      history.pushState({ page: name }, '', '#' + name);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    var titles = {
+      home: 'SAN Automation & Precision Engineering | Industrial Products, Robotics & Precision Engineering',
+      about: 'About Us | SAN Automation & Precision Engineering Bengaluru',
+      products: 'Industrial Products Catalog (11 Lines) | SAN Automation',
+      services: 'Industrial Engineering & Rapid Breakdown Services (10 Lines) | SAN Automation',
+      projects: 'Field Implementations & Turnkey Deliveries | SAN Automation',
+      contact: 'Request Technical Quote & Consultation | SAN Automation'
+    };
+    document.title = titles[name] || titles.home;
+  }
+
+  var initialHash = location.hash.replace('#', '') || 'home';
+  showPage(initialHash, false);
+
+  window.addEventListener('popstate', function(e){
+    var target = (e.state && e.state.page) || location.hash.replace('#', '') || 'home';
+    showPage(target, false);
+  });
+
+  // Global Click Delegator for Navigation
+  document.addEventListener('click', function(e){
+    var trigger = e.target.closest('[data-page]');
+    if (!trigger) return;
+
+    var page = trigger.getAttribute('data-page');
+    if (!page) return;
+
+    e.preventDefault();
+
+    var prod = trigger.getAttribute('data-product');
+    if (prod) {
+      var selectEl = document.getElementById('rfq-item');
+      if (selectEl) {
+        selectEl.value = prod;
+      }
+    }
+
+    showPage(page);
+
+    var scrollTarget = trigger.getAttribute('data-scroll');
+    if (scrollTarget) {
+      setTimeout(function(){
+        var targetEl = document.getElementById(scrollTarget);
+        if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
+
+    // Close mobile nav drawer + release scroll lock when any nav triggers page change
+    var siteNav = document.getElementById('site-nav');
+    var menuBtn = document.getElementById('menu-toggle');
+    if (siteNav) siteNav.classList.remove('open');
+    if (menuBtn) menuBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // Quick Diagnostic Fault Selector on Home
+  document.addEventListener('click', function(e){
+    var chip = e.target.closest('.fault-chip');
+    if (!chip) return;
+    var faultText = chip.getAttribute('data-fault');
+    var selectEl = document.getElementById('rfq-item');
+    var urgencyEl = document.getElementById('rfq-urgency');
+    var msgEl = document.getElementById('rfq-msg');
+
+    if (selectEl) selectEl.value = 'INDUSTRIAL MACHINE BREAKDOWN SERVICE';
+    if (urgencyEl) urgencyEl.value = 'Emergency (Within 24 Hours)';
+    if (msgEl) msgEl.value = 'EMERGENCY BREAKDOWN: Diagnosed Fault: ' + faultText + '.\nPlease dispatch mobile team immediately.';
+
+    showToast('Breakdown Fault Selected: ' + faultText);
+    showPage('contact');
+  });
+
+  // Filter Setup for Products & Services
+  function setupFilter(filterContainerId, gridContainerId) {
+    var container = document.getElementById(filterContainerId);
+    var grid = document.getElementById(gridContainerId);
+    if (!container || !grid) return;
+
+    container.addEventListener('click', function(e){
+      var btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      var filter = btn.getAttribute('data-filter');
+
+      container.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var cards = grid.querySelectorAll('.catalog-card');
+      cards.forEach(function(card){
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  setupFilter('products-filter', 'products-grid');
+  setupFilter('services-filter', 'services-grid');
+
+  // RFQ Form & WhatsApp Integration
+  var form = document.getElementById('rfq-form');
+  var feedback = document.getElementById('form-feedback');
+
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = form.elements['name'].value.trim();
+      var company = form.elements['company'].value.trim();
+      var item = form.elements['item'].value;
+
+      if (!name || !company || !item) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#FEF2F2';
+        feedback.style.color = '#DC2626';
+        feedback.textContent = 'Please fill in all required fields including your product or service selection.';
+        return;
+      }
+
+      var submitBtn = document.getElementById('rfq-submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Transmitting RFQ...';
+
+      setTimeout(function(){
+        feedback.style.display = 'block';
+        feedback.style.background = '#ECFDF5';
+        feedback.style.color = '#059669';
+        feedback.innerHTML = '<strong>✓ Request Received!</strong> Our application engineering team will review your specifications and send a formal proposal within 24 hours.';
+        showToast('Quote Request Submitted for ' + item);
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Quotation Request';
+      }, 700);
+    });
+
+    var waBtn = document.getElementById('rfq-whatsapp-btn');
+    if (waBtn) {
+      waBtn.addEventListener('click', function(){
+        var f = form.elements;
+        var itemVal = f['item'].value || 'General Industrial Enquiry';
+        var textLines = [
+          'Hello SAN Automation, I would like a technical quote:',
+          '• Name: ' + (f['name'].value || 'Not specified'),
+          '• Company: ' + (f['company'].value || 'Not specified'),
+          '• Item: ' + itemVal,
+          '• Urgency: ' + f['urgency'].value,
+          '• Quantity: ' + (f['quantity'].value || 'As discussed'),
+          '• Notes: ' + (f['message'].value || 'Please send detailed specifications and commercial terms.')
+        ];
+        var url = 'https://wa.me/919876543210?text=' + encodeURIComponent(textLines.join('\n'));
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+  }
+
+  // Pre-filter support via footer links
+  document.addEventListener('click', function(e){
+    var filterTrigger = e.target.closest('[data-filter]');
+    if (!filterTrigger || filterTrigger.classList.contains('filter-btn')) return;
+    var filterVal = filterTrigger.getAttribute('data-filter');
+    var pageVal = filterTrigger.getAttribute('data-page');
+    if (filterVal && pageVal) {
+      setTimeout(function(){
+        var targetBtn = document.querySelector('#' + pageVal + '-filter [data-filter="' + filterVal + '"]');
+        if (targetBtn) targetBtn.click();
+      }, 100);
+    }
+  });
+
+
+  // ====================================================
+  // Image Lightbox Preview Controller
+  // ====================================================
+  var modalEl = document.getElementById('image-preview-modal');
+  var modalImg = document.getElementById('modal-preview-img');
+  var modalBadge = document.getElementById('modal-preview-badge');
+  var modalTitle = document.getElementById('modal-preview-title');
+  var modalDesc = document.getElementById('modal-preview-desc');
+  var modalInquireBtn = document.getElementById('modal-inquire-btn');
+  var modalCloseBtn = document.getElementById('modal-close-btn');
+  var modalDismissBtn = document.getElementById('modal-dismiss-btn');
+  var modalBackdrop = document.getElementById('modal-backdrop');
+
+  var currentModalItemName = '';
+
+  function openImageModal(imgSrc, title, badge, desc) {
+    if (!modalEl || !modalImg) return;
+    modalImg.src = imgSrc || '';
+    modalImg.alt = title || 'Engineering System';
+    if (modalBadge) modalBadge.textContent = badge || 'PRECISION ENGINEERING';
+    if (modalTitle) modalTitle.textContent = title || 'Industrial System';
+    if (modalDesc) modalDesc.textContent = desc || 'Engineered and manufactured at SAN Automation Peenya Facility.';
+    currentModalItemName = title || '';
+    modalEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    if (!modalEl) return;
+    modalEl.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeImageModal);
+  if (modalDismissBtn) modalDismissBtn.addEventListener('click', closeImageModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeImageModal);
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modalEl && modalEl.classList.contains('open')) {
+      closeImageModal();
+    }
+  });
+
+  if (modalInquireBtn) {
+    modalInquireBtn.addEventListener('click', function(){
+      closeImageModal();
+      if (currentModalItemName) {
+        var cleanName = currentModalItemName.replace(/^[0-9]+\.\s*/, '').trim();
+        var selectEl = document.getElementById('rfq-item');
+        if (selectEl) {
+          for (var i = 0; i < selectEl.options.length; i++) {
+            if (selectEl.options[i].text.toUpperCase().indexOf(cleanName.toUpperCase()) !== -1 ||
+                cleanName.toUpperCase().indexOf(selectEl.options[i].text.toUpperCase()) !== -1) {
+              selectEl.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+      showPage('contact');
+      setTimeout(function(){
+        var contactSec = document.getElementById('page-contact');
+        if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    });
+  }
+
+  // Click handler on card preview buttons and images
+  document.addEventListener('click', function(e){
+    var previewBtn = e.target.closest('.card-preview-btn');
+    var imgWrap = e.target.closest('.catalog-img-wrap, .industry-img-wrap');
+    
+    // Ignore clicks if clicking an RFQ button inside the card body
+    if (e.target.closest('.catalog-btn, a[data-page], button[data-page]')) return;
+
+    if (previewBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var src = previewBtn.getAttribute('data-preview-img');
+      var title = previewBtn.getAttribute('data-preview-title');
+      var badge = previewBtn.getAttribute('data-preview-badge');
+      var desc = previewBtn.getAttribute('data-preview-desc');
+      openImageModal(src, title, badge, desc);
+    } else if (imgWrap) {
+      var btnInside = imgWrap.querySelector('.card-preview-btn');
+      var imgInside = imgWrap.querySelector('img');
+      if (btnInside) {
+        var src = btnInside.getAttribute('data-preview-img');
+        var title = btnInside.getAttribute('data-preview-title');
+        var badge = btnInside.getAttribute('data-preview-badge');
+        var desc = btnInside.getAttribute('data-preview-desc');
+        openImageModal(src, title, badge, desc);
+      } else if (imgInside) {
+        var card = imgWrap.closest('.catalog-card, .industry-card');
+        var t = card ? card.querySelector('.catalog-title, .industry-title') : null;
+        var d = card ? card.querySelector('.catalog-desc, .industry-desc') : null;
+        var b = card ? card.querySelector('.catalog-category') : null;
+        openImageModal(
+          imgInside.getAttribute('src'),
+          t ? t.textContent.trim() : 'Engineering System',
+          b ? b.textContent.trim() : 'PRECISION ENGINEERING',
+          d ? d.textContent.trim() : ''
+        );
+      }
+    }
+  });
+
+  // ====================================================
+  // Indux Full-Bleed Background Slideshow Controller
+  // ====================================================
+  (function initInduxHeroSlider(){
+    var section = document.getElementById('hero-slider-section');
+    if (!section) return;
+
+    var slides = section.querySelectorAll('.hero-bg-slide');
+    var prevBtn = document.getElementById('hero-bg-prev');
+    var nextBtn = document.getElementById('hero-bg-next');
+    var currNumEl = document.getElementById('hero-bg-curr-num');
+    var tagTextEl = document.getElementById('hero-bg-tag-text');
+    var progressFill = document.getElementById('hero-progress-fill');
+
+    if (!slides.length) return;
+
+    var currentIndex = 0;
+    var totalSlides = slides.length;
+    var duration = 5500; // ms
+    var timer = null;
+    var startTime = Date.now();
+    var isPaused = false;
+
+    function stepProgress() {
+      if (isPaused) return;
+      var elapsed = Date.now() - startTime;
+      var pct = Math.min(100, (elapsed / duration) * 100);
+      if (progressFill) {
+        progressFill.style.width = pct + '%';
+      }
+      if (elapsed >= duration) {
+        goToSlide(currentIndex + 1);
+      }
+    }
+
+    function startSliderTimer() {
+      startTime = Date.now();
+      if (progressFill) progressFill.style.width = '0%';
+      clearInterval(timer);
+      timer = setInterval(stepProgress, 35);
+    }
+
+    function goToSlide(targetIdx) {
+      if (targetIdx < 0) {
+        targetIdx = totalSlides - 1;
+      } else if (targetIdx >= totalSlides) {
+        targetIdx = 0;
+      }
+
+      slides.forEach(function(s, idx){
+        s.classList.toggle('active', idx === targetIdx);
+      });
+
+      if (currNumEl) {
+        currNumEl.textContent = '0' + (targetIdx + 1);
+      }
+
+      var currentSlide = slides[targetIdx];
+      var tag = currentSlide.getAttribute('data-tag') || 'INDUSTRIAL & MANUFACTURING';
+      if (tagTextEl) {
+        tagTextEl.textContent = tag;
+      }
+
+      currentIndex = targetIdx;
+      startSliderTimer();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        goToSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        goToSlide(currentIndex + 1);
+      });
+    }
+
+    // Pause on hover
+    section.addEventListener('mouseenter', function(){
+      isPaused = true;
+    });
+
+    section.addEventListener('mouseleave', function(){
+      isPaused = false;
+      var currentWidth = parseFloat(progressFill ? progressFill.style.width : 0) || 0;
+      startTime = Date.now() - (currentWidth / 100 * duration);
+    });
+
+    // Page Visibility change pause
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) {
+        isPaused = true;
+        clearInterval(timer);
+      } else {
+        isPaused = false;
+        startSliderTimer();
+      }
+    });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    section.addEventListener('touchstart', function(e){
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].clientX;
+      }
+    }, { passive: true });
+
+    section.addEventListener('touchend', function(e){
+      if (e.changedTouches && e.changedTouches[0]) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goToSlide(currentIndex + 1);
+          else goToSlide(currentIndex - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e){
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+    });
+
+    startSliderTimer();
+  })();
+
+
+
+  // ====================================================
+  // Intelligent Scroll-Driven Capabilities Switcher
+  // ====================================================
+  (function initScrollCapabilities(){
+    var section = document.querySelector('.capabilities-section');
+    if (!section) return;
+
+    var rows = section.querySelectorAll('.cap-row');
+    var slides = section.querySelectorAll('.cap-slide');
+    var badgeEl = document.getElementById('cap-current-badge');
+    var titleEl = document.getElementById('cap-current-title');
+
+    if (!rows.length || !slides.length) return;
+
+    var activeIndex = 0;
+    var isUserHovering = false;
+    var hoverTimeout = null;
+
+    function activateRow(targetIndex, updateHash) {
+      if (targetIndex < 0 || targetIndex >= rows.length) return;
+      if (targetIndex === activeIndex && rows[targetIndex].classList.contains('active')) return;
+
+      // Update rows
+      rows.forEach(function(r, idx){
+        r.classList.toggle('active', idx === targetIndex);
+      });
+
+      // Update visual slides
+      slides.forEach(function(s, idx){
+        s.classList.toggle('active', idx === targetIndex);
+      });
+
+      // Update overlay texts with smooth subtle fade
+      var activeRow = rows[targetIndex];
+      var badgeText = activeRow.getAttribute('data-badge') || 'PRECISION ENGINEERING';
+      var titleText = activeRow.getAttribute('data-title') || '';
+
+      if (badgeEl && titleEl) {
+        badgeEl.style.opacity = '0.3';
+        titleEl.style.opacity = '0.3';
+        setTimeout(function(){
+          badgeEl.textContent = badgeText;
+          titleEl.textContent = titleText;
+          badgeEl.style.opacity = '1';
+          titleEl.style.opacity = '1';
+        }, 120);
+      }
+
+      activeIndex = targetIndex;
+    }
+
+    // High-performance scroll tracking
+    var isTicking = false;
+
+    function onScrollCheck() {
+      if (isUserHovering) return;
+
+      // Target trigger line at 45% of viewport height (natural reading eye level)
+      var targetY = window.innerHeight * 0.44;
+      var closestIndex = activeIndex;
+      var minDistance = Infinity;
+
+      rows.forEach(function(row, idx){
+        var rect = row.getBoundingClientRect();
+        var rowCenter = rect.top + (rect.height / 2);
+        var dist = Math.abs(rowCenter - targetY);
+
+        // Check if row is currently visible on screen
+        if (rect.bottom > 100 && rect.top < window.innerHeight - 100) {
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestIndex = idx;
+          }
+        }
+      });
+
+      activateRow(closestIndex);
+      isTicking = false;
+    }
+
+    window.addEventListener('scroll', function(){
+      if (!isTicking) {
+        window.requestAnimationFrame(onScrollCheck);
+        isTicking = true;
+      }
+    }, { passive: true });
+
+    // Initial check on page load / route
+    setTimeout(onScrollCheck, 200);
+
+    // Hover interaction support
+    rows.forEach(function(row){
+      row.addEventListener('mouseenter', function(){
+        isUserHovering = true;
+        clearTimeout(hoverTimeout);
+        var idx = parseInt(row.getAttribute('data-index'), 10);
+        if (!isNaN(idx)) activateRow(idx);
+      });
+
+      row.addEventListener('mouseleave', function(){
+        clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(function(){
+          isUserHovering = false;
+        }, 600);
+      });
+    });
+
+  })();
+
+
+
+  // Senior Mobile Navigation Drawer Controller
+  var menuBtn = document.getElementById('menu-toggle');
+  var siteNav = document.getElementById('site-nav');
+  if (menuBtn && siteNav) {
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = siteNav.classList.toggle('open');
+      menuBtn.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close drawer when clicking any link
+    siteNav.querySelectorAll('.nav-link, button').forEach(function(link){
+      link.addEventListener('click', function(){
+        siteNav.classList.remove('open');
+        menuBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close drawer on click outside
+    document.addEventListener('click', function(e){
+      if (!siteNav.contains(e.target) && !menuBtn.contains(e.target)) {
+        if (siteNav.classList.contains('open')) {
+          siteNav.classList.remove('open');
+          menuBtn.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
+
+})();
