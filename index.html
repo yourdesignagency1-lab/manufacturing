@@ -393,11 +393,11 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 1. Automotive & EV -->
 <div class="ref-industry-card" data-page="products" data-product="ROBOTIC WELDING AND FABRICATION AUTOMATION">
 <div class="ref-ind-icon ref-ind-icon--blue">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<rect height="12" rx="2" width="20" x="2" y="6"></rect>
-<circle cx="7" cy="18" r="2"></circle>
-<circle cx="17" cy="18" r="2"></circle>
-<path d="M5 6l2-3h10l2 3"></path>
+<svg class="prem-icon prem-icon--auto" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<path class="anim-car-chassis" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.4-1.7-1.1-2.2l-2.4-1.8A3 3 0 0 0 16.7 8H8.3a3 3 0 0 0-1.8 1L4.1 10.8C3.4 11.3 3 12.1 3 13v3c0 .6.4 1 1 1h2"></path>
+<circle class="anim-wheel anim-wheel--1" cx="7.5" cy="17.5" r="2.5"></circle>
+<circle class="anim-wheel anim-wheel--2" cx="16.5" cy="17.5" r="2.5"></circle>
+<path class="anim-beam" d="M21 13h2"></path>
 </svg>
 </div>
 <h3 class="ref-ind-title">Automotive &amp; EV</h3>
@@ -407,9 +407,11 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 2. Aerospace & Defense -->
 <div class="ref-industry-card" data-page="services" data-product="INDUSTRIAL SPARE PARTS MANUFACTURING">
 <div class="ref-ind-icon ref-ind-icon--rust">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<line x1="5" x2="19" y1="12" y2="12"></line>
-<polyline points="12 5 19 12 12 19"></polyline>
+<svg class="prem-icon prem-icon--aero" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<g class="anim-jet">
+<path d="M12 2l3 7h6l-5 4 2 8-6-4-6 4 2-8-5-4h6z"></path>
+</g>
+<path class="anim-contrail" stroke-dasharray="2 3" d="M12 18v5"></path>
 </svg>
 </div>
 <h3 class="ref-ind-title">Aerospace &amp; Defense</h3>
@@ -419,11 +421,12 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 3. Warehousing & Logistics -->
 <div class="ref-industry-card" data-page="products" data-product="CONVEYORS">
 <div class="ref-ind-icon ref-ind-icon--cyan">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<rect height="18" rx="2" width="18" x="3" y="3"></rect>
-<line x1="9" x2="15" y1="9" y2="9"></line>
-<line x1="9" x2="15" y1="13" y2="13"></line>
-<line x1="9" x2="13" y1="17" y2="17"></line>
+<svg class="prem-icon prem-icon--conveyor" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<rect class="anim-box" height="7" rx="1.5" width="8" x="8" y="4"></rect>
+<path d="M2 17h20"></path>
+<circle class="anim-roller anim-roller--1" cx="5" cy="17" r="2"></circle>
+<circle class="anim-roller anim-roller--2" cx="12" cy="17" r="2"></circle>
+<circle class="anim-roller anim-roller--3" cx="19" cy="17" r="2"></circle>
 </svg>
 </div>
 <h3 class="ref-ind-title">Warehousing &amp; Logistics</h3>
@@ -433,10 +436,13 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 4. Heavy Engineering -->
 <div class="ref-industry-card" data-page="products" data-product="INDUSTRIAL HYDRAULIC AND PNEUMATIC PRESSES">
 <div class="ref-ind-icon ref-ind-icon--deep">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<path d="M2 20h20"></path>
-<path d="M6 20V8l6 4V4l8 6v10"></path>
-<path d="M10 16h4"></path>
+<svg class="prem-icon prem-icon--press" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<path d="M4 21h16M4 3h16M5 3v18M19 3v18"></path>
+<g class="anim-piston">
+<rect height="4" rx="1" width="8" x="8" y="8"></rect>
+<line x1="12" x2="12" y1="3" y2="8"></line>
+</g>
+<rect height="2" rx=".5" width="10" x="7" y="19"></rect>
 </svg>
 </div>
 <h3 class="ref-ind-title">Heavy Engineering</h3>
@@ -446,24 +452,27 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 5. Special Purpose Machines -->
 <div class="ref-industry-card" data-page="products" data-product="SPECIAL PURPOSE MACHINES (SPM)">
 <div class="ref-ind-icon ref-ind-icon--blue">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<circle cx="12" cy="12" r="3"></circle>
-<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+<svg class="prem-icon prem-icon--spm" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<circle cx="12" cy="12" r="3.5"></circle>
+<g class="anim-spm-gear">
+<path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.8 1.8M17.27 17.27l1.8 1.8M4.93 19.07l1.8-1.8M17.27 6.73l1.8-1.8"></path>
+</g>
 </svg>
 </div>
 <h3 class="ref-ind-title">Special Purpose Machines</h3>
 <p class="ref-ind-desc">Rotary Indexers &amp; Robotics</p>
 </div>
 
-<!-- 6. Foundries & Steel Plants -->
+<!-- 6. Foundries & Heavy Mills -->
 <div class="ref-industry-card" data-page="products" data-product="CRANE SETUPS(FOR INDUSTRIES)">
 <div class="ref-ind-icon ref-ind-icon--rust">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<path d="M3 21h18"></path>
-<path d="M5 21V7l7-4 7 4v14"></path>
-<path d="M9 10h6"></path>
-<path d="M9 14h6"></path>
-<path d="M9 18h6"></path>
+<svg class="prem-icon prem-icon--crane" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<path d="M2 6h20M4 6v15M20 6v15"></path>
+<g class="anim-crane-trolley">
+<rect height="3.5" rx="1" width="6" x="9" y="4.5"></rect>
+<line x1="12" x2="12" y1="8" y2="14"></line>
+<path d="M10 16a2 2 0 1 0 4 0"></path>
+</g>
 </svg>
 </div>
 <h3 class="ref-ind-title">Foundries &amp; Heavy Mills</h3>
@@ -473,8 +482,9 @@ Industries We <span class="ref-title-accent">Serve.</span>
 <!-- 7. Plant Operations & AMC -->
 <div class="ref-industry-card" data-page="services" data-product="INDUSTRIAL MACHINE BREAKDOWN SERVICE">
 <div class="ref-ind-icon ref-ind-icon--orange">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
-<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+<svg class="prem-icon prem-icon--siren" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="24">
+<polygon class="anim-bolt" points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+<circle class="anim-siren-radar" cx="12" cy="12" r="9.5" stroke-dasharray="3 3"></circle>
 </svg>
 </div>
 <h3 class="ref-ind-title">Plant Operations &amp; AMC</h3>
@@ -503,13 +513,11 @@ Precision. Quality.<br>
 <!-- 1. Sub-Micron Precision -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--blue">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<circle cx="12" cy="12" r="10"></circle>
-<line x1="22" x2="18" y1="12" y2="12"></line>
-<line x1="6" x2="2" y1="12" y2="12"></line>
-<line x1="12" x2="12" y1="6" y2="2"></line>
-<line x1="12" x2="12" y1="22" y2="18"></line>
-<circle cx="12" cy="12" r="3"></circle>
+<svg class="prem-icon prem-icon--cmm" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<circle class="anim-cmm-circle" cx="12" cy="12" r="9"></circle>
+<line class="anim-cmm-axis anim-cmm-axis--h" x1="2" x2="22" y1="12" y2="12"></line>
+<line class="anim-cmm-axis anim-cmm-axis--v" x1="12" x2="12" y1="2" y2="22"></line>
+<circle class="anim-cmm-probe" cx="12" cy="12" fill="currentColor" r="2.5"></circle>
 </svg>
 </div>
 <h3 class="ref-why-title">Sub-Micron Precision (±0.005mm)</h3>
@@ -519,10 +527,12 @@ Precision. Quality.<br>
 <!-- 2. 35,000 Sq.Ft Peenya Facility -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--rust">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<path d="M2 20h20"></path>
-<path d="M6 20V8l6 4V4l8 6v10"></path>
-<path d="M10 16h4"></path>
+<svg class="prem-icon prem-icon--plant" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<path d="M2 20h20M6 20V8l6 4V4l8 6v10"></path>
+<g class="anim-plant-hook">
+<line x1="12" x2="12" y1="11" y2="15"></line>
+<path d="M10.5 16.5a1.5 1.5 0 1 0 3 0"></path>
+</g>
 </svg>
 </div>
 <h3 class="ref-why-title">35,000 Sq.Ft Peenya Facility</h3>
@@ -532,10 +542,12 @@ Precision. Quality.<br>
 <!-- 3. Turnkey Concept-to-Runoff -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--cyan">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
+<svg class="prem-icon prem-icon--turnkey" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<g class="anim-poly-spin">
 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
 <polyline points="2 17 12 22 22 17"></polyline>
 <polyline points="2 12 12 17 22 12"></polyline>
+</g>
 </svg>
 </div>
 <h3 class="ref-why-title">Turnkey Concept-to-Runoff</h3>
@@ -545,8 +557,9 @@ Precision. Quality.<br>
 <!-- 4. Rapid <2-Hour Breakdown SLA -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--orange">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+<svg class="prem-icon prem-icon--flash" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<polygon class="anim-flash-bolt" points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+<circle class="anim-flash-ring" cx="12" cy="12" r="9" stroke-dasharray="3 3"></circle>
 </svg>
 </div>
 <h3 class="ref-why-title">Rapid &lt;2-Hour Breakdown SLA</h3>
@@ -556,9 +569,13 @@ Precision. Quality.<br>
 <!-- 5. Robotic Cells & Custom SPM -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--blue">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<circle cx="12" cy="12" r="3"></circle>
-<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+<svg class="prem-icon prem-icon--robot" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<path d="M12 2a3 3 0 0 0-3 3v2a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+<g class="anim-robot-arm">
+<path d="M12 10v4l4 3"></path>
+<circle class="anim-robot-spark" cx="19" cy="19" fill="currentColor" r="2"></circle>
+</g>
+<path d="M5 21h14"></path>
 </svg>
 </div>
 <h3 class="ref-why-title">Robotic Cells &amp; Custom SPM</h3>
@@ -568,11 +585,11 @@ Precision. Quality.<br>
 <!-- 6. Direct OEM Value & Pricing -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--teal">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-<circle cx="9" cy="7" r="4"></circle>
-<path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+<svg class="prem-icon prem-icon--trust" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<circle class="anim-trust-ring" cx="12" cy="12" r="9"></circle>
+<g class="anim-trust-check">
+<path d="M9 12l2 2 4-4"></path>
+</g>
 </svg>
 </div>
 <h3 class="ref-why-title">Direct OEM Value &amp; Pricing</h3>
@@ -582,11 +599,13 @@ Precision. Quality.<br>
 <!-- 7. Heavy Material Handling Systems -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--deep">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<rect height="18" rx="2" width="18" x="3" y="3"></rect>
-<line x1="9" x2="15" y1="9" y2="9"></line>
-<line x1="9" x2="15" y1="13" y2="13"></line>
-<line x1="9" x2="13" y1="17" y2="17"></line>
+<svg class="prem-icon prem-icon--trolley" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<rect class="anim-trolley-bed" height="8" rx="1.5" width="18" x="3" y="6"></rect>
+<g class="anim-trolley-wheels">
+<circle cx="7" cy="18" r="2.2"></circle>
+<circle cx="17" cy="18" r="2.2"></circle>
+</g>
+<path class="anim-trolley-handle" d="M3 9l-1.5-4h-1"></path>
 </svg>
 </div>
 <h3 class="ref-why-title">Heavy Material Handling Systems</h3>
@@ -596,10 +615,11 @@ Precision. Quality.<br>
 <!-- 8. Machine Overhauls & Reconditioning -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--rust">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-<path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-<path d="M2 2l7.586 7.586"></path>
+<svg class="prem-icon prem-icon--gauge" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<circle cx="12" cy="12" r="9"></circle>
+<line class="anim-gauge-needle" x1="12" x2="16" y1="12" y2="8"></line>
+<circle cx="12" cy="12" fill="currentColor" r="2"></circle>
+<path d="M12 5v2M19 12h-2M12 19v-2M5 12h2"></path>
 </svg>
 </div>
 <h3 class="ref-why-title">Machine Overhauls &amp; Reconditioning</h3>
@@ -609,9 +629,9 @@ Precision. Quality.<br>
 <!-- 9. 99.4% Machine Uptime & AMC -->
 <div class="ref-why-card">
 <div class="ref-why-icon ref-why-icon--cyan">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-<polyline points="9 12 11 14 15 10"></polyline>
+<svg class="prem-icon prem-icon--shield" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22">
+<path class="anim-shield-body" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+<polyline class="anim-shield-tick" points="9 12 11 14 15 10"></polyline>
 </svg>
 </div>
 <h3 class="ref-why-title">99.4% Machine Uptime &amp; AMC</h3>
