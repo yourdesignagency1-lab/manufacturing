@@ -2154,6 +2154,10 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 
 
+.hero-fold-wrapper {
+  display: contents;
+}
+
 /* ================================================= */
 /* INDUX FULL-BLEED HERO BACKGROUND SLIDESHOW        */
 /* ================================================= */
@@ -2895,16 +2899,29 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     display: none !important;
   }
 
-  /* 4. Hero Section: Precision Mobile Layout */
-  .hero-section {
-    min-height: auto !important;
+  /* 4. Full-Screen First-Fold Hero & Stats Viewport Architecture */
+  .hero-fold-wrapper {
+    min-height: calc(100svh - 64px) !important;
+    min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-start !important;
-    padding: 28px 0 16px !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    background: #080E1B !important;
+  }
+  .hero-section {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 24px 0 16px !important;
     width: 100% !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
+    background: transparent !important;
   }
   .hero-bg-overlay {
     background: linear-gradient(
@@ -2996,10 +3013,15 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     display: none !important;
   }
 
-  /* 6. Stats Band: 4 in a Row Metric Strip Directly Below Buttons */
+  /* 6. Stats Band: Integrated into Bottom of Full-Screen Fold */
   .stats-band {
-    padding: 12px 0 24px !important;
+    flex: 0 0 auto !important;
+    padding: 10px 0 16px !important;
     width: 100% !important;
+    box-sizing: border-box !important;
+    background: #080E1B !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   }
   .stats-grid {
     display: grid !important;
