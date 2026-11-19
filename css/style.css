@@ -373,22 +373,6 @@ img { display: block; max-width: 100%; height: auto; }
   width: auto;
   object-fit: contain;
 }
-.brand-meta {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.brand-title {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  line-height: 1.1;
-  white-space: nowrap;
-}
-.brand-title span { color: var(--san-blue); }
-
 /* Nav Menu */
 .site-nav {
   display: flex;
@@ -2745,15 +2729,6 @@ textarea.form-control { resize: vertical; min-height: 110px; }
   .brand-logo-img {
     height: 36px !important;
     width: auto !important;
-  }
-  .brand-title {
-    font-size: 15px !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
-    line-height: 1.15 !important;
-  }
-  .brand-title span {
-    color: var(--san-blue) !important;
   }
   /* Remove cramped quote button from top header on all mobile viewports to prevent squishing */
   .header-actions .btn-primary {
