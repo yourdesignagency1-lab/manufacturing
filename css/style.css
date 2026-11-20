@@ -1671,236 +1671,131 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 }
 
 /* ================================================= */
-/* GLOBAL HIGH-TECH INDUSTRIAL CONTACT CARD DOCK     */
+/* GLOBAL CALL TO ACTION BANNER (SIMPLE CLEAN STYLE) */
 /* ================================================= */
-.global-contact-wrapper {
-  padding: 50px 0 70px;
-  background: linear-gradient(180deg, var(--bg-subtle) 0%, #060B14 100%);
+.simple-cta-section {
+  padding: 80px 0 90px;
+  background: #F8FAFC;
   position: relative;
-  overflow: hidden;
 }
 
-.distinct-contact-card {
-  position: relative;
-  border-radius: var(--r-md);
-  background: #080E1B;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 48px 44px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+.simple-cta-card {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid var(--surface-border);
+  border-radius: 24px;
+  padding: 68px 40px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.distinct-contact-card.in-view {
-  opacity: 1;
-  transform: translateY(0);
+.simple-cta-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.08);
 }
 
-/* Ambient Radial Lighting & Precision Engineering Matrix Grid */
-.distinct-contact-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle at 100% 0%, rgba(217, 83, 30, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 28px 28px;
-  pointer-events: none;
-}
-
-/* Animated Top Scanning Laser / Light Beam Accent */
-.distinct-contact-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--san-rust-bright) 50%, var(--san-gold-bright) 100%);
-  animation: scanLight 4.5s ease-in-out infinite;
-}
-
-@keyframes scanLight {
-  0% { left: -100%; }
-  50%, 100% { left: 100%; }
-}
-
-/* Two-Column Industrial Layout */
-.dcc-body-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 44px;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-}
-
-.dcc-heading {
+.simple-cta-title {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.2vw, 36px);
-  font-weight: 800;
-  line-height: 1.2;
-  color: #FFFFFF;
-  margin-bottom: 14px;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 850;
+  line-height: 1.18;
+  color: #0F172A;
+  margin-bottom: 18px;
   letter-spacing: -0.025em;
 }
 
-.dcc-heading .accent-rust-text {
-  color: var(--san-rust-bright);
-  text-shadow: 0 0 24px var(--san-rust-glow);
+.simple-cta-title-accent {
+  color: var(--san-rust);
 }
 
-.dcc-desc {
-  font-size: 15px;
-  color: #94A3B8;
+.simple-cta-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
   line-height: 1.65;
-  margin-bottom: 0;
+  color: #64748B;
   max-width: 580px;
+  margin: 0 auto 36px;
 }
 
-/* Interactive Action Cards Column */
-.dcc-actions-deck {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.dcc-action-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
-  border-radius: var(--r-sm);
-  background: rgba(19, 28, 49, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-decoration: none;
-  color: #FFFFFF;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.dcc-action-card:hover {
-  background: rgba(19, 28, 49, 0.95);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-
-.dcc-action-card--phone:hover {
-  border-color: var(--san-gold-light);
-  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
-}
-
-.dcc-action-card--wa:hover {
-  border-color: #22C55E;
-  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
-}
-
-.dcc-action-card--rfq {
-  background: linear-gradient(135deg, var(--san-rust) 0%, var(--san-rust-deep) 100%);
-  border-color: var(--san-rust);
-  box-shadow: 0 6px 20px var(--san-rust-glow);
-}
-
-.dcc-action-card--rfq:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(217, 83, 30, 0.5);
-}
-
-.dcc-action-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.dcc-action-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--r-xs);
-  background: rgba(255, 255, 255, 0.08);
-  display: flex;
+.simple-cta-actions {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
-.dcc-action-card:hover .dcc-action-icon {
-  transform: scale(1.1);
-}
-
-.dcc-action-title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 2px;
-  line-height: 1.2;
-}
-
-.dcc-action-sub {
-  font-size: 12px;
-  color: #94A3B8;
-  line-height: 1.3;
-}
-
-.dcc-action-card--rfq .dcc-action-sub {
-  color: #FED7AA;
-}
-
-.dcc-action-arrow {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.4);
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.dcc-action-card:hover .dcc-action-arrow {
-  color: #FFFFFF;
-  transform: translateX(4px);
-}
-
-.dcc-email-bar {
-  display: flex;
+.simple-cta-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  border-radius: var(--r-xs);
-  font-size: 12.5px;
-  color: #94A3B8;
-}
-
-.dcc-copy-btn {
-  background: transparent;
-  border: none;
-  color: var(--san-gold-light);
-  font-size: 12px;
-  font-weight: 700;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 650;
+  padding: 14px 30px;
+  border-radius: 9999px;
+  text-decoration: none;
   cursor: pointer;
-  padding: 2px 6px;
-  transition: color 0.15s;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
-.dcc-copy-btn:hover {
+.simple-cta-btn--primary {
+  background: var(--san-rust);
   color: #FFFFFF;
+  border: 1.5px solid var(--san-rust);
+  box-shadow: 0 4px 14px var(--san-rust-glow);
 }
 
-@media (max-width: 900px) {
-  .distinct-contact-card {
-    padding: 30px 20px;
+.simple-cta-btn--primary:hover {
+  background: var(--san-rust-deep);
+  border-color: var(--san-rust-deep);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--san-rust-glow);
+}
+
+.simple-cta-btn--secondary {
+  background: #F1F5F9;
+  color: #1E293B;
+  border: 1.5px solid #E2E8F0;
+}
+
+.simple-cta-btn--secondary:hover {
+  background: #E2E8F0;
+  color: var(--san-blue);
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .simple-cta-section {
+    padding: 48px 0 60px;
   }
-  .dcc-body-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+  .simple-cta-card {
+    padding: 44px 20px 40px;
+    border-radius: 18px;
+  }
+  .simple-cta-title {
+    font-size: 28px;
+    line-height: 1.22;
+  }
+  .simple-cta-desc {
+    font-size: 14.5px;
+    margin-bottom: 26px;
+  }
+  .simple-cta-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .simple-cta-btn {
+    width: 100%;
+    padding: 13px 20px;
   }
 }
 
