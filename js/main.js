@@ -229,7 +229,7 @@
     modalImg.alt = title || 'Engineering System';
     if (modalBadge) modalBadge.textContent = badge || 'PRECISION ENGINEERING';
     if (modalTitle) modalTitle.textContent = title || 'Industrial System';
-    if (modalDesc) modalDesc.textContent = desc || 'Engineered and manufactured at SAN Automation Peenya Facility.';
+    if (modalDesc) modalDesc.textContent = desc || 'Engineered and manufactured at SAN Automation Bangalore Facility.';
     currentModalItemName = title || '';
     modalEl.classList.add('open');
     document.body.style.overflow = 'hidden';
