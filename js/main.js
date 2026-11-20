@@ -187,7 +187,7 @@
           '• Quantity: ' + (f['quantity'].value || 'As discussed'),
           '• Notes: ' + (f['message'].value || 'Please send detailed specifications and commercial terms.')
         ];
-        var url = 'https://wa.me/919876543210?text=' + encodeURIComponent(textLines.join('\n'));
+        var url = 'https://wa.me/919741482809?text=' + encodeURIComponent(textLines.join('\n'));
         window.open(url, '_blank', 'noopener');
       });
     }
