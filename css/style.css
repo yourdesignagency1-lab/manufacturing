@@ -202,6 +202,48 @@ img { display: block; max-width: 100%; height: auto; }
   transform: translateY(-1px);
 }
 
+/* ================================================= */
+/* INDUSTRIAL MINIMALIST BAR PRETITLE (IMAGE 1 SPEC)  */
+/* ================================================= */
+.indux-pretitle-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--san-blue);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+.indux-pretitle-bar::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 3.5px;
+  border-radius: 2px;
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+.indux-pretitle-bar--rust {
+  color: var(--san-rust);
+}
+.indux-pretitle-bar--rust-bright {
+  color: #FB923C;
+}
+.indux-pretitle-bar--gold {
+  color: #38BDF8;
+}
+.indux-pretitle-bar--white {
+  color: #FFFFFF;
+}
+.indux-pretitle-bar--center {
+  justify-content: center;
+  width: 100%;
+}
+
 /* Section Header Structure */
 .section-header {
   margin-bottom: 40px;
@@ -1602,24 +1644,50 @@ img { display: block; max-width: 100%; height: auto; }
   font-size: 12px;
 }
 
-/* Mission & Vision Grid */
+/* ================================================= */
+/* PAGE: ABOUT US - PREMIUM ENGINEERING SHOWCASE     */
+/* ================================================= */
+#page-about .about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px;
+  align-items: start; /* Fixes vertical centering misalignment */
+}
+
+#page-about .about-founder-column {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+
+.about-p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 18px;
+}
+
+/* Mission & Vision Dual Cards */
 .about-mission-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 24px 0 28px;
+  gap: 18px;
+  margin: 26px 0 28px;
 }
 .about-mv-card {
   background: #FFFFFF;
   border: 1px solid var(--surface-border);
-  border-radius: 12px;
-  padding: 22px 20px;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 16px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
 }
 .about-mv-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+  transform: translateY(-3px);
+  border-color: rgba(7, 76, 138, 0.28);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08);
 }
 .about-mv-card--mission {
   border-top: 3.5px solid var(--san-blue);
@@ -1630,139 +1698,193 @@ img { display: block; max-width: 100%; height: auto; }
 .about-mv-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 .about-mv-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 .about-mv-icon--blue {
-  background: var(--san-blue-soft);
+  background: #EFF6FF;
   color: var(--san-blue);
 }
 .about-mv-icon--rust {
-  background: var(--san-rust-soft);
+  background: #FFF7ED;
   color: var(--san-rust);
 }
 .about-mv-title {
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 750;
+  font-size: 17px;
+  font-weight: 800;
   color: #0F172A;
   margin: 0;
 }
 .about-mv-text {
   font-size: 13.5px;
-  color: var(--ink-secondary);
+  color: #475569;
   line-height: 1.6;
   margin: 0;
+  flex-grow: 1;
 }
 
 /* Operating Standards Box */
 .about-principles-box {
-  background: #F8FAFC;
+  background: #FFFFFF;
   border: 1px solid var(--surface-border);
-  border-radius: 14px;
-  padding: 22px 24px;
-  margin-top: 24px;
+  border-radius: 18px;
+  padding: 26px 24px;
+  margin-top: 26px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+}
+.about-principles-header {
+  margin-bottom: 16px;
 }
 .about-principles-heading {
   font-family: var(--font-display);
-  font-size: 14.5px;
-  font-weight: 750;
+  font-size: 17px;
+  font-weight: 800;
   color: #0F172A;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  margin: 6px 0 0;
 }
 .about-principles-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px 18px;
+  gap: 14px 16px;
 }
 .about-principle-item {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: flex-start;
+  padding: 14px 16px;
+  background: #F8FAFC;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 12px;
   font-size: 13px;
   color: #334155;
   line-height: 1.5;
+  transition: all 0.2s ease;
+}
+.about-principle-item:hover {
+  background: #FFFFFF;
+  border-color: rgba(7, 76, 138, 0.25);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  transform: translateY(-1px);
 }
 .ap-num {
   font-family: var(--font-mono);
-  font-weight: 750;
-  font-size: 11.5px;
-  color: var(--san-rust);
-  background: var(--san-rust-soft);
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--san-blue);
+  background: var(--san-blue-soft);
+  padding: 3px 7px;
+  border-radius: 6px;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
-/* Founder & Executive Showcase Card */
+/* ================================================= */
+/* FOUNDER & EXECUTIVE SHOWCASE CARD                 */
+/* ================================================= */
 .about-founder-column {
   position: relative;
 }
 .founder-card {
   background: #FFFFFF;
   border: 1px solid rgba(7, 76, 138, 0.16);
-  border-top: 4px solid var(--san-blue);
-  border-radius: 20px;
-  padding: 34px 30px;
-  box-shadow: 0 16px 40px -10px rgba(7, 76, 138, 0.1), 0 2px 6px rgba(15, 23, 42, 0.04);
+  border-radius: 22px;
+  padding: 34px 28px 26px;
+  box-shadow: 0 16px 44px -10px rgba(7, 76, 138, 0.12), 0 2px 8px rgba(15, 23, 42, 0.04);
   position: relative;
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.founder-card:hover {
+  box-shadow: 0 24px 52px -12px rgba(7, 76, 138, 0.18), 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+.founder-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(7, 76, 138, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 76, 138, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.founder-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--san-blue) 0%, var(--san-blue-vibrant) 50%, var(--san-rust) 100%);
 }
 .founder-card-badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: var(--san-rust-soft);
-  color: var(--san-rust-deep);
+  gap: 8px;
+  background: #F0FDF4;
+  color: #166534;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  padding: 4px 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
   border-radius: 100px;
-  border: 1px solid var(--san-rust-border);
-  margin-bottom: 22px;
+  border: 1px solid #BBF7D0;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 .fcb-indicator {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--san-rust);
+  background: #22C55E;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+  animation: pretitlePulse 2s infinite;
 }
 .founder-card-top {
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 .founder-avatar-wrap {
-  width: 68px;
-  height: 68px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--san-blue-deep) 0%, var(--san-blue) 100%);
+  background: radial-gradient(circle at 35% 35%, #153E68 0%, #074C8A 65%, #052F56 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 5px var(--san-blue-border);
+  box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 6px var(--san-blue-border), 0 8px 18px rgba(7, 76, 138, 0.25);
+  position: relative;
+}
+.founder-avatar-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  pointer-events: none;
 }
 .founder-initials {
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 850;
+  font-size: 26px;
+  font-weight: 900;
   color: #FFFFFF;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 .founder-meta {
   flex-grow: 1;
@@ -1777,23 +1899,26 @@ img { display: block; max-width: 100%; height: auto; }
   letter-spacing: -0.02em;
 }
 .founder-role {
-  font-size: 13.5px;
-  font-weight: 750;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--san-rust);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   margin-bottom: 2px;
 }
 .founder-firm {
   font-size: 12px;
   color: #64748B;
-  font-weight: 500;
+  font-weight: 600;
 }
 .founder-quote-box {
-  background: linear-gradient(145deg, #F8FAFC 0%, rgba(239, 246, 255, 0.5) 100%);
+  background: #F8FAFC;
   border-left: 3.5px solid var(--san-blue);
-  border-radius: 0 12px 12px 0;
-  padding: 16px 18px;
-  margin-bottom: 22px;
+  border-radius: 0 14px 14px 0;
+  padding: 16px 18px 14px;
+  margin-bottom: 20px;
   position: relative;
+  z-index: 1;
 }
 .founder-quote-icon {
   position: absolute;
@@ -1802,152 +1927,254 @@ img { display: block; max-width: 100%; height: auto; }
   color: rgba(7, 76, 138, 0.12);
 }
 .founder-quote-text {
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.6;
   color: #1E293B;
   font-style: italic;
-  margin: 0;
+  margin: 0 0 8px;
+}
+.founder-quote-author {
+  font-size: 11px;
+  font-weight: 750;
+  color: var(--san-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .founder-specs-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 .founder-spec-row {
   display: flex;
   gap: 12px;
-  font-size: 13px;
+  align-items: center;
+  padding: 10px 12px;
+  background: #F8FAFC;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 10px;
+  font-size: 12.5px;
   color: #334155;
-  line-height: 1.5;
+  line-height: 1.45;
+  transition: all 0.2s ease;
 }
-.fs-icon {
-  font-size: 16px;
+.founder-spec-row:hover {
+  background: #FFFFFF;
+  border-color: rgba(7, 76, 138, 0.25);
+  transform: translateX(2px);
+}
+.founder-spec-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
+.founder-spec-icon--blue {
+  background: #EFF6FF;
+  color: var(--san-blue);
+}
+.founder-spec-icon--rust {
+  background: #FFF7ED;
+  color: var(--san-rust);
+}
+.founder-spec-icon--cyan {
+  background: #ECFEFF;
+  color: #0284C7;
+}
+
 .founder-contact-box {
   background: #F8FAFC;
   border: 1px solid var(--surface-border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px;
+  position: relative;
+  z-index: 1;
 }
 .fcb-direct {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.fcb-item {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
 }
 .fcb-label {
-  display: block;
-  font-size: 11px;
+  font-size: 10.5px;
   color: #64748B;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin-bottom: 2px;
 }
 .fcb-val {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 750;
   color: var(--san-blue);
   text-decoration: none;
+  word-break: break-all;
 }
 .fcb-val:hover {
   text-decoration: underline;
+  color: var(--san-blue-vibrant);
+}
+.fcb-actions {
+  display: flex;
+  gap: 8px;
+}
+.fcb-btn-primary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--san-rust);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 750;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.fcb-btn-primary:hover {
+  background: var(--san-rust-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(217, 83, 30, 0.3);
+}
+.fcb-btn-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+.fcb-btn-wa:hover {
+  background: #20BA56;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
 }
 
-/* Facility & Infrastructure Section */
+/* Facility Section & 4-Card Infrastructure Grid */
 .about-facility-section {
   background: #F8FAFC;
-  padding: 72px 0 84px;
+  padding: 80px 0 92px;
   border-top: 1px solid var(--surface-border);
 }
 .facility-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 }
 .facility-card {
   background: #FFFFFF;
   border: 1px solid var(--surface-border);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 26px 20px 22px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s ease;
 }
 .facility-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(7, 76, 138, 0.25);
-  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.08);
+  border-color: rgba(7, 76, 138, 0.3);
+  box-shadow: 0 14px 30px -6px rgba(15, 23, 42, 0.08);
 }
 .facility-card-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .facility-card-icon--blue {
-  background: var(--san-blue-soft);
+  background: #EFF6FF;
   color: var(--san-blue);
 }
 .facility-card-icon--rust {
-  background: var(--san-rust-soft);
+  background: #FFF7ED;
   color: var(--san-rust);
 }
 .facility-card-title {
   font-family: var(--font-display);
   font-size: 16.5px;
-  font-weight: 750;
+  font-weight: 800;
   color: #0F172A;
   margin-bottom: 8px;
+  line-height: 1.3;
 }
 .facility-card-desc {
   font-size: 13px;
   color: #64748B;
-  line-height: 1.55;
+  line-height: 1.6;
   margin-bottom: 16px;
   flex-grow: 1;
 }
 .facility-card-tag {
   display: inline-block;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 750;
   color: var(--san-blue);
   background: var(--san-blue-soft);
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
   width: fit-content;
+  margin-top: auto;
 }
 .about-accreditation-strip {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 24px;
-  padding: 16px 24px;
+  gap: 28px;
+  padding: 16px 28px;
   background: #FFFFFF;
   border: 1px solid var(--surface-border);
   border-radius: 100px;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
 }
 .aas-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 700;
   color: var(--san-blue-deep);
 }
 .aas-item svg {
-  color: var(--san-blue);
+  color: #10B981;
 }
 
 @media (max-width: 900px) {
+  #page-about .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  #page-about .about-founder-column {
+    position: static;
+  }
   .facility-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1971,6 +2198,9 @@ img { display: block; max-width: 100%; height: auto; }
   }
   .founder-card {
     padding: 24px 18px;
+  }
+  .fcb-direct {
+    grid-template-columns: 1fr;
   }
 }
 
