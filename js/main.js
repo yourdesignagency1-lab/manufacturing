@@ -764,4 +764,83 @@
     });
   }
 
+
+  // ====================================================
+  // Mobile Snap Carousel Dots & Card Navigation Controller
+  // ====================================================
+  function initHomeCarousels() {
+    var carousels = document.querySelectorAll('.home-cards-carousel');
+    carousels.forEach(function(carousel){
+      var carouselId = carousel.id;
+      var dotsWrap = document.querySelector('.home-carousel-dots[data-carousel="' + carouselId + '"]');
+      if (!dotsWrap) return;
+
+      var dots = dotsWrap.querySelectorAll('.carousel-dot');
+      var cards = carousel.querySelectorAll('.home-card-v2');
+      if (!cards.length) return;
+
+      // Update active dot on scroll
+      var scrollTimeout;
+      carousel.addEventListener('scroll', function(){
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function(){
+          var scrollLeft = carousel.scrollLeft;
+          var cardWidth = cards[0].offsetWidth + 14; // gap is 14px
+          var activeIndex = Math.round(scrollLeft / cardWidth);
+          activeIndex = Math.max(0, Math.min(activeIndex, dots.length - 1));
+
+          dots.forEach(function(dot, idx){
+            if (idx === activeIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }, 35);
+      }, { passive: true });
+
+      // Click dot to scroll smoothly to that card
+      dots.forEach(function(dot, idx){
+        dot.addEventListener('click', function(){
+          if (cards[idx]) {
+            var targetScroll = cards[idx].offsetLeft - carousel.offsetLeft - 16;
+            carousel.scrollTo({
+              left: Math.max(0, targetScroll),
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+
+    // Make entire home-card-v2 clickable with smooth transition
+    document.addEventListener('click', function(e){
+      var card = e.target.closest('.home-card-v2');
+      if (card) {
+        var page = card.getAttribute('data-page');
+        var product = card.getAttribute('data-product');
+        if (page) {
+          if (typeof navigateTo === 'function') {
+            navigateTo(page);
+          } else {
+            location.hash = '#' + page;
+          }
+          if (product && page === 'contact') {
+            setTimeout(function(){
+              var textarea = document.getElementById('rfq-notes') || document.querySelector('textarea[name="notes"]');
+              if (textarea) textarea.value = 'Inquiry for ' + product;
+            }, 100);
+          }
+        }
+      }
+    });
+  }
+
+  // Auto-init on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHomeCarousels);
+  } else {
+    initHomeCarousels();
+  }
+
 })();
