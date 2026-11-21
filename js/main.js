@@ -72,6 +72,7 @@
       var selectEl = document.getElementById('rfq-item');
       if (selectEl) {
         selectEl.value = prod;
+        selectEl.dispatchEvent(new Event('change'));
       }
     }
 
@@ -102,8 +103,14 @@
     var urgencyEl = document.getElementById('rfq-urgency');
     var msgEl = document.getElementById('rfq-msg');
 
-    if (selectEl) selectEl.value = 'INDUSTRIAL MACHINE BREAKDOWN SERVICE';
-    if (urgencyEl) urgencyEl.value = 'Emergency (Within 24 Hours)';
+    if (selectEl) {
+      selectEl.value = 'INDUSTRIAL MACHINE BREAKDOWN SERVICE';
+      selectEl.dispatchEvent(new Event('change'));
+    }
+    if (urgencyEl) {
+      urgencyEl.value = 'Emergency (Within 24 Hours)';
+      urgencyEl.dispatchEvent(new Event('change'));
+    }
     if (msgEl) msgEl.value = 'EMERGENCY BREAKDOWN: Diagnosed Fault: ' + faultText + '.\nPlease dispatch mobile team immediately.';
 
     showToast('Breakdown Fault Selected: ' + faultText);
@@ -219,6 +226,194 @@
     }
   }
 
+  // ====================================================
+  // High-Tech Industrial Custom Select Component
+  // ====================================================
+  function initCustomSelect(selectId) {
+    var select = document.getElementById(selectId);
+    if (!select || select.dataset.customized === 'true') return;
+    select.dataset.customized = 'true';
+
+    var parent = select.parentElement;
+    parent.classList.add('custom-select-container');
+    select.classList.add('custom-select-native');
+
+    var customWrapper = document.createElement('div');
+    customWrapper.className = 'custom-select-wrap';
+    customWrapper.id = 'custom-select-' + selectId;
+
+    // Trigger Button
+    var trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'custom-select-trigger';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+
+    var labelSpan = document.createElement('span');
+    labelSpan.className = 'custom-select-label';
+
+    var arrow = document.createElement('span');
+    arrow.className = 'custom-select-chevron';
+    arrow.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>';
+
+    trigger.appendChild(labelSpan);
+    trigger.appendChild(arrow);
+    customWrapper.appendChild(trigger);
+
+    // Dropdown Menu
+    var menu = document.createElement('div');
+    menu.className = 'custom-select-menu';
+    menu.setAttribute('role', 'listbox');
+
+    function createOptionElement(opt) {
+      var optDiv = document.createElement('div');
+      optDiv.className = 'custom-select-option';
+      optDiv.setAttribute('role', 'option');
+      optDiv.setAttribute('data-value', opt.value);
+
+      if (select.value === opt.value) {
+        optDiv.classList.add('selected');
+      }
+
+      var optText = opt.textContent.trim();
+      if (opt.value === '') {
+        optDiv.classList.add('is-placeholder');
+      }
+
+      optDiv.innerHTML = '<span class="cso-label">' + optText + '</span>' +
+        '<span class="cso-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></span>';
+
+      optDiv.addEventListener('click', function(e){
+        e.stopPropagation();
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        select.dispatchEvent(new Event('input', { bubbles: true }));
+        updateTrigger();
+        closeMenu();
+      });
+
+      return optDiv;
+    }
+
+    function renderMenu() {
+      menu.innerHTML = '';
+      var children = select.children;
+
+      for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+
+        if (child.tagName === 'OPTGROUP') {
+          var groupWrap = document.createElement('div');
+          groupWrap.className = 'custom-select-group';
+
+          var groupHeader = document.createElement('div');
+          groupHeader.className = 'custom-select-group-header';
+          var groupLabel = child.getAttribute('label') || '';
+          var isProduct = groupLabel.toUpperCase().indexOf('PRODUCT') !== -1;
+          groupHeader.innerHTML = '<span class="cs-group-pill ' + (isProduct ? 'cs-group-pill--blue' : 'cs-group-pill--rust') + '">' + groupLabel + '</span>';
+          groupWrap.appendChild(groupHeader);
+
+          var options = child.children;
+          for (var j = 0; j < options.length; j++) {
+            groupWrap.appendChild(createOptionElement(options[j]));
+          }
+          menu.appendChild(groupWrap);
+        } else if (child.tagName === 'OPTION') {
+          menu.appendChild(createOptionElement(child));
+        }
+      }
+    }
+
+    function updateTrigger() {
+      var selectedOpt = select.options[select.selectedIndex];
+      if (selectedOpt && selectedOpt.value !== '') {
+        labelSpan.textContent = selectedOpt.textContent.trim();
+        labelSpan.classList.add('has-value');
+      } else {
+        labelSpan.textContent = (selectedOpt ? selectedOpt.textContent.trim() : '-- Please select an item --');
+        labelSpan.classList.remove('has-value');
+      }
+
+      var allOptions = menu.querySelectorAll('.custom-select-option');
+      allOptions.forEach(function(item){
+        if (item.getAttribute('data-value') === select.value) {
+          item.classList.add('selected');
+        } else {
+          item.classList.remove('selected');
+        }
+      });
+    }
+
+    function openMenu() {
+      document.querySelectorAll('.custom-select-wrap.is-open').forEach(function(el){
+        if (el !== customWrapper) {
+          el.classList.remove('is-open');
+          var tr = el.querySelector('.custom-select-trigger');
+          if (tr) tr.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      customWrapper.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+
+      var selectedItem = menu.querySelector('.custom-select-option.selected');
+      if (selectedItem) {
+        setTimeout(function(){
+          selectedItem.scrollIntoView({ block: 'nearest' });
+        }, 50);
+      }
+    }
+
+    function closeMenu() {
+      customWrapper.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (customWrapper.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    select.addEventListener('change', function(){
+      updateTrigger();
+    });
+
+    renderMenu();
+    updateTrigger();
+    customWrapper.appendChild(menu);
+    parent.appendChild(customWrapper);
+  }
+
+  // Close when clicking outside
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.custom-select-wrap')) {
+      document.querySelectorAll('.custom-select-wrap.is-open').forEach(function(el){
+        el.classList.remove('is-open');
+        var tr = el.querySelector('.custom-select-trigger');
+        if (tr) tr.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.custom-select-wrap.is-open').forEach(function(el){
+        el.classList.remove('is-open');
+        var tr = el.querySelector('.custom-select-trigger');
+        if (tr) tr.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Initialize custom dropdowns for RFQ form
+  initCustomSelect('rfq-item');
+  initCustomSelect('rfq-urgency');
+
   // Pre-filter support via footer links
   document.addEventListener('click', function(e){
     var filterTrigger = e.target.closest('[data-filter]');
@@ -288,6 +483,7 @@
             if (selectEl.options[i].text.toUpperCase().indexOf(cleanName.toUpperCase()) !== -1 ||
                 cleanName.toUpperCase().indexOf(selectEl.options[i].text.toUpperCase()) !== -1) {
               selectEl.selectedIndex = i;
+              selectEl.dispatchEvent(new Event('change'));
               break;
             }
           }
