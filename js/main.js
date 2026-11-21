@@ -534,12 +534,14 @@
       var observer = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
           if (entry.isIntersecting) {
+            statsBand.classList.add('in-view');
             if (!hasTriggered) {
               runCounters();
               hasTriggered = true;
             }
           } else {
             // Reset trigger when scrolled out so re-scrolling animates again!
+            statsBand.classList.remove('in-view');
             hasTriggered = false;
           }
         });
