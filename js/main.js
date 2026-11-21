@@ -469,10 +469,9 @@
     var counters = statsBand.querySelectorAll('.counter-value');
     if (!counters.length) return;
 
-    var hasAnimated = false;
+    var isRunning = false;
     var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // High-precision cubic-bezier ease-out curve (fluid deceleration into final value)
     function easeOutCubic(t) {
       return 1 - Math.pow(1 - t, 3);
     }
@@ -506,29 +505,45 @@
     }
 
     function runCounters() {
-      if (hasAnimated) return;
-      hasAnimated = true;
+      if (isRunning) return;
+      isRunning = true;
 
       counters.forEach(function(counter, idx){
         var target = parseFloat(counter.getAttribute('data-target')) || 0;
         var decimals = parseInt(counter.getAttribute('data-decimals'), 10) || 0;
         counter.textContent = decimals > 0 ? (0).toFixed(decimals) : '0';
         setTimeout(function(){
-          animateCounter(counter, target, decimals, 1800);
-        }, idx * 90);
+          animateCounter(counter, target, decimals, 1500);
+        }, idx * 75);
       });
+
+      setTimeout(function(){
+        isRunning = false;
+      }, 1600);
     }
 
-    // IntersectionObserver triggers animation when stats band enters viewport
+    // Set initial 0 text before scroll
+    counters.forEach(function(counter){
+      var decimals = parseInt(counter.getAttribute('data-decimals'), 10) || 0;
+      counter.textContent = decimals > 0 ? (0).toFixed(decimals) : '0';
+    });
+
+    // IntersectionObserver triggers counting animation on scroll into viewport
     if ('IntersectionObserver' in window) {
+      var hasTriggered = false;
       var observer = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
           if (entry.isIntersecting) {
-            runCounters();
-            observer.unobserve(entry.target);
+            if (!hasTriggered) {
+              runCounters();
+              hasTriggered = true;
+            }
+          } else {
+            // Reset trigger when scrolled out so re-scrolling animates again!
+            hasTriggered = false;
           }
         });
-      }, { threshold: 0.25 });
+      }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
 
       observer.observe(statsBand);
     } else {
@@ -539,7 +554,6 @@
     window.addEventListener('hashchange', function(){
       var page = location.hash.replace('#', '') || 'home';
       if (page === 'home') {
-        hasAnimated = false;
         var rect = statsBand.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           runCounters();
@@ -547,8 +561,6 @@
       }
     });
   })();
-
-
 
   // ====================================================
   // Intelligent Scroll-Driven Capabilities Switcher
