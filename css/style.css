@@ -5357,3 +5357,87 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     border-radius: 6px !important;
   }
 }
+
+
+/* ================================================= */
+/* REFINED HOME SECTIONS: HEADING + CARDS + VIEW ALL */
+/* ================================================= */
+.home-section-header {
+  margin-bottom: 24px;
+}
+.home-section-header .section-title {
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+.home-section-header .section-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #64748B;
+  max-width: 660px;
+  margin: 0;
+}
+
+.home-view-all-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.home-view-all-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 13px 36px !important;
+  font-size: 14.5px !important;
+  font-weight: 750 !important;
+  border-radius: 10px !important;
+  letter-spacing: -0.01em !important;
+  background: linear-gradient(135deg, var(--san-rust, #EA580C) 0%, #D9480F 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.35) !important;
+  cursor: pointer !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease !important;
+  text-decoration: none !important;
+}
+.home-view-all-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(234, 88, 12, 0.5) !important;
+}
+.home-view-all-btn:active {
+  transform: scale(0.98) !important;
+}
+
+@media (max-width: 768px) {
+  .home-featured-section {
+    padding: 38px 0 32px !important;
+  }
+  .home-section-header {
+    margin-bottom: 16px !important;
+  }
+  .home-section-header .section-title {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 6px !important;
+  }
+  .home-section-header .section-desc {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  .home-view-all-wrap {
+    margin-top: 14px !important;
+  }
+  .home-view-all-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 12px 24px !important;
+    font-size: 13.5px !important;
+    border-radius: 8px !important;
+  }
+}
