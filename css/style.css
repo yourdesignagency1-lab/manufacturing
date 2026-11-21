@@ -4299,13 +4299,13 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     display: none !important;
   }
 
-  /* 4. Full-Screen Mobile Hero Viewport (Stretched to Full Screen Height) */
+  /* 4. Full-Screen Mobile Hero Viewport (Content Placed Down At Bottom) */
   .hero-fold-wrapper {
     min-height: calc(100svh - 64px) !important;
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
     width: 100% !important;
     box-sizing: border-box !important;
     position: relative !important;
@@ -4317,20 +4317,27 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
-    padding: 40px 0 32px !important;
+    justify-content: flex-end !important;
+    padding: 20px 0 28px !important;
     width: 100% !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
     background: transparent !important;
     position: relative !important;
   }
+  .hero-content-wrap {
+    width: 100% !important;
+    position: relative !important;
+    z-index: 3 !important;
+    margin-top: auto !important;
+  }
   .hero-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(6, 11, 22, 0.88) 0%,
-      rgba(6, 11, 22, 0.72) 45%,
-      rgba(6, 11, 22, 0.95) 100%
+      rgba(6, 11, 22, 0.2) 0%,
+      rgba(6, 11, 22, 0.55) 40%,
+      rgba(6, 11, 22, 0.94) 85%,
+      rgba(6, 11, 22, 0.98) 100%
     ) !important;
   }
   .hero-content-wrap {
