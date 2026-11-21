@@ -1434,6 +1434,15 @@
       });
     }
 
+    var btnQuickClose = document.getElementById('cb-quick-close');
+    if (btnQuickClose) {
+      btnQuickClose.addEventListener('click', function(){
+        localStorage.setItem('san_cookie_consent', 'essential');
+        localStorage.setItem('san_cookie_prefs', JSON.stringify({ essential: true, performance: false, integration: false }));
+        hideCookieBanner();
+      });
+    }
+
     // Modal Cookie Controls
     var btnSavePrefs = document.getElementById('cookie-save-prefs');
     if (btnSavePrefs) {

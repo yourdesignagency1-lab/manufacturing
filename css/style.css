@@ -8149,7 +8149,37 @@ html, body {
 .cb-inner {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+}
+
+.cb-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cb-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cb-quick-close {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 20px;
+  line-height: 1;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.cb-quick-close:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .cb-badge-row {
@@ -8322,31 +8352,57 @@ html, body {
     flex-direction: column;
   }
   .cookie-banner {
-    bottom: 74px; /* Sits cleanly above the mobile bottom action dock */
-    left: 12px;
-    right: 12px;
-    width: auto;
-    max-width: 100%;
-    padding: 16px;
+    bottom: 66px !important; /* sits 10px cleanly above the 56px mobile bottom action dock */
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: calc(100vw - 16px) !important;
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    background: rgba(11, 17, 32, 0.96) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5) !important;
+  }
+  .cb-inner {
+    gap: 6px !important;
+  }
+  .cb-mini-badge {
+    font-size: 8.5px !important;
+    padding: 2px 5px !important;
+    letter-spacing: 0.05em !important;
+  }
+  .cb-heading {
+    font-size: 13px !important;
+    margin: 0 !important;
+    font-weight: 750 !important;
+  }
+  .cb-paragraph {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    color: #94A3B8 !important;
+    margin: 0 !important;
+  }
+  .cb-inline-link {
+    font-size: 11px !important;
   }
   .cb-actions-col {
-    flex-direction: column;
-    align-items: stretch;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr auto !important;
+    gap: 6px !important;
+    padding-top: 4px !important;
+    align-items: center !important;
   }
   .cb-btn {
-    width: 100%;
-    text-align: center;
-  }
-  .fcb-brand-logo {
-    height: 38px !important;
-  }
-  .fcb-actions {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-  }
-  .fcb-btn {
     font-size: 11.5px !important;
-    padding: 10px 8px !important;
+    padding: 7px 8px !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  .cb-btn--text {
+    width: auto !important;
+    padding: 7px 8px !important;
+    font-size: 11px !important;
   }
   /* Compact & elevated watermark for mobile view (fits cleanly, positioned above copyright) */
   .footer-watermark {
