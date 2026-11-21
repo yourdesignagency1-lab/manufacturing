@@ -2496,9 +2496,19 @@ Precision. Quality.<br>
   <!-- Giant Watermark Background Text (Matching Screenshot) -->
   <div class="footer-watermark" aria-hidden="true">san automation</div>
 
-  <!-- Centered Copyright (Matching Screenshot) -->
+  <!-- Centered Copyright & Industrial Compliance Links -->
   <div class="footer-bottom-v2">
-    &copy; 2026 SAN Automation &amp; Precision Engineering Pvt. Ltd. All rights reserved.
+    <div class="footer-bottom-inner-v2">
+      <span class="fb-copy">&copy; 2026 SAN Automation &amp; Precision Engineering Pvt. Ltd. All rights reserved.</span>
+      <span class="fb-sep" aria-hidden="true">&bull;</span>
+      <div class="fb-legal-links">
+        <button type="button" class="legal-trigger-btn" data-legal="privacy">Privacy &amp; NDA Policy</button>
+        <span class="fb-sep" aria-hidden="true">&bull;</span>
+        <button type="button" class="legal-trigger-btn" data-legal="terms">Terms &amp; Engineering Conditions</button>
+        <span class="fb-sep" aria-hidden="true">&bull;</span>
+        <button type="button" class="legal-trigger-btn" data-legal="cookies">Cookie Settings</button>
+      </div>
+    </div>
   </div>
 </footer>
 <!-- Image Preview Lightbox Modal -->
@@ -2525,6 +2535,271 @@ Precision. Quality.<br>
 </div>
 </div>
 </div>
+</div>
+
+<!-- ================================================= -->
+<!-- INDUSTRIAL LEGAL & COMPLIANCE MODAL               -->
+<!-- ================================================= -->
+<div class="legal-modal" id="legal-governance-modal" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title" style="display:none;">
+  <div class="legal-modal-backdrop" id="legal-modal-backdrop"></div>
+  <div class="legal-modal-dialog">
+    <!-- Header -->
+    <div class="legal-modal-header">
+      <div class="lmh-brand">
+        <div class="lmh-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div>
+          <div class="lmh-tag">CORPORATE GOVERNANCE &bull; ISO 9001:2015 REGISTERED</div>
+          <h2 class="legal-modal-title" id="legal-modal-title">Corporate Legal &amp; Technical Governance</h2>
+        </div>
+      </div>
+      <button type="button" class="legal-modal-close" id="legal-modal-close" aria-label="Close dialog">&times;</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="legal-tabs-bar" role="tablist">
+      <button type="button" class="legal-tab-btn active" role="tab" aria-selected="true" data-tab="privacy">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span>Privacy &amp; NDA Policy</span>
+      </button>
+      <button type="button" class="legal-tab-btn" role="tab" aria-selected="false" data-tab="terms">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        <span>Terms &amp; Engineering Conditions</span>
+      </button>
+      <button type="button" class="legal-tab-btn" role="tab" aria-selected="false" data-tab="cookies">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8.5 8.5v.01M15.5 8.5v.01M12 12v.01M8.5 15.5v.01M15.5 15.5v.01"></path></svg>
+        <span>Website Cookies &amp; Telemetry</span>
+      </button>
+    </div>
+
+    <!-- Content Pane: Scrollable -->
+    <div class="legal-modal-content">
+      <!-- 1. PRIVACY & NDA PANE -->
+      <div class="legal-pane active" id="pane-privacy" role="tabpanel">
+        <div class="legal-lead-card">
+          <div class="llc-badge">MUTUAL NON-DISCLOSURE GUARANTEE</div>
+          <p>
+            SAN Automation &amp; Precision Engineering Pvt. Ltd. treats all client engineering drawings, 3D CAD/CAM models, toolroom specifications, and commercial inquiries under strict, binding Mutual Non-Disclosure Agreement (NDA) protocols. We maintain an enterprise-level zero-leakage policy across our design workstations and fabrication cells.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">1. CAD/CAM &amp; Intellectual Property Protection</h3>
+          <p>
+            Any engineering files uploaded through our RFQ desk—including STEP, IGES, SLDPRT, DWG, DXF, or PDF engineering prints—remain the exclusive intellectual property of the submitting enterprise. Drawings are encrypted in transit via TLS 1.3, stored on isolated local workstations, and accessible strictly to authorized senior tooling engineers for design for manufacturability (DFM) review and quotation generation.
+          </p>
+          <ul class="legal-list">
+            <li><strong>Zero Subcontract Leaks:</strong> We never distribute, disclose, or outsource client drawings to secondary machine shops without prior explicit, written authorization.</li>
+            <li><strong>Cold Storage Archiving:</strong> Completed project CAD data is archived in air-gapped, encrypted backup repositories accessible only by designated metrology leads.</li>
+            <li><strong>Right to Complete Purge:</strong> Clients may formally request complete cryptographic destruction of all historical RFQ files and CAD metadata upon contract conclusion.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">2. Commercial &amp; Contact Telemetry Handling</h3>
+          <p>
+            Information collected via our commercial quotation forms (Contact Name, Business Email, Corporate Phone/WhatsApp, Procurement Scope, and Breakdown Details) is utilized solely for:
+          </p>
+          <ul class="legal-list">
+            <li>Generating official commercial Bill of Quantities (BOQ) and technical proposals within 24 hours.</li>
+            <li>Direct engineering clarification calls and on-site plant survey scheduling.</li>
+            <li>Deploying rapid 24/7 industrial machine breakdown field engineers to your facility.</li>
+          </ul>
+          <p>
+            We do <strong>not</strong> sell, barter, rent, or broker industrial customer contact records or procurement telemetry to third-party marketing brokers or advertisers.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">3. Statutory &amp; Regulatory Compliance</h3>
+          <p>
+            Our information processing adheres to the <strong>Digital Personal Data Protection (DPDP) Act 2023 (India)</strong>, ISO 9001:2015 quality data audit standards, and international B2B privacy frameworks. Official legal communications regarding data access or NDA execution can be addressed to:
+          </p>
+          <div class="legal-contact-callout">
+            <div><strong>Corporate Legal Desk:</strong> SAN Automation &amp; Precision Engineering Pvt. Ltd.</div>
+            <div><strong>Registered Plant:</strong> #54, 2nd Cross Road, Green Nest Residency Layout (GNR), Vabasandra (V), Hulimangala Road, Jigani (Hobli), Anekal (Taluk), Electronic City Phase 1, Bangalore – 560105, Karnataka, India.</div>
+            <div><strong>Compliance Email:</strong> <a href="mailto:sanautomation2025@gmail.com">sanautomation2025@gmail.com</a> &bull; <strong>Direct Hotline:</strong> +91 97414 82809</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. TERMS & CONDITIONS PANE -->
+      <div class="legal-pane" id="pane-terms" role="tabpanel" style="display:none;">
+        <div class="legal-lead-card">
+          <div class="llc-badge">COMMERCIAL &amp; ENGINEERING SPECIFICATIONS</div>
+          <p>
+            These Terms &amp; Engineering Conditions govern all technical proposals, purchase orders, machine fabrications, turnkey robotics installations, and breakdown service contracts executed by SAN Automation &amp; Precision Engineering Pvt. Ltd.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">1. RFQ Proposals &amp; Price Indexation</h3>
+          <p>
+            Official Commercial Quotations and Bills of Quantities (BOQ) issued by our chief engineering desk are valid for <strong>30 calendar days</strong> from the transmission timestamp. Due to global raw material volatility (structural mild steel, SS304/SS316, aerospace-grade aluminum, brass, and imported linear motion guides), quotes beyond 30 days are subject to indexing based on current metal market indices.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">2. Manufacturing &amp; Metrology Tolerances</h3>
+          <p>
+            Unless explicitly designated on client-approved engineering prints, all standard CNC milling, turning, and structural fabrication adheres strictly to <strong>ISO 2768-m (Medium)</strong> metrology tolerances. High-precision tooling, jigs, fixtures, and aerospace tooling are manufactured to specified drawing limits down to <strong>&plusmn;0.005mm (&plusmn;5 microns)</strong> with CMM inspection verification certificates.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">3. Factory (FAT) &amp; Site (SAT) Acceptance Testing</h3>
+          <p>
+            All custom Special Purpose Machines (SPMs), conveyor automation lines, and robotic pick-and-place systems undergo rigorous multi-stage verification:
+          </p>
+          <ul class="legal-list">
+            <li><strong>Factory Acceptance Testing (FAT):</strong> Conducted at our Electronic City assembly plant with dry-cycle runs, payload simulation, and cycle time verification witnessed by client inspection engineers.</li>
+            <li><strong>Site Acceptance Testing (SAT):</strong> Executed upon mechanical erection and electrical commissioning at the client's shop floor, concluding with formal sign-off handover.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">4. Industrial Commercial Milestones</h3>
+          <p>
+            Standard payment terms for custom capital equipment manufacturing:
+          </p>
+          <ul class="legal-list">
+            <li><strong>40% Advance:</strong> Upon formal Purchase Order (PO) release and design freeze.</li>
+            <li><strong>40% Pre-Dispatch:</strong> Upon successful FAT sign-off at SAN Automation facility.</li>
+            <li><strong>20% Commissioning:</strong> Within 15 business days of successful SAT handover.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">5. Warranty &amp; Breakdown Service SLAs</h3>
+          <p>
+            All custom fabricated machinery carries a <strong>12-month structural and fabrication warranty</strong> against manufacturing defects from the date of commissioning. Rapid emergency breakdown support (24/7 SLA) applies to registered AMC industrial clients with dedicated field dispatch across Bengaluru, Jigani, Bommasandra, Peenya, Bidadi, and Hosur industrial hubs.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. COOKIES & TELEMETRY PANE -->
+      <div class="legal-pane" id="pane-cookies" role="tabpanel" style="display:none;">
+        <div class="legal-lead-card">
+          <div class="llc-badge">TRANSPARENT TECHNICAL TELEMETRY</div>
+          <p>
+            SAN Automation uses essential technical telemetry and session cookies to ensure rapid page delivery, secure RFQ draft persistence, and seamless high-resolution blueprint previewing across mobile devices and shop-floor terminals.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">Cookie Classification &amp; Purpose</h3>
+          <div class="cookie-table-wrap">
+            <table class="cookie-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Technical Function</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Essential Telemetry</strong></td>
+                  <td>Maintains RFQ form state, single-page navigation routing, and CSRF transmission security.</td>
+                  <td>Session / 30 Days</td>
+                  <td><span class="cookie-status-badge required">Mandatory</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CAD Asset Pre-caching</strong></td>
+                  <td>Accelerates rendering of high-resolution machine photography and technical specs.</td>
+                  <td>7 Days</td>
+                  <td><span class="cookie-status-badge optional">Optimized</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Third-Party Handlers</strong></td>
+                  <td>Powers interactive Google Maps plant routing and direct WhatsApp Business API dispatches.</td>
+                  <td>Session</td>
+                  <td><span class="cookie-status-badge optional">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="legal-section">
+          <h3 class="legal-sec-title">Manage Your Telemetry Preferences</h3>
+          <p>
+            Configure your technical cookie preferences below. Essential cookies cannot be deactivated as they are required for commercial quotation security.
+          </p>
+
+          <div class="cookie-controls-list">
+            <div class="cookie-control-item">
+              <div class="cci-info">
+                <div class="cci-title">Essential Technical Cookies</div>
+                <div class="cci-desc">Required for RFQ dispatch, CSRF protection, and responsive viewport stability.</div>
+              </div>
+              <div class="cci-toggle">
+                <input type="checkbox" id="ck-essential" checked disabled>
+                <label for="ck-essential" class="cci-slider locked" title="Essential cookies cannot be disabled"></label>
+              </div>
+            </div>
+
+            <div class="cookie-control-item">
+              <div class="cci-info">
+                <div class="cci-title">Performance &amp; Asset Caching</div>
+                <div class="cci-desc">Enables local caching of machine catalog images, engineering blueprints, and fonts.</div>
+              </div>
+              <div class="cci-toggle">
+                <input type="checkbox" id="ck-performance" checked>
+                <label for="ck-performance" class="cci-slider"></label>
+              </div>
+            </div>
+
+            <div class="cookie-control-item">
+              <div class="cci-info">
+                <div class="cci-title">Interactive Map &amp; Desk Integration</div>
+                <div class="cci-desc">Stores user location markers for Google Maps directions and WhatsApp RFQ pre-fill state.</div>
+              </div>
+              <div class="cci-toggle">
+                <input type="checkbox" id="ck-integration" checked>
+                <label for="ck-integration" class="cci-slider"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="cookie-save-row">
+            <button type="button" class="btn btn-rust" id="cookie-save-prefs">Save Preferences</button>
+            <button type="button" class="btn btn--outline" id="cookie-accept-all-modal">Accept All Telemetry</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="legal-modal-footer">
+      <div class="lmf-info">
+        <span>Corporate Entity: <strong>SAN Automation &amp; Precision Engineering Pvt. Ltd.</strong> (CIN Registered)</span>
+      </div>
+      <button type="button" class="btn btn--outline" id="legal-modal-dismiss">Close Compliance Window</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================= -->
+<!-- INTELLIGENT INDUSTRIAL COOKIE CONSENT BANNER       -->
+<!-- ================================================= -->
+<div id="cookie-consent-banner" class="cookie-banner" role="region" aria-label="Industrial Security and Cookie Consent" style="display:none;">
+  <div class="cb-inner">
+    <div class="cb-badge-row">
+      <span class="cb-mini-badge">INDUSTRIAL SECURITY &bull; ISO 9001:2015</span>
+    </div>
+    <div class="cb-heading">CAD Telemetry &amp; Cookie Consent</div>
+    <p class="cb-paragraph">
+      SAN Automation uses essential technical telemetry to encrypt RFQ submissions, persist CAD drafts, and optimize machine blueprint loading. By browsing our engineering portal, you agree to our <button type="button" class="cb-inline-link" data-legal="privacy">Privacy &amp; NDA Guidelines</button>.
+    </p>
+    <div class="cb-actions-col">
+      <button type="button" class="cb-btn cb-btn--primary" id="cb-accept-all">Accept All</button>
+      <button type="button" class="cb-btn cb-btn--outline" id="cb-essential-only">Essential Only</button>
+      <button type="button" class="cb-btn cb-btn--text" id="cb-open-settings" data-legal="cookies">Cookie Settings</button>
+    </div>
+  </div>
 </div>
 <!-- Mobile Sticky Bottom Action Dock (Native App Conversions) -->
 <nav class="mobile-bottom-dock" aria-label="Mobile Quick Actions">

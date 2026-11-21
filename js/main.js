@@ -1310,9 +1310,158 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function(){
       initGlobalCardScrollAnimations();
+      initLegalGovernanceAndCookies();
     });
   } else {
     initGlobalCardScrollAnimations();
+    initLegalGovernanceAndCookies();
+  }
+
+  // ====================================================
+  // Industrial Legal Governance & Cookie Consent Engine
+  // ====================================================
+  function initLegalGovernanceAndCookies() {
+    var modal = document.getElementById('legal-governance-modal');
+    var banner = document.getElementById('cookie-consent-banner');
+    if (!modal) return;
+
+    var tabs = modal.querySelectorAll('.legal-tab-btn');
+    var panes = modal.querySelectorAll('.legal-pane');
+    var closeBtn = document.getElementById('legal-modal-close');
+    var dismissBtn = document.getElementById('legal-modal-dismiss');
+    var backdrop = document.getElementById('legal-modal-backdrop');
+
+    function switchLegalTab(tabName) {
+      tabs.forEach(function(btn){
+        var isTarget = btn.getAttribute('data-tab') === tabName;
+        btn.classList.toggle('active', isTarget);
+        btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      });
+
+      panes.forEach(function(pane){
+        var isTarget = pane.id === 'pane-' + tabName;
+        pane.classList.toggle('active', isTarget);
+        pane.style.display = isTarget ? 'block' : 'none';
+      });
+
+      // If switching to cookies, sync stored preferences to toggles
+      if (tabName === 'cookies') {
+        var raw = localStorage.getItem('san_cookie_prefs');
+        if (raw) {
+          try {
+            var prefs = JSON.parse(raw);
+            var ckPerf = document.getElementById('ck-performance');
+            var ckInteg = document.getElementById('ck-integration');
+            if (ckPerf) ckPerf.checked = !!prefs.performance;
+            if (ckInteg) ckInteg.checked = !!prefs.integration;
+          } catch(e) {}
+        }
+      }
+    }
+
+    function openLegalModal(tabName) {
+      switchLegalTab(tabName || 'privacy');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLegalModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Tab buttons click
+    tabs.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var tab = this.getAttribute('data-tab');
+        switchLegalTab(tab);
+      });
+    });
+
+    // Delegated triggers for opening legal modal (links in footer, banner, etc.)
+    document.addEventListener('click', function(e){
+      var trigger = e.target.closest('[data-legal]');
+      if (!trigger) return;
+      e.preventDefault();
+      var tab = trigger.getAttribute('data-legal') || 'privacy';
+      openLegalModal(tab);
+    });
+
+    // Close buttons & backdrop
+    if (closeBtn) closeBtn.addEventListener('click', closeLegalModal);
+    if (dismissBtn) dismissBtn.addEventListener('click', closeLegalModal);
+    if (backdrop) backdrop.addEventListener('click', closeLegalModal);
+
+    window.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeLegalModal();
+      }
+    });
+
+    // Cookie Banner Logic
+    function hideCookieBanner() {
+      if (!banner) return;
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(24px)';
+      banner.style.transition = 'all 0.3s ease';
+      setTimeout(function(){
+        banner.style.display = 'none';
+      }, 300);
+    }
+
+    var consentStatus = localStorage.getItem('san_cookie_consent');
+    if (!consentStatus && banner) {
+      setTimeout(function(){
+        banner.style.display = 'block';
+      }, 1400);
+    }
+
+    var btnAcceptAll = document.getElementById('cb-accept-all');
+    if (btnAcceptAll) {
+      btnAcceptAll.addEventListener('click', function(){
+        localStorage.setItem('san_cookie_consent', 'accepted');
+        localStorage.setItem('san_cookie_prefs', JSON.stringify({ essential: true, performance: true, integration: true }));
+        hideCookieBanner();
+      });
+    }
+
+    var btnEssentialOnly = document.getElementById('cb-essential-only');
+    if (btnEssentialOnly) {
+      btnEssentialOnly.addEventListener('click', function(){
+        localStorage.setItem('san_cookie_consent', 'essential');
+        localStorage.setItem('san_cookie_prefs', JSON.stringify({ essential: true, performance: false, integration: false }));
+        hideCookieBanner();
+      });
+    }
+
+    // Modal Cookie Controls
+    var btnSavePrefs = document.getElementById('cookie-save-prefs');
+    if (btnSavePrefs) {
+      btnSavePrefs.addEventListener('click', function(){
+        var ckPerf = document.getElementById('ck-performance');
+        var ckInteg = document.getElementById('ck-integration');
+        var perf = ckPerf ? ckPerf.checked : true;
+        var integ = ckInteg ? ckInteg.checked : true;
+        localStorage.setItem('san_cookie_consent', (perf && integ) ? 'accepted' : 'custom');
+        localStorage.setItem('san_cookie_prefs', JSON.stringify({ essential: true, performance: perf, integration: integ }));
+        hideCookieBanner();
+        closeLegalModal();
+      });
+    }
+
+    var btnAcceptAllModal = document.getElementById('cookie-accept-all-modal');
+    if (btnAcceptAllModal) {
+      btnAcceptAllModal.addEventListener('click', function(){
+        var ckPerf = document.getElementById('ck-performance');
+        var ckInteg = document.getElementById('ck-integration');
+        if (ckPerf) ckPerf.checked = true;
+        if (ckInteg) ckInteg.checked = true;
+        localStorage.setItem('san_cookie_consent', 'accepted');
+        localStorage.setItem('san_cookie_prefs', JSON.stringify({ essential: true, performance: true, integration: true }));
+        hideCookieBanner();
+        closeLegalModal();
+      });
+    }
   }
 
 })();
