@@ -6572,26 +6572,69 @@ textarea.form-control {
 
 
 /* ================================================= */
-/* GLOBAL SCROLL ENTRANCE: LEFT & RIGHT FOR ALL CARDS */
+/* GLOBAL SCROLL ENTRANCE: LEFT, RIGHT & FADE-UP     */
 /* ================================================= */
 .animate-from-left {
   opacity: 0;
-  transform: translateX(-45px);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease !important;
+  transform: translateX(-40px);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease !important;
   will-change: transform, opacity;
 }
 
 .animate-from-right {
   opacity: 0;
-  transform: translateX(45px);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease !important;
+  transform: translateX(40px);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease !important;
+  will-change: transform, opacity;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease !important;
   will-change: transform, opacity;
 }
 
 .animate-from-left.in-view,
-.animate-from-right.in-view {
+.animate-from-right.in-view,
+.animate-fade-up.in-view {
   opacity: 1 !important;
-  transform: translateX(0) !important;
+  transform: translate(0, 0) !important;
+}
+
+/* Card Hover Lifts when in-view */
+.catalog-card.in-view:hover,
+.facility-card.in-view:hover,
+.home-card-v2.in-view:hover,
+.about-vcard.in-view:hover {
+  transform: translateY(-6px) !important;
+}
+
+.channel-card.in-view:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* Mobile: gently reduce horizontal offset to eliminate any edge bleeding */
+@media (max-width: 640px) {
+  .animate-from-left {
+    transform: translateX(-18px);
+  }
+  .animate-from-right {
+    transform: translateX(18px);
+  }
+  .animate-fade-up {
+    transform: translateY(20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-from-left,
+  .animate-from-right,
+  .animate-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Prevent horizontal page shaking on mobile during animations */

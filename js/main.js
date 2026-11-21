@@ -47,6 +47,13 @@
       contact: 'Request Technical Quote & Consultation | SAN Automation'
     };
     document.title = titles[name] || titles.home;
+
+    // Trigger intelligent scroll animations for the newly active page
+    setTimeout(function(){
+      if (typeof initGlobalCardScrollAnimations === 'function') {
+        initGlobalCardScrollAnimations(name);
+      }
+    }, 60);
   }
 
   var initialHash = location.hash.replace('#', '') || 'home';
@@ -1130,67 +1137,180 @@
 
 
   // ====================================================
-  // Global Scroll-Driven Alternating Card Entrance Animations
+  // Global Intelligent Scroll-Driven Multi-Page Animations
+  // Handles: Products, About, Projects, Services, Contact & Home
   // ====================================================
-  function initGlobalCardScrollAnimations() {
-    var cardSelectors = [
-      '.home-card-v2',
-      '.cap-card',
-      '.catalog-card',
-      '.ref-ind-card',
-      '.ref-why-card'
-    ];
+  var globalScrollObserver = null;
 
-    var allCards = document.querySelectorAll(cardSelectors.join(','));
-    if (!allCards.length) return;
+  function initGlobalCardScrollAnimations(activePageName) {
+    if (!activePageName) {
+      var activeEl = document.querySelector('.page.active');
+      activePageName = activeEl ? activeEl.id.replace('page-', '') : 'home';
+    }
 
-    // Group cards by parent to alternate left and right per row
-    var parents = new Set();
-    allCards.forEach(function(card){
-      if (card.parentElement) parents.add(card.parentElement);
-    });
+    var activePage = document.getElementById('page-' + activePageName);
+    if (!activePage) return;
 
-    parents.forEach(function(parent){
-      var cardsInGrid = parent.querySelectorAll(cardSelectors.join(','));
-      cardsInGrid.forEach(function(card, idx){
-        // Odd index: from left, Even index: from right
-        if (idx % 2 === 0) {
+    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Cleanly disconnect any previous observer on route change
+    if (globalScrollObserver) {
+      globalScrollObserver.disconnect();
+      globalScrollObserver = null;
+    }
+
+    var animElements = [];
+
+    // 1. Inner Hero Headers (Fade up on entrance)
+    var innerHero = activePage.querySelector('.inner-hero-content');
+    if (innerHero) {
+      innerHero.classList.add('animate-fade-up');
+      animElements.push(innerHero);
+    }
+
+    // 2. Products / Services / Projects Catalog Grids & Cards
+    var catalogGrids = activePage.querySelectorAll('.catalog-grid');
+    catalogGrids.forEach(function(grid){
+      var cards = grid.querySelectorAll('.catalog-card');
+      cards.forEach(function(card, idx){
+        card.classList.remove('animate-from-left', 'animate-from-right', 'animate-fade-up');
+        if (idx % 3 === 0) {
           card.classList.add('animate-from-left');
+        } else if (idx % 3 === 1) {
+          card.classList.add('animate-fade-up');
         } else {
           card.classList.add('animate-from-right');
         }
+        animElements.push(card);
       });
     });
 
-    if ('IntersectionObserver' in window) {
-      var scrollObserver = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-          } else {
-            // Re-trigger animation when scrolled out and back in
-            entry.target.classList.remove('in-view');
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    // 3. About Page Industrial Narrative & Infrastructure Cards
+    var aboutVCards = activePage.querySelectorAll('.about-vcard');
+    aboutVCards.forEach(function(card, idx){
+      card.classList.remove('animate-from-left', 'animate-from-right', 'animate-fade-up');
+      card.classList.add(idx % 2 === 0 ? 'animate-from-left' : 'animate-from-right');
+      animElements.push(card);
+    });
 
-      allCards.forEach(function(card){
-        scrollObserver.observe(card);
-      });
-    } else {
-      allCards.forEach(function(card){
-        card.classList.add('in-view');
-      });
+    var facilityCards = activePage.querySelectorAll('.facility-card');
+    facilityCards.forEach(function(card, idx){
+      card.classList.remove('animate-from-left', 'animate-from-right', 'animate-fade-up');
+      card.classList.add(idx % 2 === 0 ? 'animate-from-left' : 'animate-from-right');
+      animElements.push(card);
+    });
+
+    var quoteBox = activePage.querySelector('.aeb-quote-box');
+    if (quoteBox) {
+      quoteBox.classList.add('animate-fade-up');
+      animElements.push(quoteBox);
     }
+
+    var pillarItems = activePage.querySelectorAll('.aeb-pillar-item');
+    pillarItems.forEach(function(item, idx){
+      item.classList.add('animate-fade-up');
+      item.style.transitionDelay = (idx * 0.08) + 's';
+      animElements.push(item);
+    });
+
+    // 4. Contact Page Cards & Form Elements
+    var rfqCard = activePage.querySelector('#contact-rfq-card');
+    if (rfqCard) {
+      rfqCard.classList.remove('animate-from-left', 'animate-from-right');
+      rfqCard.classList.add('animate-fade-up');
+      animElements.push(rfqCard);
+    }
+
+    var solidFacilityCard = activePage.querySelector('.solid-facility-card');
+    if (solidFacilityCard) {
+      solidFacilityCard.classList.remove('animate-from-right');
+      solidFacilityCard.classList.add('animate-from-left');
+      animElements.push(solidFacilityCard);
+    }
+
+    var solidMapCard = activePage.querySelector('.solid-map-card');
+    if (solidMapCard) {
+      solidMapCard.classList.remove('animate-from-left');
+      solidMapCard.classList.add('animate-from-right');
+      animElements.push(solidMapCard);
+    }
+
+    var channelCards = activePage.querySelectorAll('.channel-card');
+    channelCards.forEach(function(channel, idx){
+      channel.classList.add('animate-fade-up');
+      channel.style.transitionDelay = (idx * 0.06) + 's';
+      animElements.push(channel);
+    });
+
+    var assessmentCard = activePage.querySelector('.assessment-card');
+    if (assessmentCard) {
+      assessmentCard.classList.add('animate-fade-up');
+      animElements.push(assessmentCard);
+    }
+
+    // 5. Home Page Cards (Capabilities, Industries, Why Choose Us)
+    var homeCards = activePage.querySelectorAll('.home-card-v2, .cap-card, .ref-ind-card, .ref-why-card');
+    homeCards.forEach(function(card, idx){
+      card.classList.remove('animate-from-left', 'animate-from-right', 'animate-fade-up');
+      card.classList.add(idx % 2 === 0 ? 'animate-from-left' : 'animate-from-right');
+      animElements.push(card);
+    });
+
+    // 6. Global CTA Cards on active page
+    var ctaCards = activePage.querySelectorAll('.san-cta-card, .premium-contact-card, .simple-cta-box');
+    ctaCards.forEach(function(cta){
+      cta.classList.add('animate-fade-up');
+      animElements.push(cta);
+    });
+
+    // If user prefers reduced motion or browser lacks IntersectionObserver, reveal immediately
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      animElements.forEach(function(el){
+        el.classList.add('in-view');
+      });
+      return;
+    }
+
+    // Initialize IntersectionObserver with a gentle margin
+    globalScrollObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          // Re-trigger animation when scrolled out and back in
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    var windowHeight = window.innerHeight;
+    animElements.forEach(function(el, idx){
+      var rect = el.getBoundingClientRect();
+      if (rect.top < windowHeight - 40 && rect.bottom > 0) {
+        // Element is visible above the fold on landing: reveal with progressive micro-stagger
+        setTimeout(function(){
+          el.classList.add('in-view');
+        }, idx * 40);
+      } else {
+        // Element is further down: observe for scroll entrance
+        el.classList.remove('in-view');
+        globalScrollObserver.observe(el);
+      }
+    });
   }
 
   // Also re-apply when page tab changes (for single-page navigation)
   window.addEventListener('hashchange', function(){
-    setTimeout(initGlobalCardScrollAnimations, 150);
+    var hash = location.hash.replace('#', '') || 'home';
+    setTimeout(function(){
+      initGlobalCardScrollAnimations(hash);
+    }, 100);
   });
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGlobalCardScrollAnimations);
+    document.addEventListener('DOMContentLoaded', function(){
+      initGlobalCardScrollAnimations();
+    });
   } else {
     initGlobalCardScrollAnimations();
   }
