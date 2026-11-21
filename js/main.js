@@ -815,7 +815,7 @@
 
     // Make entire home-card-v2 clickable with smooth transition
     document.addEventListener('click', function(e){
-      var card = e.target.closest('.home-card-v2');
+      var card = e.target.closest('.home-card-v2, .cap-card');
       if (card) {
         var page = card.getAttribute('data-page');
         var product = card.getAttribute('data-product');

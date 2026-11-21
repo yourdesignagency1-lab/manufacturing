@@ -5441,3 +5441,162 @@ textarea.form-control { resize: vertical; min-height: 110px; }
     border-radius: 8px !important;
   }
 }
+
+
+/* ================================================= */
+/* NEW SIMPLE & ELEGANT CAPABILITIES 6-CARD GRID     */
+/* ================================================= */
+.cap-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 36px;
+  margin-bottom: 48px;
+}
+
+.cap-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.cap-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.28s ease;
+}
+.cap-card:hover {
+  background: rgba(14, 28, 54, 0.6);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 20px rgba(56, 189, 248, 0.12);
+}
+.cap-card:hover::before {
+  background: linear-gradient(90deg, #38BDF8, var(--san-rust, #EA580C));
+}
+
+.cap-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cap-card-num {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: #38BDF8;
+  letter-spacing: 0.05em;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.cap-card-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E2E8F0;
+  font-size: 14px;
+  transition: all 0.24s ease;
+}
+.cap-card:hover .cap-card-arrow {
+  background: #38BDF8;
+  color: #060B16;
+  border-color: #38BDF8;
+  transform: translate(2px, -2px);
+}
+
+.cap-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 750;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.cap-card-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #94A3B8;
+  margin-bottom: 20px;
+  flex: 1 1 auto;
+}
+
+.cap-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 10px;
+}
+
+.cap-card-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.cap-card-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: #E2E8F0;
+  transition: color 0.2s ease;
+}
+.cap-card:hover .cap-card-link {
+  color: var(--san-rust, #EA580C);
+}
+
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .cap-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .cap-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-top: 22px !important;
+    margin-bottom: 32px !important;
+  }
+  .cap-card {
+    padding: 20px 18px 18px !important;
+    border-radius: 14px !important;
+  }
+  .cap-card-title {
+    font-size: 16.5px !important;
+  }
+  .cap-card-desc {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 16px !important;
+  }
+}
