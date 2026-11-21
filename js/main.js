@@ -172,6 +172,20 @@
       return;
     }
 
+    var rawDigits = phone.replace(/\D/g, '');
+    if (!phone || rawDigits.length < 10) {
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#FEF2F2';
+        feedback.style.color = '#DC2626';
+        feedback.style.border = '1px solid #FECACA';
+        feedback.textContent = 'Please enter a valid 10-digit phone or WhatsApp number.';
+      }
+      var pInput = document.getElementById('rfq-phone');
+      if (pInput) pInput.focus();
+      return;
+    }
+
     var textLines = [
       '★ *SAN Automation & Precision Engineering — Technical RFQ*',
       '• *Client Name:* ' + name,
@@ -222,6 +236,55 @@
       waBtn.addEventListener('click', function(e){
         e.preventDefault();
         transmitRFQToWhatsApp();
+      });
+    }
+
+    // Phone / WhatsApp Number Restriction & Formatter
+    var phoneInput = document.getElementById('rfq-phone');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function(){
+        var val = this.value;
+        var hasPlus = val.trim().startsWith('+');
+        var digits = val.replace(/\D/g, '');
+
+        if (hasPlus) {
+          // International format: max 12 digits (e.g. +91 98765 43210)
+          digits = digits.slice(0, 12);
+          if (digits.startsWith('91') && digits.length > 2) {
+            var nat = digits.slice(2);
+            if (nat.length > 5) {
+              this.value = '+91 ' + nat.slice(0, 5) + ' ' + nat.slice(5, 10);
+            } else {
+              this.value = '+91 ' + nat;
+            }
+          } else {
+            this.value = '+' + digits;
+          }
+        } else {
+          // National standard: strictly max 10 digits (e.g. 98765 43210)
+          digits = digits.slice(0, 10);
+          if (digits.length > 5) {
+            this.value = digits.slice(0, 5) + ' ' + digits.slice(5, 10);
+          } else {
+            this.value = digits;
+          }
+        }
+      });
+
+      phoneInput.addEventListener('keydown', function(e){
+        // Allow navigation/editing keys
+        if ([8, 9, 13, 27, 46, 37, 38, 39, 40].indexOf(e.keyCode) !== -1 ||
+            (e.ctrlKey || e.metaKey)) {
+          return;
+        }
+        // Allow '+' only at the beginning
+        if (e.key === '+' && this.selectionStart === 0 && !this.value.includes('+')) {
+          return;
+        }
+        // Disallow non-numeric characters
+        if (!/^\d$/.test(e.key)) {
+          e.preventDefault();
+        }
       });
     }
   }
