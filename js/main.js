@@ -843,4 +843,71 @@
     initHomeCarousels();
   }
 
+
+  // ====================================================
+  // Global Scroll-Driven Alternating Card Entrance Animations
+  // ====================================================
+  function initGlobalCardScrollAnimations() {
+    var cardSelectors = [
+      '.home-card-v2',
+      '.cap-card',
+      '.catalog-card',
+      '.ref-ind-card',
+      '.ref-why-card'
+    ];
+
+    var allCards = document.querySelectorAll(cardSelectors.join(','));
+    if (!allCards.length) return;
+
+    // Group cards by parent to alternate left and right per row
+    var parents = new Set();
+    allCards.forEach(function(card){
+      if (card.parentElement) parents.add(card.parentElement);
+    });
+
+    parents.forEach(function(parent){
+      var cardsInGrid = parent.querySelectorAll(cardSelectors.join(','));
+      cardsInGrid.forEach(function(card, idx){
+        // Odd index: from left, Even index: from right
+        if (idx % 2 === 0) {
+          card.classList.add('animate-from-left');
+        } else {
+          card.classList.add('animate-from-right');
+        }
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      var scrollObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          } else {
+            // Re-trigger animation when scrolled out and back in
+            entry.target.classList.remove('in-view');
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+      allCards.forEach(function(card){
+        scrollObserver.observe(card);
+      });
+    } else {
+      allCards.forEach(function(card){
+        card.classList.add('in-view');
+      });
+    }
+  }
+
+  // Also re-apply when page tab changes (for single-page navigation)
+  window.addEventListener('hashchange', function(){
+    setTimeout(initGlobalCardScrollAnimations, 150);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalCardScrollAnimations);
+  } else {
+    initGlobalCardScrollAnimations();
+  }
+
 })();
