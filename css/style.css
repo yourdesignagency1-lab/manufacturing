@@ -2463,6 +2463,9 @@ img { display: block; max-width: 100%; height: auto; }
   background: #F8FAFC;
   padding: 50px 0 84px;
   border-top: 1px solid #EDF2F7;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Master Solid Card - Engineered identically to .catalog-card */
@@ -2472,6 +2475,11 @@ img { display: block; max-width: 100%; height: auto; }
   border: 1px solid #E2E8F0 !important;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
   position: relative !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
 }
 
@@ -2924,9 +2932,13 @@ textarea.form-control {
 /* ================================================= */
 .contact-lower-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px;
   align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Facility Card */
@@ -2934,6 +2946,11 @@ textarea.form-control {
   padding: 34px 32px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .facility-header {
@@ -2944,12 +2961,18 @@ textarea.form-control {
   padding-bottom: 20px;
   border-bottom: 1px solid #F1F5F9;
   margin-bottom: 22px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .facility-title-wrap {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .facility-icon-badge {
@@ -2972,12 +2995,15 @@ textarea.form-control {
   color: #0F172A;
   margin-bottom: 2px;
   line-height: 1.25;
+  word-break: break-word;
 }
 
 .facility-corp-name {
   font-size: 12px;
   font-weight: 600;
   color: #64748B;
+  word-break: break-word;
+  line-height: 1.4;
 }
 
 .facility-status-pill {
@@ -2994,6 +3020,7 @@ textarea.form-control {
   color: #047857;
   border: 1px solid rgba(16, 185, 129, 0.25);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .fsp-dot {
@@ -3008,6 +3035,10 @@ textarea.form-control {
   flex-direction: column;
   gap: 20px;
   flex-grow: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Address Box Styled Like .catalog-specs */
@@ -3020,6 +3051,10 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .fir-label {
@@ -3035,6 +3070,7 @@ textarea.form-control {
   line-height: 1.6;
   color: #334155;
   margin: 0;
+  word-break: break-word;
 }
 
 .fir-landmark {
@@ -3045,6 +3081,7 @@ textarea.form-control {
   color: #0F172A;
   font-weight: 600;
   margin-top: 2px;
+  flex-wrap: wrap;
 }
 
 .landmark-tag {
@@ -3063,16 +3100,19 @@ textarea.form-control {
 .facility-map-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   font-size: 12.5px;
   font-weight: 700;
   color: #074C8A;
   background: #EFF6FF;
   border: 1px solid rgba(7, 76, 138, 0.2);
-  padding: 8px 14px;
+  padding: 9px 14px;
   border-radius: 8px;
   text-decoration: none;
   width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
   margin-top: 6px;
   transition: all 0.2s ease;
 }
@@ -3088,6 +3128,10 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .channel-card {
@@ -3100,6 +3144,10 @@ textarea.form-control {
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .channel-card:hover {
@@ -3148,6 +3196,7 @@ textarea.form-control {
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .channel-label {
@@ -3165,6 +3214,7 @@ textarea.form-control {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .channel-card--wa .channel-value {
@@ -3179,6 +3229,10 @@ textarea.form-control {
   border: 1px solid #EDF2F7;
   font-size: 12.5px;
   margin-top: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .hours-title {
@@ -3217,6 +3271,11 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .cmp-header {
@@ -3227,6 +3286,10 @@ textarea.form-control {
   padding-bottom: 16px;
   border-bottom: 1px solid #F1F5F9;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .cmp-tag {
@@ -3244,11 +3307,13 @@ textarea.form-control {
   font-weight: 800;
   color: #0F172A;
   margin: 0;
+  word-break: break-word;
 }
 
 .cmp-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   font-size: 12.5px;
   font-weight: 700;
@@ -3259,6 +3324,8 @@ textarea.form-control {
   border-radius: 8px;
   text-decoration: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .cmp-btn:hover {
@@ -3271,10 +3338,17 @@ textarea.form-control {
   overflow: hidden;
   border: 1px solid #E2E8F0;
   line-height: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .cmp-map-wrap iframe {
   display: block;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 /* Dark Architectural Assessment Card */
@@ -3286,6 +3360,10 @@ textarea.form-control {
   box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.28);
   border: 1px solid rgba(255, 255, 255, 0.08);
   margin-top: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .assessment-badge {
@@ -3307,6 +3385,7 @@ textarea.form-control {
   color: #FFFFFF;
   margin-bottom: 6px;
   letter-spacing: -0.01em;
+  word-break: break-word;
 }
 
 .assessment-desc {
@@ -3314,6 +3393,7 @@ textarea.form-control {
   line-height: 1.55;
   color: #94A3B8;
   margin-bottom: 16px;
+  word-break: break-word;
 }
 
 .assessment-btn {
@@ -3344,8 +3424,10 @@ textarea.form-control {
 /* Mobile Responsiveness for Contact Section */
 @media (max-width: 992px) {
   .contact-lower-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) !important;
     gap: 24px;
+    width: 100%;
+    max-width: 100%;
   }
   .form-card {
     padding: 32px 24px;
@@ -3374,6 +3456,10 @@ textarea.form-control {
     min-width: 0 !important;
     box-sizing: border-box !important;
   }
+  .facility-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3395,6 +3481,37 @@ textarea.form-control {
   .solid-map-card {
     padding: 22px 16px;
     border-radius: 16px !important;
+  }
+  .facility-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+  }
+  .facility-title-wrap {
+    width: 100%;
+  }
+  .facility-status-pill {
+    align-self: flex-start;
+    margin-left: 56px;
+  }
+  .facility-map-btn {
+    width: 100%;
+  }
+  .cmp-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+  .cmp-btn {
+    width: 100%;
+  }
+  .assessment-card {
+    padding: 20px 16px;
   }
   .rfq-actions-row {
     margin-bottom: 16px;
