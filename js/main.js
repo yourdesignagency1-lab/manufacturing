@@ -827,7 +827,7 @@
           }
           if (product && page === 'contact') {
             setTimeout(function(){
-              var textarea = document.getElementById('rfq-notes') || document.querySelector('textarea[name="notes"]');
+              var textarea = document.getElementById('rfq-msg') || document.getElementById('rfq-notes') || document.querySelector('textarea[name="message"], textarea[name="notes"]');
               if (textarea) textarea.value = 'Inquiry for ' + product;
             }, 100);
           }
