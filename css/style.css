@@ -1626,7 +1626,7 @@ img { display: block; max-width: 100%; height: auto; }
 .inner-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 920px;
+  text-align: left;
 }
 .breadcrumbs {
   display: flex;
