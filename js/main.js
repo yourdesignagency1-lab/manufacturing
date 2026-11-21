@@ -138,57 +138,83 @@
   setupFilter('products-filter', 'products-grid');
   setupFilter('services-filter', 'services-grid');
 
-  // RFQ Form & WhatsApp Integration
+  // RFQ Form & Direct WhatsApp Dispatch with Details
   var form = document.getElementById('rfq-form');
   var feedback = document.getElementById('form-feedback');
+
+  function transmitRFQToWhatsApp() {
+    if (!form) return;
+    var f = form.elements;
+    var name = (f['name'] ? f['name'].value.trim() : '');
+    var company = (f['company'] ? f['company'].value.trim() : '');
+    var email = (f['email'] ? f['email'].value.trim() : '');
+    var phone = (f['phone'] ? f['phone'].value.trim() : '');
+    var item = (f['item'] ? f['item'].value : '') || 'General Industrial RFQ';
+    var urgency = (f['urgency'] ? f['urgency'].value : 'Standard Requirement (1-2 Weeks)');
+    var quantity = (f['quantity'] ? f['quantity'].value.trim() : '');
+    var message = (f['message'] ? f['message'].value.trim() : '');
+
+    if (!name || !company || !item) {
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.background = '#FEF2F2';
+        feedback.style.color = '#DC2626';
+        feedback.style.border = '1px solid #FECACA';
+        feedback.textContent = 'Please fill in required fields (Name, Company, and Product/Service) before transmitting to WhatsApp.';
+      }
+      return;
+    }
+
+    var textLines = [
+      '★ *SAN Automation & Precision Engineering — Technical RFQ*',
+      '• *Client Name:* ' + name,
+      '• *Company:* ' + company,
+      '• *Business Email:* ' + (email || 'Not specified'),
+      '• *Phone / WhatsApp:* ' + (phone || 'Not specified'),
+      '• *Requirement:* ' + item,
+      '• *Urgency / Timeline:* ' + urgency,
+      '• *Scope / Quantity:* ' + (quantity || 'To be specified'),
+      '• *Technical Notes:* ' + (message || 'Please provide quotation, lead time and engineering drawings.')
+    ];
+
+    var url = 'https://wa.me/919741482809?text=' + encodeURIComponent(textLines.join('\n'));
+
+    if (feedback) {
+      feedback.style.display = 'block';
+      feedback.style.background = '#ECFDF5';
+      feedback.style.color = '#059669';
+      feedback.style.border = '1px solid #A7F3D0';
+      feedback.innerHTML = '<strong>✓ Opening WhatsApp!</strong> Transferring your quotation request details to our engineering desk...';
+    }
+    if (typeof showToast === 'function') {
+      showToast('Opening WhatsApp with RFQ details...');
+    }
+
+    var submitBtn = document.getElementById('rfq-submit-btn');
+    if (submitBtn) {
+      var origHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Opening WhatsApp...</span>';
+      setTimeout(function(){
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = origHTML;
+      }, 2000);
+    }
+
+    window.open(url, '_blank', 'noopener');
+  }
 
   if (form) {
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var name = form.elements['name'].value.trim();
-      var company = form.elements['company'].value.trim();
-      var item = form.elements['item'].value;
-
-      if (!name || !company || !item) {
-        feedback.style.display = 'block';
-        feedback.style.background = '#FEF2F2';
-        feedback.style.color = '#DC2626';
-        feedback.textContent = 'Please fill in all required fields including your product or service selection.';
-        return;
-      }
-
-      var submitBtn = document.getElementById('rfq-submit-btn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Transmitting RFQ...';
-
-      setTimeout(function(){
-        feedback.style.display = 'block';
-        feedback.style.background = '#ECFDF5';
-        feedback.style.color = '#059669';
-        feedback.innerHTML = '<strong>✓ Request Received!</strong> Our application engineering team will review your specifications and send a formal proposal within 24 hours.';
-        showToast('Quote Request Submitted for ' + item);
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Quotation Request';
-      }, 700);
+      transmitRFQToWhatsApp();
     });
 
     var waBtn = document.getElementById('rfq-whatsapp-btn');
-    if (waBtn) {
-      waBtn.addEventListener('click', function(){
-        var f = form.elements;
-        var itemVal = f['item'].value || 'General Industrial Enquiry';
-        var textLines = [
-          'Hello SAN Automation, I would like a technical quote:',
-          '• Name: ' + (f['name'].value || 'Not specified'),
-          '• Company: ' + (f['company'].value || 'Not specified'),
-          '• Item: ' + itemVal,
-          '• Urgency: ' + f['urgency'].value,
-          '• Quantity: ' + (f['quantity'].value || 'As discussed'),
-          '• Notes: ' + (f['message'].value || 'Please send detailed specifications and commercial terms.')
-        ];
-        var url = 'https://wa.me/919741482809?text=' + encodeURIComponent(textLines.join('\n'));
-        window.open(url, '_blank', 'noopener');
+    if (waBtn && waBtn !== document.getElementById('rfq-submit-btn')) {
+      waBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        transmitRFQToWhatsApp();
       });
     }
   }
