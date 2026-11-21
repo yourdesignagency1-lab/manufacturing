@@ -6035,7 +6035,7 @@ html, body {
 
 .footer-container-v2 {
   display: grid;
-  grid-template-columns: 340px 180px 1fr;
+  grid-template-columns: 360px 180px 1fr;
   gap: 60px;
   position: relative;
   z-index: 3;
@@ -6044,76 +6044,160 @@ html, body {
 
 .footer-card-badge {
   background: #FFFFFF;
-  border-radius: 18px;
-  padding: 22px 20px;
+  border-radius: 20px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-card-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #EA580C 0%, #F97316 50%, #0284C7 100%);
+}
+
+.fcb-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  gap: 12px;
 }
 
-.fcb-info {
+.fcb-logo-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.fcb-brand-logo {
+  height: 42px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  display: block;
+}
+
+.fcb-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #15803D;
+  background: #DCFCE7;
+  border: 1px solid #BBF7D0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.fcb-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16A34A;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  animation: fcbPulse 2s infinite;
+}
+
+@keyframes fcbPulse {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+}
+
+.fcb-body {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
+
 .fcb-title {
-  font-family: var(--font-display);
-  font-size: 17px;
+  font-family: var(--font-display, 'Poppins', sans-serif);
+  font-size: 15.5px;
   font-weight: 800;
   color: #0F172A;
-  line-height: 1.2;
+  line-height: 1.25;
 }
-.fcb-highlight {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--san-rust, #EA580C);
-  margin-bottom: 4px;
+
+.fcb-desc {
+  font-size: 12.5px;
+  color: #64748B;
+  line-height: 1.45;
+  margin: 0;
 }
+
 .fcb-badges {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 8px;
 }
+
 .fcb-pill {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
   background: #F1F5F9;
   color: #475569;
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid #E2E8F0;
-}
-.fcb-actions {
-  display: flex;
-  gap: 6px;
-}
-.fcb-btn {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fcb-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.fcb-btn {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 12px;
+  border-radius: 8px;
   text-decoration: none;
   background: #0F172A;
   color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
+
+.fcb-btn:hover {
+  background: #1E293B;
+  transform: translateY(-1px);
+}
+
 .fcb-btn--wa {
   background: #25D366;
   color: #FFFFFF;
 }
 
-.fcb-qr-wrap {
-  width: 76px;
-  height: 76px;
-  min-width: 76px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #E2E8F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.fcb-btn--wa:hover {
+  background: #1EBE5D;
+}
+
+.fcb-btn--call {
+  background: #0F172A;
+  color: #FFFFFF;
+}
+
+.fcb-btn--call:hover {
+  background: var(--san-rust, #EA580C);
 }
 
 .footer-group-title {
@@ -6239,6 +6323,20 @@ html, body {
   .footer-container-v2 {
     gap: 28px;
     margin-bottom: 36px;
+  }
+  .footer-card-badge {
+    padding: 20px 18px !important;
+  }
+  .fcb-brand-logo {
+    height: 38px !important;
+  }
+  .fcb-actions {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .fcb-btn {
+    font-size: 11.5px !important;
+    padding: 10px 8px !important;
   }
   .footer-watermark {
     font-size: 16vw !important;
