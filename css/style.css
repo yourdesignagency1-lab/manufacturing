@@ -1572,14 +1572,68 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* ================================================= */
-/* INNER HERO (INDUX BREADCRUMBS & HEADING)          */
+/* INNER HERO (ATMOSPHERIC INDUSTRIAL HEADER)       */
 /* ================================================= */
 .inner-hero {
-  padding: 56px 0 42px;
-  background: #0B1120;
-  color: #FFFFFF;
   position: relative;
+  overflow: hidden;
+  padding: 68px 0 54px;
+  background-color: #070C18;
+  color: #FFFFFF;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 -1px 0 rgba(234, 88, 12, 0.15);
+}
+.inner-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.24;
+  filter: saturate(1.15) brightness(0.92);
+  transform: scale(1.02);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.inner-hero:hover .inner-hero-bg {
+  transform: scale(1.05);
+  opacity: 0.30;
+}
+.inner-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(7, 12, 24, 0.94) 0%, rgba(11, 29, 58, 0.86) 52%, rgba(7, 12, 24, 0.88) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.inner-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+.inner-hero-glow {
+  position: absolute;
+  top: -80px;
+  right: 8%;
+  width: 440px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.14) 0%, rgba(2, 132, 199, 0.08) 50%, transparent 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 1;
+}
+.inner-hero-content {
+  position: relative;
+  z-index: 2;
 }
 .breadcrumbs {
   display: flex;
@@ -1587,25 +1641,87 @@ img { display: block; max-width: 100%; height: auto; }
   gap: 8px;
   font-size: 13px;
   color: #94A3B8;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  font-weight: 500;
 }
 .breadcrumbs a {
-  color: var(--san-gold);
+  color: #CBD5E1;
+  text-decoration: none;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
-.breadcrumbs a:hover { text-decoration: underline; }
+.breadcrumbs a:hover {
+  color: #F97316;
+  text-decoration: underline;
+}
+.breadcrumbs span:last-child {
+  color: #F8FAFC;
+  font-weight: 600;
+}
+.inner-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(234, 88, 12, 0.12);
+  border: 1px solid rgba(234, 88, 12, 0.35);
+  color: #FB923C;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 5px 13px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.inner-hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #F97316;
+  box-shadow: 0 0 8px #F97316;
+  animation: aebPulse 2s infinite ease-in-out;
+}
 .inner-title {
   font-family: var(--font-display);
   font-size: clamp(30px, 4.2vw, 46px);
   font-weight: 800;
   letter-spacing: -0.035em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.2;
 }
 .inner-subtitle {
-  font-size: 16.5px;
+  font-size: 16px;
   color: #CBD5E1;
-  max-width: 760px;
-  line-height: 1.6;
+  max-width: 820px;
+  line-height: 1.65;
+}
+.inner-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #E2E8F0;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+.hero-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(234, 88, 12, 0.4);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 /* ================================================= */
@@ -4497,13 +4613,27 @@ textarea.form-control { resize: vertical; min-height: 110px; }
 
   /* 11. Inner Pages Hero Mobile */
   .inner-hero {
-    padding: 42px 0 30px !important;
+    padding: 42px 0 32px !important;
   }
   .inner-title {
     font-size: 26px !important;
   }
   .inner-subtitle {
-    font-size: 13.5px !important;
+    font-size: 14px !important;
+  }
+  .inner-hero-badge {
+    font-size: 10px !important;
+    padding: 4px 10px !important;
+    letter-spacing: 0.8px !important;
+    margin-bottom: 10px !important;
+  }
+  .inner-hero-chips {
+    gap: 8px !important;
+    margin-top: 16px !important;
+  }
+  .hero-chip {
+    font-size: 11.5px !important;
+    padding: 5px 10px !important;
   }
 
   /* 12. Contact & RFQ Form Mobile */
