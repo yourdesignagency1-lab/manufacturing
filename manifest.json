@@ -1,0 +1,21 @@
+{
+  "name": "SAN Automation & Precision Engineering",
+  "short_name": "SAN Automation",
+  "description": "Custom robotics, special purpose machines, CNC precision components & 24/7 industrial breakdown services in Bangalore.",
+  "start_url": "/manufacturing/",
+  "display": "standalone",
+  "background_color": "#060B16",
+  "theme_color": "#074C8A",
+  "icons": [
+    {
+      "src": "assets/logo-transparent.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo-transparent.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+# robots.txt — SAN Automation & Precision Engineering
+# https://yourdesignagency1-lab.github.io/manufacturing/
+
+User-agent: *
+Allow: /
+Disallow: /.git/
+Disallow: /.nojekyll
+
+# Sitemaps
+Sitemap: https://yourdesignagency1-lab.github.io/manufacturing/sitemap.xml
+
+# Crawl-delay (optional, for courtesy to smaller bots)
+# Crawl-delay: 10
+
+# Googlebot specific
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /assets/
+
+# Bingbot
+User-agent: bingbot
+Allow: /
