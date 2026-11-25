@@ -659,6 +659,14 @@ img { display: block; max-width: 100%; height: auto; }
   display: none;
 }
 
+/* Stats Marquee Container (Desktop Default: Hidden) */
+.stats-marquee-wrapper {
+  display: none;
+}
+.stats-desktop-wrap {
+  display: block;
+}
+
 /* ================================================= */
 /* SECTION: ABOUT SAN (INDUX SPLIT WITH 4 ICONS)     */
 /* ================================================= */
@@ -5598,63 +5606,99 @@ textarea.form-control {
     display: none !important;
   }
 
-  /* 6. Stats Band (Screenshot 1): Refined 2x2 Industrial Grid */
+  /* 6. Stats Band: Continuous Marquee Animation for Mobile View */
+  .stats-desktop-wrap {
+    display: none !important;
+  }
   .stats-band {
-    padding: 24px 0 28px !important;
+    padding: 16px 0 20px !important;
     width: 100% !important;
     box-sizing: border-box !important;
     background: #080D1A !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    overflow: hidden !important;
   }
-  .stats-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
+  .stats-marquee-wrapper {
+    display: block !important;
+    position: relative !important;
     width: 100% !important;
-    box-sizing: border-box !important;
+    overflow: hidden !important;
+    padding: 6px 0 !important;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 96%, transparent 100%) !important;
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 1) 96%, transparent 100%) !important;
   }
-  .stat-item {
-    padding: 16px 14px !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  .stats-marquee-track {
+    display: flex !important;
+    width: max-content !important;
+    will-change: transform !important;
+    animation: statsMarqueeScroll 20s linear infinite !important;
+  }
+  .stats-marquee-wrapper:hover .stats-marquee-track,
+  .stats-marquee-wrapper:focus-within .stats-marquee-track,
+  .stats-marquee-wrapper:active .stats-marquee-track {
+    animation-play-state: paused !important;
+  }
+  .stats-marquee-group {
+    display: flex !important;
+    gap: 12px !important;
+    padding-right: 12px !important;
+  }
+  .stats-marquee-card {
+    flex: 0 0 205px !important;
+    width: 205px !important;
+    min-width: 205px !important;
+    box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.045) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 16px !important;
+    padding: 16px 15px 14px !important;
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
-    text-align: left !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    height: auto !important;
-    min-height: 86px !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
   }
-  .stat-item:not(:last-child)::after,
-  .stat-item::after {
-    display: none !important;
-  }
-  .stat-num {
-    font-size: 26px !important;
-    font-weight: 800 !important;
+  .stats-marquee-card .stat-num {
+    font-family: var(--font-display) !important;
+    font-size: 28px !important;
+    font-weight: 850 !important;
     color: #38BDF8 !important;
-    margin-bottom: 4px !important;
-    line-height: 1.1 !important;
+    margin-bottom: 6px !important;
+    line-height: 1 !important;
     white-space: nowrap !important;
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 2px !important;
   }
-  .stat-num .accent {
-    color: var(--san-rust) !important;
+  .stats-marquee-card .accent-rust,
+  .stats-marquee-card .accent {
+    color: #FB923C !important;
+    font-weight: 800 !important;
   }
-  .stat-label-full {
-    display: block !important;
+  .stats-marquee-card .stat-label {
     font-size: 11.5px !important;
-    line-height: 1.35 !important;
+    line-height: 1.4 !important;
     color: #94A3B8 !important;
+    font-weight: 500 !important;
+    display: block !important;
   }
-  .stat-label-short {
-    display: none !important;
+  @keyframes statsMarqueeScroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stats-marquee-track {
+      animation: none !important;
+      overflow-x: auto !important;
+    }
   }
 
   /* 7. About Section (Screenshot 2 & 3): Compact Senior-Engineered Mobile Layout */
