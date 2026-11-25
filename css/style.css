@@ -2061,153 +2061,197 @@ img { display: block; max-width: 100%; height: auto; }
   padding: 80px 0 96px;
   border-top: 1px solid var(--surface-border);
 }
-.about-pillars-grid,
-.about-vstack {
+.about-pillars-carousel {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 32px auto 20px;
 }
 
-.about-pillar-solid-card {
-  background: #FFFFFF !important;
-  border-radius: 20px !important;
-  overflow: hidden !important;
-  border: 1px solid #E2E8F0 !important;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  position: relative !important;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+.about-pillar-v2 {
+  position: relative;
+  height: 380px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+  cursor: pointer;
+  background: #0B1120;
+  user-select: none;
 }
 
-.about-pillar-solid-card:hover {
-  transform: translateY(-6px) !important;
-  border-color: #0284C7 !important;
-  box-shadow: 0 20px 40px -12px rgba(7, 76, 138, 0.18) !important;
+.about-pillar-v2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(7, 76, 138, 0.24);
 }
 
-/* Image Header */
-.pillar-img-wrap {
-  position: relative !important;
-  height: 230px !important;
-  overflow: hidden !important;
-  background: #0B1120 !important;
-  border-radius: 19px 19px 0 0 !important;
+.about-pillar-v2 .home-card-v2-arrow {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.pillar-img-wrap::after {
-  content: '';
+.about-pillar-v2.is-expanded .home-card-v2-arrow {
+  transform: rotate(90deg);
+  background: var(--san-rust, #EA580C) !important;
+  border-color: var(--san-rust, #EA580C) !important;
+}
+
+/* Interactive Slide-Up Remaining Information Drawer */
+.pillar-drawer {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 17, 32, 0.1) 40%, rgba(11, 17, 32, 0.65) 100%);
-  pointer-events: none;
+  z-index: 10;
+  background: rgba(11, 17, 32, 0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 22px 20px;
+  box-sizing: border-box;
+  transform: translateY(102%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease, visibility 0.36s;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.pillar-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+.about-pillar-v2.is-expanded .pillar-drawer {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
-.about-pillar-solid-card:hover .pillar-img {
-  transform: scale(1.06) !important;
+.pillar-drawer-scroll {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Floating Category & SLA Badges */
-.pillar-img-badge {
-  position: absolute !important;
-  top: 14px !important;
-  left: 14px !important;
-  background: rgba(7, 76, 138, 0.92) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  color: #FFFFFF !important;
-  font-size: 10.5px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  padding: 5px 12px !important;
-  border-radius: 6px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  z-index: 2 !important;
+.pillar-drawer-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.pillar-drawer-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
-.pillar-img-sla {
-  position: absolute !important;
-  top: 14px !important;
-  right: 14px !important;
-  background: rgba(16, 185, 129, 0.92) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  color: #FFFFFF !important;
-  font-size: 10.5px !important;
-  font-weight: 800 !important;
-  padding: 5px 12px !important;
-  border-radius: 6px !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  z-index: 2 !important;
+.pillar-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Card Body */
-.pillar-body {
-  padding: 24px 22px 22px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
+.pillar-drawer-tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.pillar-body .about-vcard-meta {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  flex-wrap: wrap !important;
-  margin-bottom: 12px !important;
+.pillar-drawer-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--san-rust, #EA580C);
+  background: rgba(234, 88, 12, 0.16);
+  border: 1px solid rgba(234, 88, 12, 0.35);
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
 }
 
-.pillar-body .about-vcard-title {
-  font-family: var(--font-display) !important;
-  font-size: 19px !important;
-  font-weight: 850 !important;
-  color: #0F172A !important;
-  margin: 0 0 10px !important;
-  line-height: 1.3 !important;
+.pillar-drawer-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #94A3B8;
+  text-transform: uppercase;
 }
 
-.pillar-body .about-vcard-desc {
-  font-size: 13.5px !important;
-  color: #475569 !important;
-  line-height: 1.65 !important;
-  margin: 0 0 18px !important;
-  flex: 1 !important;
+.pillar-drawer-close {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
 }
 
-.pillar-body .about-vcard-specs {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  margin-top: auto !important;
+.pillar-drawer-close:hover {
+  background: var(--san-rust, #EA580C);
+  border-color: var(--san-rust, #EA580C);
+  transform: scale(1.08);
 }
 
-.pillar-body .vcard-spec-item {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  font-size: 11.5px !important;
-  font-weight: 700 !important;
-  color: #334155 !important;
-  background: #F8FAFC !important;
-  border: 1px solid #E2E8F0 !important;
-  padding: 5px 10px !important;
-  border-radius: 6px !important;
+.pillar-drawer-title {
+  font-family: var(--font-display);
+  font-size: 17.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
 }
 
-.pillar-body .vcard-spec-item svg {
-  color: #0284C7 !important;
-  flex-shrink: 0 !important;
+.pillar-drawer-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #CBD5E1;
+  margin: 0 0 14px;
+}
+
+.pillar-drawer-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.pillar-drawer-spec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 6px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pillar-drawer-spec svg {
+  color: #22C55E;
+  flex-shrink: 0;
+}
+
+.pillar-drawer-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  text-align: center;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.pillar-drawer-hint {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.02em;
 }
 
 /* Icon Stage Pod */
@@ -2471,9 +2515,9 @@ img { display: block; max-width: 100%; height: auto; }
   .aeb-pillars-col {
     min-width: 0;
   }
-  .about-pillars-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
+  .about-pillars-carousel {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
   }
 }
 
@@ -2720,35 +2764,29 @@ img { display: block; max-width: 100%; height: auto; }
   .about-vertical-section {
     padding: 44px 0 52px !important;
   }
-  .about-pillars-grid {
-    grid-template-columns: 1fr !important;
-    gap: 18px !important;
-    width: 100% !important;
+  .about-pillars-carousel {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    gap: 14px !important;
+    padding: 10px 16px 20px !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
   }
-  .about-pillar-solid-card {
-    border-radius: 18px !important;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07) !important;
-    width: 100% !important;
+  .about-pillars-carousel::-webkit-scrollbar {
+    display: none !important;
   }
-  .pillar-img-wrap {
-    height: 195px !important;
-    border-radius: 17px 17px 0 0 !important;
-  }
-  .pillar-body {
-    padding: 18px 16px 16px !important;
-  }
-  .pillar-body .about-vcard-title {
-    font-size: 17px !important;
-    margin-bottom: 8px !important;
-  }
-  .pillar-body .about-vcard-desc {
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-    margin-bottom: 14px !important;
-  }
-  .pillar-body .vcard-spec-item {
-    font-size: 11px !important;
-    padding: 4px 8px !important;
+  .about-pillar-v2 {
+    flex: 0 0 88% !important;
+    max-width: 88% !important;
+    scroll-snap-align: center !important;
+    height: 380px !important;
+    min-height: 380px !important;
+    border-radius: 22px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
   }
   .about-mission-grid {
     grid-template-columns: 1fr;

@@ -53,6 +53,12 @@
       if (typeof initGlobalCardScrollAnimations === 'function') {
         initGlobalCardScrollAnimations(name);
       }
+      if (typeof initHomeCarousels === 'function') {
+        initHomeCarousels();
+      }
+      if (typeof initPillarCards === 'function') {
+        initPillarCards();
+      }
     }, 60);
   }
 
@@ -1063,6 +1069,9 @@
   function initHomeCarousels() {
     var carousels = document.querySelectorAll('.home-cards-carousel');
     carousels.forEach(function(carousel){
+      if (carousel._carouselInitialized) return;
+      carousel._carouselInitialized = true;
+
       var carouselId = carousel.id;
       var dotsWrap = document.querySelector('.home-carousel-dots[data-carousel="' + carouselId + '"]');
       if (!dotsWrap) return;
@@ -1077,7 +1086,8 @@
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(function(){
           var scrollLeft = carousel.scrollLeft;
-          var cardWidth = cards[0].offsetWidth + 14; // gap is 14px
+          var firstCard = cards[0];
+          var cardWidth = (firstCard && firstCard.offsetWidth > 0 ? firstCard.offsetWidth : 280) + 14;
           var activeIndex = Math.round(scrollLeft / cardWidth);
           activeIndex = Math.max(0, Math.min(activeIndex, dots.length - 1));
 
@@ -1105,34 +1115,175 @@
       });
     });
 
-    // Make entire home-card-v2 clickable with smooth transition
-    document.addEventListener('click', function(e){
-      var card = e.target.closest('.home-card-v2, .cap-card');
-      if (card) {
-        var page = card.getAttribute('data-page');
-        var product = card.getAttribute('data-product');
-        if (page) {
-          if (typeof navigateTo === 'function') {
-            navigateTo(page);
-          } else {
-            location.hash = '#' + page;
-          }
-          if (product && page === 'contact') {
-            setTimeout(function(){
-              var textarea = document.getElementById('rfq-msg') || document.getElementById('rfq-notes') || document.querySelector('textarea[name="message"], textarea[name="notes"]');
-              if (textarea) textarea.value = 'Inquiry for ' + product;
-            }, 100);
+    // Global listener for home/cap cards navigation
+    if (!document._homeCardNavBound) {
+      document._homeCardNavBound = true;
+      document.addEventListener('click', function(e){
+        var card = e.target.closest('.home-card-v2[data-page], .cap-card[data-page]');
+        if (card) {
+          var page = card.getAttribute('data-page');
+          var product = card.getAttribute('data-product');
+          if (page) {
+            if (typeof showPage === 'function') {
+              showPage(page);
+            } else if (typeof navigateTo === 'function') {
+              navigateTo(page);
+            } else {
+              location.hash = '#' + page;
+            }
+            if (product && page === 'contact') {
+              setTimeout(function(){
+                var textarea = document.getElementById('rfq-msg') || document.getElementById('rfq-notes') || document.querySelector('textarea[name="message"], textarea[name="notes"]');
+                if (textarea) textarea.value = 'Inquiry for ' + product;
+              }, 100);
+            }
           }
         }
-      }
+      });
+    }
+  }
+
+  // ====================================================
+  // Engineering Pillars Interactive Drawer Toggle Controller
+  // Expands "remaining information" on card click / tap
+  // ====================================================
+  function initPillarCards() {
+    var pillarCards = document.querySelectorAll('.about-pillar-v2');
+    if (!pillarCards.length) return;
+
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var isSwiping = false;
+
+    pillarCards.forEach(function(card){
+      if (card._pillarInitialized) return;
+      card._pillarInitialized = true;
+
+      // Distinguish swipe vs tap on mobile
+      card.addEventListener('touchstart', function(e){
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          isSwiping = false;
+        }
+      }, { passive: true });
+
+      card.addEventListener('touchmove', function(e){
+        if (e.touches.length === 1) {
+          var diffX = Math.abs(e.touches[0].clientX - touchStartX);
+          var diffY = Math.abs(e.touches[0].clientY - touchStartY);
+          if (diffX > 10 || diffY > 10) {
+            isSwiping = true;
+          }
+        }
+      }, { passive: true });
+
+      // Click / Tap Handler
+      card.addEventListener('click', function(e){
+        // If swiping the carousel, don't trigger expand
+        if (isSwiping) {
+          isSwiping = false;
+          return;
+        }
+
+        var isCloseBtn = e.target.closest('.pillar-drawer-close, .pillar-drawer-footer');
+        var isArrowBtn = e.target.closest('.pillar-expand-btn, .home-card-v2-arrow');
+        var isDrawerScroll = e.target.closest('.pillar-drawer-scroll');
+        var isExpanded = card.classList.contains('is-expanded');
+
+        // Close button click
+        if (isCloseBtn) {
+          e.stopPropagation();
+          card.classList.remove('is-expanded');
+          card.setAttribute('aria-expanded', 'false');
+          var drawer = card.querySelector('.pillar-drawer');
+          if (drawer) drawer.setAttribute('aria-hidden', 'true');
+          return;
+        }
+
+        // If clicking within the open drawer text, let user interact/scroll without closing
+        if (isExpanded && isDrawerScroll && !isArrowBtn && !isCloseBtn) {
+          return;
+        }
+
+        // Toggle state
+        if (isExpanded) {
+          card.classList.remove('is-expanded');
+          card.setAttribute('aria-expanded', 'false');
+          var drawer = card.querySelector('.pillar-drawer');
+          if (drawer) drawer.setAttribute('aria-hidden', 'true');
+        } else {
+          // Close other cards in group
+          pillarCards.forEach(function(c){
+            c.classList.remove('is-expanded');
+            c.setAttribute('aria-expanded', 'false');
+            var d = c.querySelector('.pillar-drawer');
+            if (d) d.setAttribute('aria-hidden', 'true');
+          });
+
+          card.classList.add('is-expanded');
+          card.setAttribute('aria-expanded', 'true');
+          var drawer = card.querySelector('.pillar-drawer');
+          if (drawer) drawer.setAttribute('aria-hidden', 'false');
+        }
+      });
+
+      // Keyboard accessibility
+      card.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var isExpanded = card.classList.contains('is-expanded');
+          if (isExpanded) {
+            card.classList.remove('is-expanded');
+            card.setAttribute('aria-expanded', 'false');
+            var drawer = card.querySelector('.pillar-drawer');
+            if (drawer) drawer.setAttribute('aria-hidden', 'true');
+          } else {
+            pillarCards.forEach(function(c){
+              c.classList.remove('is-expanded');
+              c.setAttribute('aria-expanded', 'false');
+              var d = c.querySelector('.pillar-drawer');
+              if (d) d.setAttribute('aria-hidden', 'true');
+            });
+            card.classList.add('is-expanded');
+            card.setAttribute('aria-expanded', 'true');
+            var drawer = card.querySelector('.pillar-drawer');
+            if (drawer) drawer.setAttribute('aria-hidden', 'false');
+          }
+        } else if (e.key === 'Escape') {
+          card.classList.remove('is-expanded');
+          card.setAttribute('aria-expanded', 'false');
+          var drawer = card.querySelector('.pillar-drawer');
+          if (drawer) drawer.setAttribute('aria-hidden', 'true');
+        }
+      });
     });
+
+    // Close open cards when clicking outside
+    if (!document._pillarOutsideBound) {
+      document._pillarOutsideBound = true;
+      document.addEventListener('click', function(e){
+        if (!e.target.closest('.about-pillar-v2')) {
+          document.querySelectorAll('.about-pillar-v2.is-expanded').forEach(function(c){
+            c.classList.remove('is-expanded');
+            c.setAttribute('aria-expanded', 'false');
+            var d = c.querySelector('.pillar-drawer');
+            if (d) d.setAttribute('aria-hidden', 'true');
+          });
+        }
+      });
+    }
   }
 
   // Auto-init on DOMContentLoaded
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHomeCarousels);
+    document.addEventListener('DOMContentLoaded', function(){
+      initHomeCarousels();
+      initPillarCards();
+    });
   } else {
     initHomeCarousels();
+    initPillarCards();
   }
 
 
