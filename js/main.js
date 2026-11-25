@@ -1316,6 +1316,19 @@
     initPillarCards();
   }
 
+  // Mobile Sticky Dock "Let's Talk" Focus Assistant
+  document.addEventListener('click', function(e){
+    var talkBtn = e.target.closest('#msd-talk-btn, .msd-btn--talk');
+    if (talkBtn) {
+      setTimeout(function(){
+        var msgField = document.getElementById('rfq-msg') || document.getElementById('rfq-notes') || document.querySelector('textarea[name="message"]');
+        if (msgField) {
+          msgField.focus();
+        }
+      }, 350);
+    }
+  });
+
 
   // ====================================================
   // Global Intelligent Scroll-Driven Multi-Page Animations

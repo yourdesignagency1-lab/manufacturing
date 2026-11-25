@@ -4504,6 +4504,112 @@ textarea.form-control {
   background: #25D366;
 }
 
+/* ================================================= */
+/* Mobile Sticky Quick-Action Dock (Call, WhatsApp, Let's Talk) */
+/* ================================================= */
+.mobile-sticky-dock {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-dock {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9990 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    background: rgba(11, 17, 32, 0.94) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .toast {
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .msd-btn {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    font-family: var(--font-display, inherit) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+    transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  .msd-btn:active {
+    transform: scale(0.96) !important;
+  }
+
+  .msd-icon-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .msd-label {
+    white-space: nowrap !important;
+  }
+
+  /* 1. Direct Call */
+  .msd-btn--call {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  }
+  .msd-btn--call:hover,
+  .msd-btn--call:active {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* 2. WhatsApp Direct Chat */
+  .msd-btn--whatsapp {
+    background: #25D366 !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(37, 211, 102, 0.45) !important;
+    box-shadow: 0 3px 12px rgba(37, 211, 102, 0.35) !important;
+  }
+  .msd-btn--whatsapp:hover,
+  .msd-btn--whatsapp:active {
+    filter: brightness(1.08) !important;
+  }
+
+  /* 3. Let's Talk Technical Consultation */
+  .msd-btn--talk {
+    background: var(--san-rust, #EA580C) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(234, 88, 12, 0.45) !important;
+    box-shadow: 0 3px 12px rgba(234, 88, 12, 0.35) !important;
+  }
+  .msd-btn--talk:hover,
+  .msd-btn--talk:active {
+    filter: brightness(1.08) !important;
+  }
+}
+
 /* Toast */
 .toast {
   position: fixed;
@@ -5655,27 +5761,9 @@ textarea.form-control {
   .header-actions .btn-rust {
     display: none !important;
   }
-  /* Floating WhatsApp dial: Clean bottom-right positioning matching reference */
+  /* Floating WhatsApp dial: Hidden on mobile in favor of the unified mobile sticky dock */
   .floating-dial {
-    display: flex !important;
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    z-index: 999 !important;
-  }
-  .floating-btn {
-    width: 52px !important;
-    height: 52px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
-  }
-  .floating-btn--wa {
-    background: #25D366 !important;
-    color: #FFFFFF !important;
-    font-size: 24px !important;
+    display: none !important;
   }
   /* 1b. Premium Minimalist Animated Hamburger Button */
   .menu-btn {
@@ -6225,18 +6313,9 @@ textarea.form-control {
     border-radius: 50% !important;
   }
 
-  /* Floating WhatsApp Button: Safe Corner Docking */
+  /* Floating dial hidden on mobile in favor of sticky dock */
   .floating-dial {
-    display: flex !important;
-    position: fixed !important;
-    bottom: 16px !important;
-    right: 14px !important;
-    z-index: 9999 !important;
-  }
-  .floating-btn {
-    width: 48px !important;
-    height: 48px !important;
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45) !important;
+    display: none !important;
   }
 
   /* 9. Breakdown Consultation Banner Mobile */
