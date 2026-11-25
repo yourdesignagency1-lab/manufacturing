@@ -1144,22 +1144,131 @@
   }
 
   // ====================================================
-  // Engineering Pillars Interactive Drawer Toggle Controller
-  // Expands "remaining information" on card click / tap
+  // Engineering Pillars Popup Modal Controller
+  // Opens rich popup modal revealing "remaining information"
   // ====================================================
   function initPillarCards() {
+    var pillarModal = document.getElementById('pillar-detail-modal');
     var pillarCards = document.querySelectorAll('.about-pillar-v2');
-    if (!pillarCards.length) return;
+    if (!pillarModal || !pillarCards.length) return;
 
+    var pmImg = document.getElementById('pm-img');
+    var pmNum = document.getElementById('pm-num');
+    var pmTag = document.getElementById('pm-tag');
+    var pmBadge = document.getElementById('pm-badge');
+    var pmTitle = document.getElementById('pm-title');
+    var pmDesc = document.getElementById('pm-desc');
+    var pmSpecs = document.getElementById('pm-specs');
+    var pmInquireBtn = document.getElementById('pm-inquire-btn');
+    var pmDismissBtn = document.getElementById('pm-dismiss-btn');
+    var pmCloseBtn = document.getElementById('pm-close-btn');
+    var pmBackdrop = document.getElementById('pm-backdrop');
+
+    var currentInquiry = '';
+    var lastFocusedCard = null;
+
+    function openModal(card) {
+      lastFocusedCard = card;
+      var num = card.getAttribute('data-pillar-num') || '01';
+      var tag = card.getAttribute('data-pillar-tag') || '';
+      var badge = card.getAttribute('data-pillar-badge') || '';
+      var title = card.getAttribute('data-pillar-title') || '';
+      var img = card.getAttribute('data-pillar-img') || '';
+      var desc = card.getAttribute('data-pillar-desc') || '';
+      var specsRaw = card.getAttribute('data-pillar-specs') || '';
+      currentInquiry = card.getAttribute('data-pillar-product') || title;
+
+      if (pmNum) pmNum.textContent = num;
+      if (pmTag) pmTag.textContent = tag;
+      if (pmBadge) pmBadge.textContent = badge;
+      if (pmTitle) pmTitle.textContent = title;
+      if (pmDesc) pmDesc.textContent = desc;
+      if (pmImg && img) {
+        pmImg.src = img;
+        pmImg.alt = title;
+      }
+
+      // Populate specs badges with green SVG icons
+      if (pmSpecs) {
+        pmSpecs.innerHTML = '';
+        var specsList = specsRaw ? specsRaw.split('|') : [];
+        specsList.forEach(function(spec){
+          if (!spec.trim()) return;
+          var item = document.createElement('div');
+          item.className = 'pillar-modal-spec-item';
+          item.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>' + spec.trim() + '</span>';
+          pmSpecs.appendChild(item);
+        });
+      }
+
+      pillarModal.style.display = 'flex';
+      pillarModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Next frame trigger animation
+      requestAnimationFrame(function(){
+        pillarModal.classList.add('active');
+        if (pmCloseBtn) pmCloseBtn.focus();
+      });
+    }
+
+    function closeModal() {
+      pillarModal.classList.remove('active');
+      pillarModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(function(){
+        if (!pillarModal.classList.contains('active')) {
+          pillarModal.style.display = 'none';
+        }
+      }, 300);
+      if (lastFocusedCard && typeof lastFocusedCard.focus === 'function') {
+        lastFocusedCard.focus();
+      }
+    }
+
+    // Modal controls
+    if (pmCloseBtn) pmCloseBtn.onclick = closeModal;
+    if (pmDismissBtn) pmDismissBtn.onclick = closeModal;
+    if (pmBackdrop) pmBackdrop.onclick = closeModal;
+
+    // Direct RFQ inquiry button
+    if (pmInquireBtn) {
+      pmInquireBtn.onclick = function(){
+        closeModal();
+        if (typeof showPage === 'function') {
+          showPage('contact');
+        } else if (typeof navigateTo === 'function') {
+          navigateTo('contact');
+        } else {
+          location.hash = '#contact';
+        }
+        setTimeout(function(){
+          var textarea = document.getElementById('rfq-msg') || document.getElementById('rfq-notes') || document.querySelector('textarea[name="message"], textarea[name="notes"]');
+          if (textarea && currentInquiry) {
+            textarea.value = 'Technical Inquiry for Strategic Directive: ' + currentInquiry;
+            textarea.focus();
+          }
+        }, 120);
+      };
+    }
+
+    // Escape key
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && pillarModal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Wire each pillar card
     var touchStartX = 0;
     var touchStartY = 0;
     var isSwiping = false;
 
     pillarCards.forEach(function(card){
-      if (card._pillarInitialized) return;
-      card._pillarInitialized = true;
+      if (card._pillarModalBound) return;
+      card._pillarModalBound = true;
 
-      // Distinguish swipe vs tap on mobile
+      // Touch handling to differentiate swipe vs tap in carousel
       card.addEventListener('touchstart', function(e){
         if (e.touches.length === 1) {
           touchStartX = e.touches[0].clientX;
@@ -1178,101 +1287,22 @@
         }
       }, { passive: true });
 
-      // Click / Tap Handler
       card.addEventListener('click', function(e){
-        // If swiping the carousel, don't trigger expand
         if (isSwiping) {
           isSwiping = false;
           return;
         }
-
-        var isCloseBtn = e.target.closest('.pillar-drawer-close, .pillar-drawer-footer');
-        var isArrowBtn = e.target.closest('.pillar-expand-btn, .home-card-v2-arrow');
-        var isDrawerScroll = e.target.closest('.pillar-drawer-scroll');
-        var isExpanded = card.classList.contains('is-expanded');
-
-        // Close button click
-        if (isCloseBtn) {
-          e.stopPropagation();
-          card.classList.remove('is-expanded');
-          card.setAttribute('aria-expanded', 'false');
-          var drawer = card.querySelector('.pillar-drawer');
-          if (drawer) drawer.setAttribute('aria-hidden', 'true');
-          return;
-        }
-
-        // If clicking within the open drawer text, let user interact/scroll without closing
-        if (isExpanded && isDrawerScroll && !isArrowBtn && !isCloseBtn) {
-          return;
-        }
-
-        // Toggle state
-        if (isExpanded) {
-          card.classList.remove('is-expanded');
-          card.setAttribute('aria-expanded', 'false');
-          var drawer = card.querySelector('.pillar-drawer');
-          if (drawer) drawer.setAttribute('aria-hidden', 'true');
-        } else {
-          // Close other cards in group
-          pillarCards.forEach(function(c){
-            c.classList.remove('is-expanded');
-            c.setAttribute('aria-expanded', 'false');
-            var d = c.querySelector('.pillar-drawer');
-            if (d) d.setAttribute('aria-hidden', 'true');
-          });
-
-          card.classList.add('is-expanded');
-          card.setAttribute('aria-expanded', 'true');
-          var drawer = card.querySelector('.pillar-drawer');
-          if (drawer) drawer.setAttribute('aria-hidden', 'false');
-        }
+        e.preventDefault();
+        openModal(card);
       });
 
-      // Keyboard accessibility
       card.addEventListener('keydown', function(e){
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          var isExpanded = card.classList.contains('is-expanded');
-          if (isExpanded) {
-            card.classList.remove('is-expanded');
-            card.setAttribute('aria-expanded', 'false');
-            var drawer = card.querySelector('.pillar-drawer');
-            if (drawer) drawer.setAttribute('aria-hidden', 'true');
-          } else {
-            pillarCards.forEach(function(c){
-              c.classList.remove('is-expanded');
-              c.setAttribute('aria-expanded', 'false');
-              var d = c.querySelector('.pillar-drawer');
-              if (d) d.setAttribute('aria-hidden', 'true');
-            });
-            card.classList.add('is-expanded');
-            card.setAttribute('aria-expanded', 'true');
-            var drawer = card.querySelector('.pillar-drawer');
-            if (drawer) drawer.setAttribute('aria-hidden', 'false');
-          }
-        } else if (e.key === 'Escape') {
-          card.classList.remove('is-expanded');
-          card.setAttribute('aria-expanded', 'false');
-          var drawer = card.querySelector('.pillar-drawer');
-          if (drawer) drawer.setAttribute('aria-hidden', 'true');
+          openModal(card);
         }
       });
     });
-
-    // Close open cards when clicking outside
-    if (!document._pillarOutsideBound) {
-      document._pillarOutsideBound = true;
-      document.addEventListener('click', function(e){
-        if (!e.target.closest('.about-pillar-v2')) {
-          document.querySelectorAll('.about-pillar-v2.is-expanded').forEach(function(c){
-            c.classList.remove('is-expanded');
-            c.setAttribute('aria-expanded', 'false');
-            var d = c.querySelector('.pillar-drawer');
-            if (d) d.setAttribute('aria-hidden', 'true');
-          });
-        }
-      });
-    }
   }
 
   // Auto-init on DOMContentLoaded
