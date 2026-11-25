@@ -5249,6 +5249,25 @@ textarea.form-control {
   gap: 0;
 }
 
+/* Pretitle Subhead */
+.hero-indux-pretitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94A3B8;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.hero-indux-pretitle .hip-icon {
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+}
+
 /* Left Editorial Column */
 .hero-indux-title {
   font-family: var(--font-display);
@@ -5888,13 +5907,13 @@ textarea.form-control {
     display: none !important;
   }
 
-  /* 4. Full-Screen Mobile Hero Viewport (Content Placed at Lower-Fold, Lifted Just Above Sticky Dock) */
+  /* 4. Full-Screen Mobile Hero Viewport (1:1 Reference Match to YoTechno Design) */
   .hero-fold-wrapper {
     min-height: calc(100svh - 64px) !important;
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     box-sizing: border-box !important;
     position: relative !important;
@@ -5906,8 +5925,8 @@ textarea.form-control {
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
-    padding: 20px 0 calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    justify-content: flex-start !important;
+    padding: 24px 0 calc(76px + env(safe-area-inset-bottom, 0px)) !important;
     width: 100% !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
@@ -5918,16 +5937,16 @@ textarea.form-control {
     width: 100% !important;
     position: relative !important;
     z-index: 3 !important;
-    margin-top: auto !important;
+    margin-top: 0 !important;
     margin-bottom: 0 !important;
-    transform: translateY(-8px) !important;
+    transform: none !important;
   }
   .hero-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(6, 11, 22, 0.15) 0%,
-      rgba(6, 11, 22, 0.5) 40%,
-      rgba(6, 11, 22, 0.92) 80%,
+      rgba(6, 11, 22, 0.42) 0%,
+      rgba(6, 11, 22, 0.78) 42%,
+      rgba(6, 11, 22, 0.94) 80%,
       rgba(6, 11, 22, 0.98) 100%
     ) !important;
   }
@@ -5942,12 +5961,32 @@ textarea.form-control {
     text-align: left !important;
     margin: 0 !important;
   }
+
+  /* Pretitle Tag: Clean Tracked Subhead matching reference */
+  .hero-indux-pretitle {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    color: #94A3B8 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
+  }
+  .hero-indux-pretitle .hip-icon {
+    color: #38BDF8 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Title: Bold, punchy headline matching reference font scale */
   .hero-indux-title {
-    font-size: clamp(25px, 7.2vw, 33px) !important;
-    line-height: 1.18 !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.03em !important;
-    margin-bottom: 12px !important;
+    font-size: clamp(30px, 8.5vw, 36px) !important;
+    line-height: 1.15 !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.035em !important;
+    margin-bottom: 16px !important;
     color: #FFFFFF !important;
     max-width: 100% !important;
     word-break: break-word !important;
@@ -5959,11 +5998,13 @@ textarea.form-control {
     text-shadow: 0 0 22px rgba(56, 189, 248, 0.45) !important;
     display: inline !important;
   }
+
+  /* Description: Slate gray, perfectly sized and legible */
   .hero-indux-desc {
-    font-size: 13.5px !important;
+    font-size: 14px !important;
     line-height: 1.55 !important;
-    margin-bottom: 16px !important;
-    color: #E2E8F0 !important;
+    margin-bottom: 24px !important;
+    color: #94A3B8 !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -5971,30 +6012,30 @@ textarea.form-control {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85) !important;
   }
 
-  /* Buttons: Two In A Row Side-by-Side */
+  /* Action Buttons: Stacked Vertically, Full Width matching reference */
   .hero-indux-actions {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
     width: 100% !important;
-    margin: 0 0 4px 0 !important;
+    margin: 0 !important;
   }
   .hero-btn-primary,
   .hero-btn-secondary {
     width: 100% !important;
     min-width: 0 !important;
+    height: 48px !important;
     min-height: 48px !important;
-    height: auto !important;
-    padding: 12px 8px !important;
+    padding: 0 16px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-family: var(--font-main) !important;
-    font-size: 13.5px !important;
-    font-weight: 700 !important;
-    border-radius: 10px !important;
+    font-family: var(--font-display, inherit) !important;
+    font-size: 14.5px !important;
+    font-weight: 750 !important;
+    border-radius: 12px !important;
     text-align: center !important;
-    line-height: 1.25 !important;
+    line-height: 1 !important;
     box-sizing: border-box !important;
     text-decoration: none !important;
     letter-spacing: -0.01em !important;
@@ -6002,24 +6043,24 @@ textarea.form-control {
     transition: transform 0.18s ease, box-shadow 0.18s ease !important;
   }
   .hero-btn-primary {
-    background: linear-gradient(135deg, var(--san-rust) 0%, #D9480F 100%) !important;
+    background: var(--san-rust, #EA580C) !important;
     color: #FFFFFF !important;
     border: none !important;
     box-shadow: 0 4px 18px rgba(234, 88, 12, 0.45) !important;
   }
   .hero-btn-primary:active {
-    transform: scale(0.97) !important;
+    transform: scale(0.98) !important;
   }
   .hero-btn-secondary {
-    background: rgba(11, 29, 58, 0.65) !important;
+    background: rgba(11, 29, 58, 0.4) !important;
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
     color: #FFFFFF !important;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
   }
   .hero-btn-secondary:active {
-    transform: scale(0.97) !important;
+    transform: scale(0.98) !important;
   }
 
   /* Hide desktop slideshow controls and blue dividing line on mobile */
