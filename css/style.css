@@ -5888,13 +5888,13 @@ textarea.form-control {
     display: none !important;
   }
 
-  /* 4. Full-Screen Mobile Hero Viewport (Content Placed Down At Bottom) */
+  /* 4. Full-Screen Mobile Hero Viewport (Content Lifted Upward with Safe Dock Clearance) */
   .hero-fold-wrapper {
     min-height: calc(100svh - 64px) !important;
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
+    justify-content: center !important;
     width: 100% !important;
     box-sizing: border-box !important;
     position: relative !important;
@@ -5906,8 +5906,8 @@ textarea.form-control {
     min-height: calc(100dvh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
-    padding: 24px 0 24px !important;
+    justify-content: center !important;
+    padding: 20px 0 calc(76px + env(safe-area-inset-bottom, 0px)) !important;
     width: 100% !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
@@ -5918,14 +5918,16 @@ textarea.form-control {
     width: 100% !important;
     position: relative !important;
     z-index: 3 !important;
-    margin-top: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    transform: translateY(-24px) !important;
   }
   .hero-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(6, 11, 22, 0.15) 0%,
-      rgba(6, 11, 22, 0.5) 40%,
-      rgba(6, 11, 22, 0.92) 80%,
+      rgba(6, 11, 22, 0.38) 0%,
+      rgba(6, 11, 22, 0.72) 42%,
+      rgba(6, 11, 22, 0.92) 82%,
       rgba(6, 11, 22, 0.98) 100%
     ) !important;
   }
@@ -5941,7 +5943,7 @@ textarea.form-control {
     margin: 0 !important;
   }
   .hero-indux-title {
-    font-size: clamp(26px, 7.5vw, 34px) !important;
+    font-size: clamp(25px, 7.2vw, 33px) !important;
     line-height: 1.18 !important;
     font-weight: 800 !important;
     letter-spacing: -0.03em !important;
@@ -5958,9 +5960,9 @@ textarea.form-control {
     display: inline !important;
   }
   .hero-indux-desc {
-    font-size: 14px !important;
-    line-height: 1.58 !important;
-    margin-bottom: 20px !important;
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 16px !important;
     color: #E2E8F0 !important;
     max-width: 100% !important;
     margin-left: 0 !important;
