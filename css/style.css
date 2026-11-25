@@ -6012,10 +6012,10 @@ textarea.form-control {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85) !important;
   }
 
-  /* Action Buttons: Stacked Vertically, Full Width matching reference */
+  /* Action Buttons: Two In A Row Side-by-Side */
   .hero-indux-actions {
-    display: flex !important;
-    flex-direction: column !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
     width: 100% !important;
     margin: 0 !important;
@@ -6026,12 +6026,12 @@ textarea.form-control {
     min-width: 0 !important;
     height: 48px !important;
     min-height: 48px !important;
-    padding: 0 16px !important;
+    padding: 0 8px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-family: var(--font-display, inherit) !important;
-    font-size: 14.5px !important;
+    font-size: clamp(12.5px, 3.5vw, 14px) !important;
     font-weight: 750 !important;
     border-radius: 12px !important;
     text-align: center !important;
